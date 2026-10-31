@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IntoAI Technologies — Backend Server Telemetry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'IBM Plex Serif', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --bg-color: #ffffff;
+      --card-bg: #f8f9fa;
+      --card-border: rgba(10, 10, 10, 0.1);
+      --text-primary: #0a0a0a;
+      --text-secondary: rgba(10, 10, 10, 0.65);
+      --text-tertiary: rgba(10, 10, 10, 0.4);
+      --ibm-blue: #0f62fe;
+      --ibm-blue-hover: #0353e9;
+      --success-green: #198038;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      background: var(--bg-color);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: rgba(15, 98, 254, 0.08);
+      border: 1px solid rgba(15, 98, 254, 0.2);
+      color: var(--ibm-blue);
+    }
+
+    .logo-badge svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .brand-title {
+      font-family: var(--font-sans);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      color: var(--text-primary);
+    }
+
+    .status-badge {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      border-radius: 3px;
+      background: rgba(25, 128, 56, 0.08);
+      color: var(--success-green);
+      border: 1px solid rgba(25, 128, 56, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--success-green);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.018em;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    p.subtitle {
+      font-family: var(--font-sans);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .endpoints-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .endpoints-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .endpoint-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1.25rem;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .endpoint-card:hover {
+      background: #ffffff;
+      border-color: var(--ibm-blue);
+      box-shadow: 0 4px 12px rgba(15, 98, 254, 0.08);
+    }
+
+    .endpoint-title {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .endpoint-title::after {
+      content: '→';
+      font-family: var(--font-mono);
+      color: var(--ibm-blue);
+      font-size: 0.875rem;
+      opacity: 0.7;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .endpoint-card:hover .endpoint-title::after {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    .endpoint-desc {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    .endpoint-mono {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ibm-blue);
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.04em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-bar">
+      <div class="brand-group">
+        <div class="logo-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+          </svg>
+        </div>
+        <span class="brand-title">IntoAI Infrastructure</span>
+      </div>
+
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        <span>ALL SYSTEMS ONLINE</span>
+      </div>
+    </div>
+
+    <h1>Backend Telemetry & Core Services</h1>
+    <p class="subtitle">Research-grade backend engine serving APIs, real-time sync, and administrative features.</p>
+
+    <div class="endpoints-grid">
+      <a href="/admin" class="endpoint-card">
+        <div class="endpoint-title">Admin Console</div>
+        <div class="endpoint-desc">User accounts, Amazon SES mailer, storage & system config</div>
+        <div class="endpoint-mono">/admin</div>
+      </a>
+
+      <a href="/graphql" class="endpoint-card">
+        <div class="endpoint-title">GraphQL API</div>
+        <div class="endpoint-desc">Unified query & mutation interface for app & admin services</div>
+        <div class="endpoint-mono">/graphql</div>
+      </a>
+
+      <a href="/info" class="endpoint-card">
+        <div class="endpoint-title">System Status</div>
+        <div class="endpoint-desc">Server metadata, version details & deployment mode</div>
+        <div class="endpoint-mono">/info</div>
+      </a>
+
+      <div class="endpoint-card">
+        <div class="endpoint-title">WebSocket Gateway</div>
+        <div class="endpoint-desc">Real-time collaborative document sync engine</div>
+        <div class="endpoint-mono">ws://0.0.0.0:3010/socket.io</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    IntoAI Technologies · Research & Infrastructure System · Port 3010
+  </footer>
+
+</body>
+</html>
+
