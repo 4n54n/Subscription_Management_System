@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Payment Receipt - IntoAI Technologies Pvt Ltd">
+  <title>Payment Receipt | IntoAI Technologies</title>
+  <link rel="stylesheet" href="receipt_style.css?v=5">
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="page">
+      <!-- Thin blue brand stripe across the top -->
+      <div class="top-accent-strip"></div>
+      
+      <div class="content-wrapper">
+        
+        <!-- SECTION 1: HEADER -->
+        <header class="header-container">
+          <div class="header-left">
+            <div class="logo-wrap">
+              <img src="CompanyLogo.png" alt="IntoAI Technologies Logo" class="logo-img">
+              <div class="brand-details">
+                <span class="brand-name">IntoAI Technologies Pvt Ltd</span>
+                <span class="brand-sub">Enterprise AI Research & Solutions</span>
+              </div>
+            </div>
+            <div class="company-contact">
+              <p>No.472/7 Balaji Arcade, 2nd & 3rd Floor, A.V.S. Compound,</p>
+              <p>20th L Cross Road, Koramangala 4th Block, Bangalore, India — 560095</p>
+              <p><span>Email:</span> connect@intoai.ai &nbsp;|&nbsp; <span>Web:</span> www.intoai.ai &nbsp;|&nbsp; <span>Phone:</span> +91 7510711617</p>
+            </div>
+          </div>
+          
+          <div class="header-right">
+            <h1 class="receipt-title">Payment Receipt</h1>
+
+            <div class="receipt-meta-grid">
+              <span class="meta-label">Receipt No:</span>
+              <span class="meta-val">{{receipt.number}}</span>
+              
+              <span class="meta-label">Receipt Date:</span>
+              <span class="meta-val">{{receipt.date}}</span>
+            </div>
+
+            <div class="status-block">
+              <span class="status-lbl">Status</span>
+              <span class="status-badge {{receipt.status_class}}">{{receipt.status}}</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- SECTION 2: PAYMENT SUCCESS STRIP -->
+        <div class="success-banner">
+          <span class="success-icon">✓</span>
+          <span class="success-text">Payment Successfully Received</span>
+        </div>
+
+        <!-- SECTION 3: RECEIVED FROM & PAYMENT DETAILS -->
+        <div class="receipt-split-grid">
+          <!-- Left Column: Received From -->
+          <div class="receipt-card">
+            <h3>Received From</h3>
+            <div class="client-details">
+              <div class="client-name">{{client.company_name}}</div>
+              <p><span>Contact:</span> {{client.contact_name}}</p>
+              <p><span>Email:</span> {{client.email}}</p>
+              <p><span>Phone:</span> {{client.phone}}</p>
+              <p style="margin-top: 6px;"><span>Address:</span></p>
+              <p style="color: var(--text-light); font-size: 11px;">{{client.address}}</p>
+            </div>
+          </div>
+          
+          <!-- Right Column: Payment Details Card -->
+          <div class="receipt-card">
+            <h3>Payment Details</h3>
+            
+            <div class="amount-received-wrap">
+              <span class="amount-lbl">Amount Received</span>
+              <span class="amount-val">{{payment.amount}}</span>
+            </div>
+
+            <div class="payment-meta-rows">
+              <div class="payment-meta-row">
+                <span class="meta-label">Payment Date</span>
+                <span class="meta-val">{{payment.date}}</span>
+              </div>
+              <div class="payment-meta-row">
+                <span class="meta-label">Payment Method</span>
+                <span class="meta-val">{{payment.method}}</span>
+              </div>
+              <div class="payment-meta-row">
+                <span class="meta-label">Transaction ID</span>
+                <span class="meta-val">{{payment.transaction_id}}</span>
+              </div>
+              <div class="payment-meta-row">
+                <span class="meta-label">Gateway Ref</span>
+                <span class="meta-val">{{payment.gateway_ref}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: PROJECT REFERENCES -->
+        <section class="references-section">
+          <h3>Project References</h3>
+          <div class="references-grid">
+            <div class="ref-col">
+              <span class="ref-lbl">Project Name:</span>
+              <span class="ref-val">{{project.name}}</span>
+              
+              <span class="ref-lbl">Project ID:</span>
+              <span class="ref-val">{{project.id}}</span>
+            </div>
+            
+            <div class="ref-col">
+              <span class="ref-lbl">Proposal Ref:</span>
+              <span class="ref-val">{{proposal.reference}}</span>
+              
+              <span class="ref-lbl">Quote Ref:</span>
+              <span class="ref-val">{{quote.reference}}</span>
+              
+              <span class="ref-lbl">Invoice Ref:</span>
+              <span class="ref-val">{{invoice.reference}}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: PAYMENT CONFIRMATION STATEMENT -->
+        <section class="confirmation-section">
+          <h4>Payment Confirmation</h4>
+          <p class="confirmation-text">
+            This receipt confirms that IntoAI Technologies Pvt Ltd has successfully received the payment referenced above. This payment has been recorded against the associated project and commercial documents.
+          </p>
+        </section>
+
+        <!-- SECTION 6: OPTIONAL NOTES -->
+        <div class="notes-container">
+          {{#receipt.notes}}
+          <section class="notes-section">
+            <h4>Notes</h4>
+            <p>{{receipt.notes}}</p>
+          </section>
+          {{/receipt.notes}}
+        </div>
+
+        <!-- SECTION 7: FOOTER -->
+        <footer class="footer-container">
+          <div class="footer-strip">
+            <div class="footer-left">
+              <span class="footer-confidential"><span class="footer-dot">●</span> IntoAI Confidential</span>
+              <span class="footer-divider">|</span>
+              <span>Receipt No: {{receipt.number}}</span>
+              <span class="footer-divider">|</span>
+              <span>Generated Date: {{receipt.generated_date}}</span>
+            </div>
+            <div class="footer-right">
+              <span class="footer-page">Page 1 of 1</span>
+            </div>
+          </div>
+        </footer>
+
+      </div><!-- /content-wrapper -->
+    </div><!-- /page -->
+  </div><!-- /page-container -->
+
+  <!-- Client-side Javascript Mock-Renderer for direct browser previews -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!window.location.href || window.location.href.startsWith('about:')) return;
+      const bodyHtml = document.body.innerHTML;
+      if (bodyHtml.includes("{{receipt.number}}") || bodyHtml.includes("{{client.company_name}}")) {
+        console.log("Mocking receipt data for browser preview...");
+        
+        const data = {
+          "receipt.number": "REC-2026-INTOAI-084",
+          "receipt.date": "06 June 2026",
+          "receipt.status": "PAID",
+          "receipt.status_class": "paid",
+          "client.company_name": "Example Company Inc.",
+          "client.contact_name": "Sarah Jenkins",
+          "client.address": "No.100 Pine Street, Suite 2400, San Francisco, CA 94111",
+          "client.email": "sarah.jenkins@example.com",
+          "client.phone": "+1 (555) 902-3481",
+          "payment.amount": "₹35,40,000.00",
+          "payment.date": "06 June 2026 04:32 PM",
+          "payment.method": "Bank Transfer (NEFT/RTGS)",
+          "payment.transaction_id": "TXN98765432101_NEFT",
+          "payment.gateway_ref": "ICIC_RTGS_98240",
+          "proposal.reference": "PROP-2026-INTOAI-012",
+          "quote.reference": "QT-2026-INTOAI-042",
+          "invoice.reference": "INV-2026-INTOAI-084",
+          "project.name": "Autonomous AI Agent Project Management Platform",
+          "project.id": "PROJ-INTOAI-PM01",
+          "receipt.notes": "Thank you for your business. For any payment inquiries, please write to billing@intoai.ai.",
+          "receipt.generated_date": "06 Jun 2026 04:35 PM"
+        };
+        
+        // Fetch raw template text to prevent browser rendering conflicts
+        fetch(window.location.href + '?t=' + Date.now())
+          .then(response => response.text())
+          .then(htmlText => {
+            let rendered = htmlText;
+            
+            // Conditional block parsing helper
+            function parseConditionalBlock(text, key, condition, subData) {
+              const regex = new RegExp(`\\{\\{#${key}\\}\\}([\\s\\S]*?)\\{\\{\\/${key}\\}\\}`, 'g');
+              if (condition) {
+                return text.replace(regex, (match, innerText) => {
+                  let renderedInner = innerText;
+                  for (const subKey in subData) {
+                    renderedInner = renderedInner.replaceAll(`{{${subKey}}}`, subData[subKey]);
+                  }
+                  return renderedInner;
+                });
+              } else {
+                return text.replace(regex, '');
+              }
+            }
+            
+            // Parse conditional blocks
+            rendered = parseConditionalBlock(rendered, 'receipt.notes', !!data['receipt.notes'], data);
+            
+            // Replace simple placeholders
+            for (const key in data) {
+              rendered = rendered.replaceAll(`{{${key}}}`, data[key]);
+            }
+            
+            // Remove the script block itself to avoid repeating or execution issues
+            rendered = rendered.replace(/<script>[\s\S]*?<\/script>/, "");
+            
+            // Update DOM
+            document.open();
+            document.write(rendered);
+            document.close();
+          })
+          .catch(err => {
+            console.error("Error loading template text:", err);
+          });
+      }
+    });
+  </script>
+
+</body>
+</html>

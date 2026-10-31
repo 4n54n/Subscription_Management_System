@@ -1,0 +1,558 @@
+/*
+ * ============================================================
+ * IntoAI Technologies - Official Certificate Stylesheet
+ * Mode: A4 Landscape (297mm x 210mm)
+ * Strict Typography: IBM Plex Sans & IBM Plex Mono only
+ * Formal, Research-Oriented Corporate Identity
+ * ============================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+:root {
+  /* Strict IBM Font Stack */
+  --font-ibm: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* IntoAI Brand Colors */
+  --brand-blue: #0F62FE;
+  --brand-blue-dark: #0043CE;
+  --brand-blue-light: #4589FF;
+  --brand-blue-subtle: #E8F1FF;
+
+  /* Neutral Corporate Palette */
+  --text-primary: #0F172A;   /* Deep Slate */
+  --text-secondary: #334155; /* Slate-700 */
+  --text-muted: #64748B;     /* Slate-500 */
+  --text-dim: #94A3B8;       /* Slate-400 */
+  --border-subtle: #E2E8F0;
+  --border-divider: #CBD5E1;
+}
+
+/* Base Resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ibm);
+  background-color: #FFFFFF;
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+/* Outer Container */
+.certificate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* A4 Landscape Canvas: 297mm x 210mm (or 1000px x 700px coordinate ratio) */
+.certificate-page {
+  background: #FFFFFF;
+  width: 297mm;
+  height: 210mm;
+  min-width: 297mm;
+  min-height: 210mm;
+  max-width: 297mm;
+  max-height: 210mm;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  overflow: hidden;
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  break-after: avoid;
+  break-inside: avoid;
+  user-select: text;
+}
+
+/* Vector Background Layer */
+.certificate-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.certificate-bg-layer svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Foreground Grid Layout */
+.certificate-foreground {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 48px 16px 48px;
+  box-sizing: border-box;
+}
+
+/* ========================================================================= */
+/* 1. LEFT PILLAR TEXT (Embedded over the left blue curved wing)              */
+/* ========================================================================= */
+.left-wing-pillars {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  z-index: 4;
+  color: #FFFFFF;
+  font-family: var(--font-ibm);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.left-wing-pillars span {
+  display: block;
+  opacity: 0.95;
+}
+
+.left-wing-pillar-line {
+  width: 24px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.85);
+  margin-top: 4px;
+}
+
+/* ========================================================================= */
+/* 2. HEADER SECTION (Brand Logo + Research Pillars)                         */
+/* ========================================================================= */
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 35px;
+}
+
+.header-left-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 175px;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-sub-meta {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-sub-name {
+  font-family: var(--font-ibm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--brand-blue-dark);
+  text-transform: uppercase;
+}
+
+.brand-sub-envision {
+  font-family: var(--font-ibm);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.brand-sub-solutions {
+  font-family: var(--font-ibm);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Top-Right Verification QR Code & Domain Block */
+.header-qr-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+}
+
+.header-qr-code {
+  width: 72px;
+  height: 72px;
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.header-qr-code svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.header-qr-domain {
+  font-family: var(--font-ibm);
+  font-size: 8.8px;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  text-transform: lowercase;
+  color: #001D6C;
+  text-align: center;
+  line-height: 1.2;
+  width: 72px;
+  white-space: nowrap;
+  display: block;
+  margin-top: 4px;
+}
+
+.qr-domain-verify {
+  color: #001D6C;
+}
+
+.qr-domain-intoai {
+  color: #0055FF;
+}
+
+/* ========================================================================= */
+/* 3. CENTER MAIN CERTIFICATE BODY (Formal & Research-Oriented)              */
+/* ========================================================================= */
+.cert-body-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto 0;
+  padding-left: 60px;
+}
+
+.title-accent-bar {
+  width: 48px;
+  height: 3.5px;
+  background-color: var(--brand-blue);
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+.cert-main-title {
+  font-family: var(--font-ibm);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.cert-presented-to {
+  font-family: var(--font-ibm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+
+.cert-recipient-name {
+  font-family: var(--font-ibm);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+
+.name-underline {
+  width: 180px;
+  height: 1.5px;
+  background-color: var(--brand-blue-subtle);
+  border-radius: 1px;
+  margin: 6px auto 14px auto;
+}
+
+.cert-statement-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.cert-statement-p1 {
+  font-family: var(--font-ibm);
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.cert-statement-p2 {
+  font-family: var(--font-ibm);
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.cert-statement-p3 {
+  font-family: var(--font-ibm);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.highlight-role {
+  font-weight: 600;
+  color: var(--brand-blue-dark);
+}
+
+.highlight-scope {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ========================================================================= */
+/* 4. SIGNATURE & METADATA SECTION                                           */
+/* ========================================================================= */
+.cert-signature-meta-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-left: 60px;
+  padding-right: 20px;
+  margin-top: 14px;
+  margin-bottom: 0px;
+}
+
+.auth-signing-card {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+/* Left signature block */
+.signature-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 210px;
+}
+
+.signature-svg-wrap {
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: -4px;
+}
+
+.signature-svg-wrap svg {
+  height: 80px;
+  width: auto;
+}
+
+.signature-line {
+  width: 100%;
+  height: 1.5px;
+  background-color: #334155;
+  margin-bottom: 8px;
+}
+
+.signatory-name {
+  font-family: var(--font-ibm);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.signatory-role {
+  font-family: var(--font-ibm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+.signatory-org {
+  font-family: var(--font-ibm);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Middle vertical divider */
+.auth-vertical-divider {
+  width: 1.5px;
+  height: 105px;
+  background-color: #E2E8F0;
+}
+
+/* Right metadata block (DATE OF ISSUE & CERTIFICATE NO.) */
+.meta-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  text-align: left;
+  min-width: 175px;
+}
+
+.meta-item-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-item-label {
+  font-family: var(--font-ibm);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.meta-item-val {
+  font-family: var(--font-ibm);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* ========================================================================= */
+/* 5. EDITABLE TWO-WAY SYNCHRONIZATION HIGHLIGHTS                            */
+/* ========================================================================= */
+.editable-cert-field {
+  transition: all 0.2s ease;
+  outline: none;
+  border-radius: 4px;
+  cursor: text;
+  display: inline-block;
+  min-width: 20px;
+}
+
+.editable-cert-field:hover,
+.editable-cert-field:focus {
+  background: rgba(15, 98, 254, 0.08);
+  box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.25);
+}
+
+/* Print Specific Overrides */
+@media print {
+  @page {
+    size: 297mm 210mm;
+    margin: 0 !important;
+  }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    min-width: 297mm !important;
+    min-height: 210mm !important;
+    max-width: 297mm !important;
+    max-height: 210mm !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .certificate-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    overflow: hidden !important;
+    display: block !important;
+  }
+
+  .certificate-page {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    min-width: 297mm !important;
+    min-height: 210mm !important;
+    max-width: 297mm !important;
+    max-height: 210mm !important;
+    overflow: hidden !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .certificate-bg-layer,
+  .certificate-bg-layer svg {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

@@ -1,0 +1,63 @@
+metadata:
+  proposal_id: "[Select Connected Proposal]"
+  quote_id: "QT-2026-701982"
+  version: "1.0"
+  date: "June 6, 2026"
+  validity: "July 6, 2026"
+  short_title: "AI PM QUOTE"
+  status: "Pending Approval" # e.g. Pending Approval, Approved, Paid, Unpaid
+
+cover:
+  prepared_for:
+    company_name: "Example Company Inc."
+    lead: "Sarah Jenkins · Chief Information Officer"
+    email: "sarah.jenkins@example.com"
+    phone: "+1 (555) 902-3481"
+  prepared_by:
+    company_name: "IntoAI Technologies Pvt Ltd"
+    lead: "Ansan Mathew · Managing Director"
+    email: "connect@intoai.ai"
+    phone: "+91 7510711617"
+
+project_summary: "Deployment of an Autonomous AI Agent Project Management Platform integrating a semantic task graph with specialized LLM worker agents to dynamically schedule dependencies and profile developer capacities."
+
+roadmap:
+  - name: "Planning"
+    duration: "Weeks 1-4"
+  - name: "Design"
+    duration: "Weeks 5-8"
+  - name: "Development"
+    duration: "Weeks 9-14"
+  - name: "Testing"
+    duration: "Weeks 15-17"
+  - name: "Deployment"
+    duration: "Weeks 18-20"
+
+items:
+  - num: "01"
+    name: "Phase 1: Diagnostic Study & Ontological Mapping"
+    desc: "Discovery workshops, telemetry audit of internal task flows, and Neo4j task-routing schema design."
+    qty: 1
+    rate: 450000
+  - num: "02"
+    name: "Phase 2: AI Agent Core & Graph Orchestration Engine"
+    desc: "Implementation of autonomous worker agents, context vector ingestion, and sub-second prompt routing."
+    qty: 1
+    rate: 1250000
+  - num: "03"
+    name: "Phase 3: Operator Dashboard & System Integration"
+    desc: "React management portal, manual override controls, telemetry dashboards, and webhooks routing pipelines."
+    qty: 1
+    rate: 800000
+  - num: "04"
+    name: "Phase 4: Load Testing, Security Audit & Go-Live"
+    desc: "Locust simulation load testing (1,000 tasks/second), vulnerability scans, and system operational documentation."
+    qty: 1
+    rate: 500000
+
+financials:
+  gst_rate: 18
+
+terms:
+  title: "Acceptance"
+  text: "This quotation shall be considered accepted upon: Digital approval through IntoAI Workspace, Written confirmation via email, or Purchase Order (PO) issuance."

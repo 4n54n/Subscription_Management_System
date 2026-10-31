@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IntoAI Email Templates Gallery & Version History</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-main: #121212;
+      --bg-card: #161616;
+      --bg-sidebar: #161616;
+      --border-color: rgba(255, 255, 255, 0.18);
+      --accent: #0f62fe;
+      --accent-glow: rgba(15, 98, 254, 0.25);
+      --text-primary: #f4f4f4;
+      --text-secondary: #a8a8a8;
+      --text-muted: #6f6f6f;
+      --success: #24a148;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-main: #f4f4f4;
+        --bg-card: #ffffff;
+        --bg-sidebar: #ffffff;
+        --border-color: #e0e0e0;
+        --accent: #0f62fe;
+        --accent-glow: rgba(15, 98, 254, 0.2);
+        --text-primary: #161616;
+        --text-secondary: #525252;
+        --text-muted: #6f6f6f;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      background: rgba(15, 98, 254, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(15, 98, 254, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 40px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 24px 20px;
+      }
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .template-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .template-item-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .template-item-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+
+    .template-item-btn.active {
+      background: rgba(15, 98, 254, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      padding-left: 18px;
+      border-left: 2px solid var(--border-color);
+      position: relative;
+      cursor: pointer;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border-radius: 0 6px 6px 0;
+      transition: all 0.2s ease;
+    }
+
+    .timeline-item:hover {
+      background: rgba(15, 98, 254, 0.08);
+    }
+
+    .timeline-item.active {
+      border-left-color: var(--accent);
+      background: rgba(15, 98, 254, 0.12);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-color);
+    }
+
+    .timeline-item.active::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2px 0;
+    }
+
+    .timeline-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .preview-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      padding: 16px 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .preview-frame {
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 620px;
+      transition: background-color 0.3s ease;
+    }
+
+    .email-view-card {
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .email-view-card.active {
+      display: block;
+    }
+
+    /* Template Styles */
+    .card-top {
+      border-radius: 12px 12px 0 0;
+      padding: 36px;
+      transition: all 0.3s ease;
+    }
+
+    .card-footer {
+      border-radius: 0 0 12px 12px;
+      border-top: none !important;
+      padding: 24px 36px;
+      transition: all 0.3s ease;
+    }
+
+    /* Dark Mode Theme Classes (Gradient Outer Line Only Aesthetic) */
+    .theme-dark .card-top, .theme-dark .card-footer {
+      background-color: #161618 !important;
+      border: 1px solid transparent !important;
+      background-image: linear-gradient(#161618, #161618), linear-gradient(135deg, #1d4ed8 0%, #38bdf8 50%, #0284c7 100%) !important;
+      background-origin: border-box !important;
+      background-clip: padding-box, border-box !important;
+    }
+    .theme-dark .e-brand { color: #ffffff !important; }
+    .theme-dark .e-title { color: #ffffff !important; }
+    .theme-dark .e-text { color: #f4f4f5 !important; }
+    .theme-dark .e-bold { color: #ffffff !important; }
+    .theme-dark .e-muted { color: #a1a1aa !important; }
+    .theme-dark .e-box {
+      background-color: #1e1e24 !important;
+      border-left: 4px solid #0f62fe !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+      color: #f4f4f5 !important;
+    }
+    .theme-dark .e-code { background-color: #25282e !important; border: 1px dashed #0f62fe !important; color: #4f87ff !important; }
+    .theme-dark .e-btn {
+      background-color: #0f62fe !important;
+      color: #ffffff !important;
+    }
+    .theme-dark .e-divider { border-color: rgba(255, 255, 255, 0.15) !important; }
+    .theme-dark .e-link { color: #4f87ff !important; }
+
+    /* Light Mode Theme Classes */
+    .theme-light .card-top, .theme-light .card-footer {
+      background-color: #ffffff !important;
+      border: 1px solid transparent !important;
+      background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(135deg, #1d4ed8 0%, #60a5fa 50%, #0284c7 100%) !important;
+      background-origin: border-box !important;
+      background-clip: padding-box, border-box !important;
+      box-shadow: 0 4px 20px rgba(26, 115, 232, 0.12) !important;
+    }
+    .theme-light .e-brand { color: #161616 !important; }
+    .theme-light .e-title { color: #161616 !important; }
+    .theme-light .e-text { color: #161616 !important; }
+    .theme-light .e-bold { color: #161616 !important; }
+    .theme-light .e-muted { color: #525252 !important; }
+    .theme-light .e-box { background-color: #f4f4f4 !important; border-left: 4px solid #0f62fe !important; border-color: #e0e0e0 !important; color: #161616 !important; }
+    .theme-light .e-code { background-color: #f4f4f4 !important; border: 1px dashed #0f62fe !important; color: #0f62fe !important; }
+    .theme-light .e-btn { background-color: #0f62fe !important; color: #ffffff !important; }
+    .theme-light .e-divider { border-color: #e0e0e0 !important; }
+    .theme-light .e-link { color: #0f62fe !important; }
+
+  </style>
+</head>
+<body class="theme-dark">
+
+  <header>
+    <div>
+      <div class="brand-title">
+        <h1>IntoAI System Email Templates</h1>
+        <span class="brand-badge">IBM Carbon Corporate Standard</span>
+      </div>
+      <div class="subtitle">Complete catalog of production email templates with zero image dependencies and device theme adaptation</div>
+    </div>
+
+    <div class="top-controls">
+      <button class="theme-toggle-btn" onclick="toggleTheme()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="theme-btn-text">Switch to Light Theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="sidebar">
+      <div class="card">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Select Email Template
+        </div>
+        <div class="template-list">
+          <button class="template-item-btn active" onclick="showEmail('guest-access', this)">
+            1. Workspace Guest Access
+            <span style="font-size: 10px; opacity: 0.7;">Passcode</span>
+          </button>
+          <button class="template-item-btn" onclick="showEmail('storage-request', this)">
+            2. Storage Increase Request
+            <span style="font-size: 10px; opacity: 0.7;">Details Box</span>
+          </button>
+          <button class="template-item-btn" onclick="showEmail('meeting-invite', this)">
+            3. Live Presentation Invitation
+            <span style="font-size: 10px; opacity: 0.7;">Meeting</span>
+          </button>
+          <button class="template-item-btn" onclick="showEmail('workspace-invite', this)">
+            4. Workspace Team Invitation
+            <span style="font-size: 10px; opacity: 0.7;">Invite</span>
+          </button>
+          <button class="template-item-btn" onclick="showEmail('verify-email', this)">
+            5. Email Verification
+            <span style="font-size: 10px; opacity: 0.7;">Auth</span>
+          </button>
+          <button class="template-item-btn" onclick="showEmail('password-change', this)">
+            6. Password Security Notice
+            <span style="font-size: 10px; opacity: 0.7;">Security</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-container">
+      <div class="preview-header">
+        <div>
+          <strong id="active-template-title" style="font-size: 16px;">1. IntoAI Workspace Guest Access</strong>
+          <div id="active-template-desc" style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">One-time security passcode email layout for guest workspace access</div>
+        </div>
+      </div>
+
+      <div class="preview-frame" id="frame-bg">
+        
+        <!-- 1. GUEST ACCESS / PASSCODE EMAIL -->
+        <div id="email-guest-access" class="email-view-card active">
+          <div class="card-top">
+            <div style="margin-bottom: 24px;">
+              <span class="e-brand" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">IntoAI</span>
+            </div>
+            <h2 class="e-title" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 24px; font-weight: 600; line-height: 32px; margin-bottom: 16px;">IntoAI Workspace Guest Access</h2>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 16px;">
+              Please enter the following one-time verification code to access the shared project workspace:
+            </p>
+            <div class="e-code" style="font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; letter-spacing: 0.25em; padding: 20px 24px; border-radius: 6px; margin: 24px 0; text-align: center;">
+              1 5 1 4 5 7
+            </div>
+            <p class="e-muted" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; line-height: 20px;">
+              This code expires in 15 minutes.
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="e-muted" style="font-size: 12px; margin-bottom: 12px;">
+              Administrative Support: Contact <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">support@intoai.ai</a>
+            </div>
+            <div class="e-divider" style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 16px; font-size: 12px;">
+              <div style="margin-bottom: 8px;">
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Website</a>
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Terms of Service</a>
+                <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">Privacy Policy</a>
+              </div>
+              <div class="e-muted">&copy; 2026 IntoAI Technologies Pvt. Ltd. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. STORAGE REQUEST EMAIL -->
+        <div id="email-storage-request" class="email-view-card">
+          <div class="card-top">
+            <div style="margin-bottom: 24px;">
+              <span class="e-brand" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">One</span>
+            </div>
+            <h2 class="e-title" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 24px; font-weight: 600; line-height: 32px; margin-bottom: 16px;">Storage Increase Request</h2>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 16px;">
+              A new storage increase request has been submitted by <strong class="e-bold">business</strong>.
+            </p>
+            <div class="e-box" style="padding: 18px 22px; border-radius: 6px; margin: 20px 0; font-size: 14px; line-height: 1.6;">
+              <div style="margin-bottom: 8px;"><span class="e-muted">User Name:</span> <strong class="e-bold">business</strong></div>
+              <div style="margin-bottom: 8px;"><span class="e-muted">User Email:</span> <a href="#" class="e-link" style="text-decoration: none; font-weight: 600;">business@intoai.ai</a></div>
+              <div style="margin-bottom: 8px;"><span class="e-muted">Current Storage Usage:</span> <strong class="e-bold">0 B</strong></div>
+              <div style="margin-bottom: 8px;"><span class="e-muted">Current Quota:</span> <strong class="e-bold">10 GB</strong></div>
+              <div style="margin-bottom: 8px;"><span class="e-muted">Requested Storage:</span> <strong class="e-bold">450 GB</strong></div>
+              <div><span class="e-muted">Requested At:</span> <strong class="e-bold">Monday, July 27, 2026 at 8:01:13 PM</strong></div>
+            </div>
+            <p class="e-muted" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; line-height: 20px;">
+              You can manage or grant additional storage quota for this user in the Admin Dashboard under Accounts Management.
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="e-muted" style="font-size: 12px; margin-bottom: 12px;">
+              Administrative Support: Contact <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">support@intoai.ai</a>
+            </div>
+            <div class="e-divider" style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 16px; font-size: 12px;">
+              <div style="margin-bottom: 8px;">
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Website</a>
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Terms of Service</a>
+                <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">Privacy Policy</a>
+              </div>
+              <div class="e-muted">&copy; 2026 IntoAI Technologies Pvt. Ltd. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. LIVE PRESENTATION MEETING INVITATION -->
+        <div id="email-meeting-invite" class="email-view-card">
+          <div class="card-top">
+            <div style="margin-bottom: 24px;">
+              <span class="e-brand" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">IntoAI</span>
+            </div>
+            <h2 class="e-title" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 24px; font-weight: 600; line-height: 32px; margin-bottom: 16px;">Live Presentation Invitation</h2>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 12px;">
+              <strong class="e-bold">Alex River</strong> has invited you to join a live presentation session on <strong class="e-bold">How to use folder and Tags</strong>.
+            </p>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 20px;">
+              Click the button below to open the presentation room. Please note that room entry permissions apply.
+            </p>
+            <a href="#" class="e-btn" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 4px; text-decoration: none; display: inline-block;">Join Meeting</a>
+          </div>
+          <div class="card-footer">
+            <div class="e-muted" style="font-size: 12px; margin-bottom: 12px;">
+              Administrative Support: Contact <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">support@intoai.ai</a>
+            </div>
+            <div class="e-divider" style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 16px; font-size: 12px;">
+              <div style="margin-bottom: 8px;">
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Website</a>
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Terms of Service</a>
+                <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">Privacy Policy</a>
+              </div>
+              <div class="e-muted">&copy; 2026 IntoAI Technologies Pvt. Ltd. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. WORKSPACE TEAM INVITATION -->
+        <div id="email-workspace-invite" class="email-view-card">
+          <div class="card-top">
+            <div style="margin-bottom: 24px;">
+              <span class="e-brand" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">IntoAI</span>
+            </div>
+            <h2 class="e-title" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 24px; font-weight: 600; line-height: 32px; margin-bottom: 16px;">Workspace Team Invitation</h2>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 12px;">
+              <strong class="e-bold">Sarah Jenkins</strong> has invited you to collaborate in Workspace <strong class="e-bold">design-team</strong>.
+            </p>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 20px;">
+              You will gain access to shared documents, team whiteboards, and AI assistant capabilities.
+            </p>
+            <a href="#" class="e-btn" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 4px; text-decoration: none; display: inline-block;">Accept Workspace Invite</a>
+          </div>
+          <div class="card-footer">
+            <div class="e-muted" style="font-size: 12px; margin-bottom: 12px;">
+              Administrative Support: Contact <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">support@intoai.ai</a>
+            </div>
+            <div class="e-divider" style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 16px; font-size: 12px;">
+              <div style="margin-bottom: 8px;">
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Website</a>
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Terms of Service</a>
+                <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">Privacy Policy</a>
+              </div>
+              <div class="e-muted">&copy; 2026 IntoAI Technologies Pvt. Ltd. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. EMAIL VERIFICATION -->
+        <div id="email-verify-email" class="email-view-card">
+          <div class="card-top">
+            <div style="margin-bottom: 24px;">
+              <span class="e-brand" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">IntoAI</span>
+            </div>
+            <h2 class="e-title" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 24px; font-weight: 600; line-height: 32px; margin-bottom: 16px;">Verify Email Address</h2>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 20px;">
+              Please click the button below to verify your email address and activate your account.
+            </p>
+            <a href="#" class="e-btn" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 4px; text-decoration: none; display: inline-block;">Verify Email</a>
+            <p class="e-muted" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; line-height: 20px; margin-top: 20px;">
+              If you did not sign up for an IntoAI account, please ignore this email.
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="e-muted" style="font-size: 12px; margin-bottom: 12px;">
+              Administrative Support: Contact <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">support@intoai.ai</a>
+            </div>
+            <div class="e-divider" style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 16px; font-size: 12px;">
+              <div style="margin-bottom: 8px;">
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Website</a>
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Terms of Service</a>
+                <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">Privacy Policy</a>
+              </div>
+              <div class="e-muted">&copy; 2026 IntoAI Technologies Pvt. Ltd. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. PASSWORD SECURITY NOTICE -->
+        <div id="email-password-change" class="email-view-card">
+          <div class="card-top">
+            <div style="margin-bottom: 24px;">
+              <span class="e-brand" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">IntoAI</span>
+            </div>
+            <h2 class="e-title" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 24px; font-weight: 600; line-height: 32px; margin-bottom: 16px;">Password Security Notice</h2>
+            <p class="e-text" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 24px; margin-bottom: 16px;">
+              Your IntoAI account password was recently changed. If you performed this action, no further steps are required.
+            </p>
+            <p class="e-muted" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; line-height: 20px; margin-bottom: 20px;">
+              If you did not authorize this change, please click below to secure your account immediately:
+            </p>
+            <a href="#" class="e-btn" style="font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 14px; padding: 12px 26px; border-radius: 4px; text-decoration: none; display: inline-block;">Secure Account</a>
+          </div>
+          <div class="card-footer">
+            <div class="e-muted" style="font-size: 12px; margin-bottom: 12px;">
+              Administrative Support: Contact <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">support@intoai.ai</a>
+            </div>
+            <div class="e-divider" style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 16px; font-size: 12px;">
+              <div style="margin-bottom: 8px;">
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Website</a>
+                <a href="#" class="e-link" style="text-decoration: none; margin-right: 16px; font-weight: 500;">Terms of Service</a>
+                <a href="#" class="e-link" style="text-decoration: none; font-weight: 500;">Privacy Policy</a>
+              </div>
+              <div class="e-muted">&copy; 2026 IntoAI Technologies Pvt. Ltd. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let currentTheme = 'dark';
+
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.className = 'theme-' + currentTheme;
+      document.getElementById('theme-btn-text').textContent = currentTheme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme';
+    }
+
+    const templateMeta = {
+      'guest-access': {
+        title: '1. IntoAI Workspace Guest Access',
+        desc: 'One-time security passcode email layout for guest workspace access'
+      },
+      'storage-request': {
+        title: '2. Storage Increase Request',
+        desc: 'Admin notification template for user storage quota increase requests'
+      },
+      'meeting-invite': {
+        title: '3. Live Presentation Invitation',
+        desc: 'Direct invitation to join a live presentation session room'
+      },
+      'workspace-invite': {
+        title: '4. Workspace Team Invitation',
+        desc: 'Team invitation email to join a workspace'
+      },
+      'verify-email': {
+        title: '5. Email Verification',
+        desc: 'User signup and email address verification template'
+      },
+      'password-change': {
+        title: '6. Password Security Notice',
+        desc: 'Account security notification for password updates'
+      }
+    };
+
+    function showEmail(id, btn) {
+      document.querySelectorAll('.template-item-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.email-view-card').forEach(card => card.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetCard = document.getElementById('email-' + id);
+      if (targetCard) targetCard.classList.add('active');
+
+      if (templateMeta[id]) {
+        document.getElementById('active-template-title').textContent = templateMeta[id].title;
+        document.getElementById('active-template-desc').textContent = templateMeta[id].desc;
+      }
+    }
+  </script>
+</body>
+</html>

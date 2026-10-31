@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Quotation | IntoAI Technologies</title>
+  <link rel="stylesheet" href="quotation_style.css">
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="page">
+      <!-- Background plus-grid pattern -->
+      <div class="plus-grid"></div>
+      
+      <div class="content-wrapper">
+        
+        <!-- SECTION 1: HEADER -->
+        <header class="header-container">
+          <div class="header-left">
+            <div class="logo-wrap">
+              <img src="CompanyLogo.png" alt="IntoAI Technologies Logo" class="logo-img">
+              <div class="brand-details">
+                <span class="brand-name">IntoAI Technologies</span>
+                <span class="brand-sub">Enterprise AI Research & Solutions</span>
+              </div>
+            </div>
+            <div class="company-contact">
+              <p>No.472/7 Balaji Arcade, 2nd & 3rd Floor, A.V.S. Compound,</p>
+              <p>20th L Cross Road, Koramangala 4th Block, Bangalore, India — 560095</p>
+              <p><span>Email:</span> connect@intoai.ai &nbsp;|&nbsp; <span>Web:</span> www.intoai.ai &nbsp;|&nbsp; <span>Phone:</span> +91 7510711617</p>
+            </div>
+          </div>
+          
+          <div class="header-right glass-panel">
+            <div class="quote-title-container">
+              <span class="quote-label">{{doc_type}}</span>
+              <span class="status-pill {{status_class}}">{{status}}</span>
+            </div>
+            <div class="quote-meta-row">
+              <span class="quote-meta-label">Quote ID:</span>
+              <span class="quote-meta-value">{{doc_id}}</span>
+            </div>
+            <div class="quote-meta-row">
+              <span class="quote-meta-label">Prepared Date:</span>
+              <span class="quote-meta-value">{{metadata.date}}</span>
+            </div>
+            <div class="quote-meta-row">
+              <span class="quote-meta-label">{{date_label}}:</span>
+              <span class="quote-meta-value">{{date_value}}</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- SECTION 2: PREPARED FOR & BY -->
+        <section class="prepared-section">
+          <div class="prepared-card glass-panel">
+            <h4>
+              <svg viewBox="0 0 24 24" class="icon-svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Prepared For
+            </h4>
+            <div class="prepared-details">
+              <div class="prepared-company">{{cover.prepared_for.company_name}}</div>
+              <p>{{cover.prepared_for.lead}}</p>
+              <p>Email: {{cover.prepared_for.email}}</p>
+              <p>Phone: {{cover.prepared_for.phone}}</p>
+            </div>
+          </div>
+          
+          <div class="prepared-card consultant glass-panel">
+            <h4>
+              <svg viewBox="0 0 24 24" class="icon-svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Prepared By
+            </h4>
+            <div class="prepared-details">
+              <div class="prepared-company">{{cover.prepared_by.company_name}}</div>
+              <p>{{cover.prepared_by.lead}}</p>
+              <p>Email: {{cover.prepared_by.email}}</p>
+              <p>Phone: {{cover.prepared_by.phone}}</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: PROJECT SUMMARY -->
+        <section class="summary-container glass-panel">
+          <div class="summary-header">Project Summary</div>
+          <p class="summary-text">{{project_summary}}</p>
+        </section>
+
+        <!-- SECTION 4: TIMELINE ROADMAP -->
+        <section class="roadmap-container">
+          <div class="roadmap-header">Project Duration Roadmap</div>
+          <div class="roadmap-flow">
+            <div class="roadmap-step">
+              <div class="roadmap-circle">01</div>
+              <span class="roadmap-step-name">{{roadmap.0.name}}</span>
+              <span class="roadmap-step-duration">{{roadmap.0.duration}}</span>
+            </div>
+            <div class="roadmap-step">
+              <div class="roadmap-circle">02</div>
+              <span class="roadmap-step-name">{{roadmap.1.name}}</span>
+              <span class="roadmap-step-duration">{{roadmap.1.duration}}</span>
+            </div>
+            <div class="roadmap-step">
+              <div class="roadmap-circle">03</div>
+              <span class="roadmap-step-name">{{roadmap.2.name}}</span>
+              <span class="roadmap-step-duration">{{roadmap.2.duration}}</span>
+            </div>
+            <div class="roadmap-step">
+              <div class="roadmap-circle">04</div>
+              <span class="roadmap-step-name">{{roadmap.3.name}}</span>
+              <span class="roadmap-step-duration">{{roadmap.3.duration}}</span>
+            </div>
+            <div class="roadmap-step">
+              <div class="roadmap-circle">05</div>
+              <span class="roadmap-step-name">{{roadmap.4.name}}</span>
+              <span class="roadmap-step-duration">{{roadmap.4.duration}}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: PRICING TABLE -->
+        <section class="pricing-section glass-panel">
+          <div class="pricing-table-container">
+            <table class="pricing-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%">Item</th>
+                  <th style="width: 50%">Description</th>
+                  <th style="width: 10%" class="align-center">Qty</th>
+                  <th style="width: 15%" class="align-right">Rate</th>
+                  <th style="width: 15%" class="align-right">Amount</th>
+                  <th style="width: 50px;" class="table-action-btn-col"></th>
+                </tr>
+              </thead>
+              <tbody id="pricing-table-body">
+                {{pricing_table_rows}}
+              </tbody>
+            </table>
+            <div class="table-actions-footer">
+              <button class="table-action-btn add-btn" onclick="addQuoteItem()">+ Add Item</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: FINANCIALS & ACCEPTANCE -->
+        <div class="financials-pay-container">
+          <!-- Investment Card -->
+          <div class="investment-card glass-panel">
+            <div class="investment-row">
+              <span>Subtotal</span>
+              <span>{{financials.subtotal}}</span>
+            </div>
+            <div class="investment-row">
+              <span>GST ({{financials.gst_rate}}% Integrated Goods & Services Tax)</span>
+              <span>{{financials.gst}}</span>
+            </div>
+            <div class="investment-row total">
+              <span class="total-label">Total Investment</span>
+              <span class="total-val">{{financials.total}}</span>
+            </div>
+          </div>
+          
+          <!-- Acceptance Panel -->
+          <div class="acceptance-panel glass-panel">
+            <div class="acceptance-title">{{terms_title}}</div>
+            <div class="acceptance-text">
+              {{terms_text}}
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 7: MINIMAL ENTERPRISE FOOTER -->
+        <footer class="footer-container">
+          <div class="footer-strip">
+            <span class="footer-confidential"><span class="footer-dot">●</span> IntoAI Confidential</span>
+            <span class="footer-divider">|</span>
+            <span>Prepared By: {{cover.prepared_by.company_name}}</span>
+            <span class="footer-divider">|</span>
+            <span>Proposal: {{metadata.proposal_id}}</span>
+            <span class="footer-divider">|</span>
+            <span>{{doc_type}}: {{doc_id}}</span>
+            <span class="footer-divider">|</span>
+            <span>Date: {{metadata.date}}</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-page-num">Page 1 of 1</span>
+          </div>
+        </footer>
+
+      </div><!-- /content-wrapper -->
+      
+      <!-- Wave background decoration -->
+      <div class="page-wave-decoration"></div>
+    </div><!-- /page -->
+  </div><!-- /page-container -->
+
+  <script>
+    function insertQuoteItem(index) {
+      window.parent.postMessage({ type: 'QUOTE_ITEM_INSERT', index: index }, '*');
+    }
+    function deleteQuoteItem(index) {
+      window.parent.postMessage({ type: 'QUOTE_ITEM_DELETE', index: index }, '*');
+    }
+    function addQuoteItem() {
+      window.parent.postMessage({ type: 'QUOTE_ITEM_ADD' }, '*');
+    }
+  </script>
+
+</body>
+</html>

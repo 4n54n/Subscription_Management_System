@@ -1,0 +1,22 @@
+metadata:
+  letterhead_id: LH-2026-000001
+  date: "09 June 2026"
+  subject: "Letter of Authorization"
+  authorized_doc_url: ""
+
+recipient:
+  title: "To Whom It May Concern"
+  name: "Apex Global Logistics Inc."
+  address_line1: "No.100 Pine Street, Suite 2400"
+  address_line2: "San Francisco, CA 94111"
+
+body: |
+  This letter serves to formally confirm that IntoAI Technologies Pvt Ltd has completed the technical deployment and handover of the Autonomous AI Agent Project Management Platform to Apex Global Logistics Inc. All operations including Ontological Mapping, Graph Orchestration Engine load tests, and telemetry dashboards are fully operational and ready for production usage.
+
+  Our engineering team led by the Solutions Architect has verified that the deployment is fully compliant with the security protocols outlined in the technical contract. Effective immediately, administrative login nodes and secure keys have been handed over to Sarah Jenkins (Chief Information Officer, Apex Global Logistics).
+
+  We remain committed to supporting your operational scaling efforts through our Koramangala Research Center. Please let us know if we can assist with additional vector retrieval optimizations or model tuning cycles.
+
+sender:
+  name: "Ansan Mathew"
+  designation: "Managing Director"

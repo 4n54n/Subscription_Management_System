@@ -1,0 +1,440 @@
+{
+  "metrics": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Enable metric and tracing collection"
+    }
+  },
+  "crypto": {
+    "privateKey": {
+      "type": "String",
+      "desc": "The private key for used by the crypto module to create signed tokens or encrypt data.",
+      "env": "AFFINE_PRIVATE_KEY"
+    }
+  },
+  "job": {
+    "queue": {
+      "type": "Object",
+      "desc": "The config for job queues",
+      "link": "https://api.docs.bullmq.io/interfaces/v5.QueueOptions.html"
+    },
+    "worker": {
+      "type": "Object",
+      "desc": "The config for job workers",
+      "link": "https://api.docs.bullmq.io/interfaces/v5.WorkerOptions.html"
+    },
+    "queues.copilot": {
+      "type": "Object",
+      "desc": "The config for copilot job queue"
+    },
+    "queues.doc": {
+      "type": "Object",
+      "desc": "The config for doc job queue"
+    },
+    "queues.notification": {
+      "type": "Object",
+      "desc": "The config for notification job queue"
+    },
+    "queues.nightly": {
+      "type": "Object",
+      "desc": "The config for nightly job queue"
+    }
+  },
+  "throttle": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Whether the throttler is enabled."
+    },
+    "throttlers.default": {
+      "type": "Object",
+      "desc": "The config for the default throttler."
+    },
+    "throttlers.strict": {
+      "type": "Object",
+      "desc": "The config for the strict throttler."
+    }
+  },
+  "websocket": {
+    "transports": {
+      "type": "Array",
+      "desc": "The enabled transports for accepting websocket traffics.",
+      "link": "https://docs.nestjs.com/websockets/gateways#transports"
+    },
+    "maxHttpBufferSize": {
+      "type": "Number",
+      "desc": "How many bytes or characters a message can be, before closing the session (to avoid DoS)."
+    }
+  },
+  "auth": {
+    "allowSignup": {
+      "type": "Boolean",
+      "desc": "Whether allow new registrations."
+    },
+    "requireEmailDomainVerification": {
+      "type": "Boolean",
+      "desc": "Whether require email domain record verification before accessing restricted resources."
+    },
+    "requireEmailVerification": {
+      "type": "Boolean",
+      "desc": "Whether require email verification before accessing restricted resources(not implemented)."
+    },
+    "passwordRequirements": {
+      "type": "Object",
+      "desc": "The password strength requirements when set new password."
+    },
+    "session.ttl": {
+      "type": "Number",
+      "desc": "Application auth expiration time in seconds."
+    },
+    "session.ttr": {
+      "type": "Number",
+      "desc": "Application auth time to refresh in seconds."
+    }
+  },
+  "mailer": {
+    "SES.accessKeyId": {
+      "type": "String",
+      "desc": "AWS Access Key ID for Amazon SES",
+      "env": "MAILER_SES_ACCESS_KEY_ID"
+    },
+    "SES.secretAccessKey": {
+      "type": "String",
+      "desc": "AWS Secret Access Key for Amazon SES",
+      "env": "MAILER_SES_SECRET_ACCESS_KEY"
+    },
+    "SES.region": {
+      "type": "String",
+      "desc": "AWS Region for Amazon SES (e.g. us-east-1)",
+      "env": "MAILER_SES_REGION"
+    },
+    "SES.sender": {
+      "type": "String",
+      "desc": "Sender of all the emails (e.g. \"IntoAI Team <noreply@intoai.ai>\")",
+      "env": "MAILER_SENDER"
+    }
+  },
+  "doc": {
+    "experimental.yocto": {
+      "type": "Boolean",
+      "desc": "Use `y-octo` to merge updates at the same time when merging using Yjs."
+    },
+    "history.interval": {
+      "type": "Number",
+      "desc": "The minimum time interval in milliseconds of creating a new history snapshot when doc get updated."
+    }
+  },
+  "storages": {
+    "avatar.publicPath": {
+      "type": "String",
+      "desc": "The public accessible path prefix for user avatars."
+    },
+    "avatar.storage": {
+      "type": "Object",
+      "desc": "The config of storage for user avatars."
+    },
+    "blob.storage": {
+      "type": "Object",
+      "desc": "The config of storage for all uploaded blobs(images, videos, etc.)."
+    },
+    "d1.accountId": {
+      "type": "String",
+      "desc": "Cloudflare Account ID for Internship D1 Database."
+    },
+    "d1.databaseId": {
+      "type": "String",
+      "desc": "Cloudflare D1 Database UUID for Internship Programs & Certificates."
+    },
+    "d1.apiToken": {
+      "type": "String",
+      "desc": "Cloudflare API Token with D1 Edit permissions."
+    }
+  },
+  "server": {
+    "name": {
+      "type": "String",
+      "desc": "A recognizable name for the server. Will be shown when connected with IntoAI Desktop."
+    },
+    "companyName": {
+      "type": "String",
+      "desc": "Official Company Name"
+    },
+    "companyTagline": {
+      "type": "String",
+      "desc": "Company Tagline or Subtitle"
+    },
+    "companyLogoUrl": {
+      "type": "String",
+      "desc": "Company Logo URL (Primary)"
+    },
+    "companyLogoData": {
+      "type": "String",
+      "desc": "Company Logo Uploaded Base64 Data (Secondary Fallback)"
+    },
+    "linkPreviewImageUrl": {
+      "type": "String",
+      "desc": "Link Preview Image (OG Image) URL"
+    },
+    "linkPreviewImageData": {
+      "type": "String",
+      "desc": "Link Preview Image (OG Image) Uploaded Base64 Data"
+    },
+    "oneLogoData": {
+      "type": "String",
+      "desc": "\"One\" Product Logo"
+    },
+    "cin": {
+      "type": "String",
+      "desc": "Corporate Identification Number (CIN)"
+    },
+    "pan": {
+      "type": "String",
+      "desc": "Permanent Account Number (PAN)"
+    },
+    "gstin": {
+      "type": "String",
+      "desc": "GSTIN Registration Number"
+    },
+    "email": {
+      "type": "String",
+      "desc": "Official General Contact Email"
+    },
+    "supportEmail": {
+      "type": "String",
+      "desc": "Company Support Email (used for storage increase & support requests)"
+    },
+    "phone": {
+      "type": "String",
+      "desc": "Official Phone Number"
+    },
+    "address": {
+      "type": "String",
+      "desc": "Official Company Registered Address"
+    },
+    "websiteUrl": {
+      "type": "String",
+      "desc": "Official Company Website URL"
+    },
+    "contactUsUrl": {
+      "type": "String",
+      "desc": "Contact Us Page URL"
+    },
+    "privacyPolicyUrl": {
+      "type": "String",
+      "desc": "Privacy Policy Page URL"
+    },
+    "termsOfServiceUrl": {
+      "type": "String",
+      "desc": "Terms of Service Page URL"
+    },
+    "latePaymentFeePolicyUrl": {
+      "type": "String",
+      "desc": "Late Payment Fee Policy URL (used in Overdue Payment Notice emails)"
+    },
+    "bankName": {
+      "type": "String",
+      "desc": "Default Bank Name for Documents & Invoices"
+    },
+    "bankAccountName": {
+      "type": "String",
+      "desc": "Bank Account Holder Name"
+    },
+    "bankAccountNumber": {
+      "type": "String",
+      "desc": "Bank Account Number"
+    },
+    "bankIfsc": {
+      "type": "String",
+      "desc": "Bank IFSC Code"
+    },
+    "externalUrl": {
+      "type": "String",
+      "desc": "Base url of IntoAI server, used for generating external urls.\nDefault to be `[server.protocol]://[server.host][:server.port]` if not specified.\n    ",
+      "env": "AFFINE_SERVER_EXTERNAL_URL"
+    },
+    "https": {
+      "type": "Boolean",
+      "desc": "Whether the server is hosted on a ssl enabled domain (https://).",
+      "env": "AFFINE_SERVER_HTTPS"
+    },
+    "host": {
+      "type": "String",
+      "desc": "Where the server get deployed(FQDN).",
+      "env": "AFFINE_SERVER_HOST"
+    },
+    "port": {
+      "type": "Number",
+      "desc": "Which port the server will listen on.",
+      "env": "AFFINE_SERVER_PORT"
+    },
+    "path": {
+      "type": "String",
+      "desc": "Subpath where the server get deployed if there is one.(e.g. /affine)",
+      "env": "AFFINE_SERVER_SUB_PATH"
+    }
+  },
+  "flags": {
+    "earlyAccessControl": {
+      "type": "Boolean",
+      "desc": "Only allow users with early access features to access the app"
+    }
+  },
+  "docService": {
+    "endpoint": {
+      "type": "String",
+      "desc": "The endpoint of the doc service.",
+      "env": "DOC_SERVICE_ENDPOINT"
+    }
+  },
+  "client": {
+    "versionControl.enabled": {
+      "type": "Boolean",
+      "desc": "Whether check version of client before accessing the server."
+    },
+    "versionControl.requiredVersion": {
+      "type": "String",
+      "desc": "Allowed version range of the app that allowed to access the server. Requires 'client/versionControl.enabled' to be true to take effect."
+    }
+  },
+  "captcha": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Check captcha challenge when user authenticating the app."
+    },
+    "config": {
+      "type": "Object",
+      "desc": "The config for the captcha plugin."
+    }
+  },
+  "copilot": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Whether to enable the copilot plugin."
+    },
+    "researchDocModel": {
+      "type": "String",
+      "desc": "Default Gemini model for Research Document Copilot."
+    },
+    "providers.openai": {
+      "type": "Object",
+      "desc": "The config for the openai provider.",
+      "link": "#"
+    },
+    "providers.fal": {
+      "type": "Object",
+      "desc": "The config for the fal provider."
+    },
+    "providers.gemini": {
+      "type": "Object",
+      "desc": "The config for the gemini provider."
+    },
+    "providers.perplexity": {
+      "type": "Object",
+      "desc": "The config for the perplexity provider."
+    },
+    "unsplash": {
+      "type": "Object",
+      "desc": "The config for the unsplash key."
+    },
+    "storage": {
+      "type": "Object",
+      "desc": "The config for the storage provider."
+    }
+  },
+  "customerIo": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Enable customer.io integration"
+    },
+    "token": {
+      "type": "String",
+      "desc": "Customer.io token"
+    }
+  },
+  "oauth": {
+    "providers.microsoft": {
+      "type": "Object",
+      "desc": "Microsoft OAuth provider config (Entra ID: requires JSON with 'clientId' and 'clientSecret')",
+      "link": "https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow"
+    }
+  },
+  "agora": {
+    "appId": {
+      "type": "String",
+      "desc": "Agora App ID for Video & Audio live meeting rooms",
+      "env": "AGORA_APP_ID"
+    },
+    "appCertificate": {
+      "type": "String",
+      "desc": "Agora Primary App Certificate for production token authentication",
+      "env": "AGORA_APP_CERTIFICATE"
+    },
+    "customerId": {
+      "type": "String",
+      "desc": "Agora REST / STT Customer ID (optional)",
+      "env": "AGORA_CUSTOMER_ID"
+    },
+    "customerSecret": {
+      "type": "String",
+      "desc": "Agora REST / STT Customer Secret (optional)",
+      "env": "AGORA_CUSTOMER_SECRET"
+    }
+  },
+  "payment": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Whether enable payment plugin"
+    },
+    "showLifetimePrice": {
+      "type": "Boolean",
+      "desc": "Whether enable lifetime price and allow user to pay for it."
+    },
+    "apiKey": {
+      "type": "String",
+      "desc": "Stripe API key to enable payment service.",
+      "env": "STRIPE_API_KEY"
+    },
+    "webhookKey": {
+      "type": "String",
+      "desc": "Stripe webhook key to enable payment service.",
+      "env": "STRIPE_WEBHOOK_KEY"
+    },
+    "stripe": {
+      "type": "Object",
+      "desc": "Stripe sdk options",
+      "link": "https://docs.stripe.com/api"
+    }
+  },
+  "worker": {
+    "allowedOrigin": {
+      "type": "Array",
+      "desc": "Allowed origin"
+    }
+  },
+  "phish": {
+    "enabled": {
+      "type": "Boolean",
+      "desc": "Enable Microsoft Mail Phishing Monitoring and AI Threat Inspection",
+      "env": "MICROSOFT_PHISH_ENABLED"
+    },
+    "tenantId": {
+      "type": "String",
+      "desc": "Microsoft Azure Directory (Tenant) ID",
+      "env": "MICROSOFT_PHISH_TENANT_ID"
+    },
+    "clientId": {
+      "type": "String",
+      "desc": "Microsoft Azure Application (Client) ID",
+      "env": "MICROSOFT_PHISH_CLIENT_ID"
+    },
+    "clientSecret": {
+      "type": "String",
+      "desc": "Microsoft Azure Application Secret Value",
+      "env": "MICROSOFT_PHISH_CLIENT_SECRET"
+    },
+    "model": {
+      "type": "String",
+      "desc": "Selected Google Gemini AI Model for Phishing Email Inspection",
+      "env": "MICROSOFT_PHISH_MODEL"
+    }
+  }
+}

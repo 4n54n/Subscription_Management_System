@@ -1,0 +1,54 @@
+metadata:
+  proposal_id: "[Select Connected Proposal]"
+  quote_id: "[Select Connected Quote]"
+  invoice_id: "INV-2026-802931"
+  version: "1.0"
+  date: "June 6, 2026"
+  due_date: "June 20, 2026"
+  short_title: "AI PM INVOICE"
+  project_id: "PROJ-INTOAI-PM01"
+  status: "Unpaid" # e.g. Unpaid, Paid, Overdue
+
+cover:
+  prepared_for:
+    company_name: "Example Company Inc."
+    lead: "Sarah Jenkins · Chief Information Officer"
+    address: "No.100 Pine Street, Suite 2400, San Francisco, CA 94111"
+    email: "sarah.jenkins@example.com"
+    phone: "+1 (555) 902-3481"
+    gst: "[Client GSTIN]"
+  prepared_by:
+    company_name: "IntoAI Technologies Pvt Ltd"
+    lead: "Ansan Mathew · Managing Director"
+    email: "connect@intoai.ai"
+    phone: "+91 7510711617"
+    reg_info: "CIN: U72900KA2023PTC174829"
+    gst: "IntoAI GSTIN: 29AAACI4567B1Z4"
+
+items:
+  - num: "01"
+    name: "Phase 1: Diagnostic Study & Ontological Mapping"
+    desc: "Discovery workshops, telemetry audit of internal task flows, and Neo4j task-routing schema design."
+    qty: 1
+    rate: 450000
+  - num: "02"
+    name: "Phase 2: AI Agent Core & Graph Orchestration Engine"
+    desc: "Implementation of autonomous worker agents, context vector ingestion, and sub-second prompt routing."
+    qty: 1
+    rate: 1250000
+  - num: "03"
+    name: "Phase 3: Operator Dashboard & System Integration"
+    desc: "React management portal, manual override controls, telemetry dashboards, and webhooks routing pipelines."
+    qty: 1
+    rate: 800000
+  - num: "04"
+    name: "Phase 4: Load Testing, Security Audit & Go-Live"
+    desc: "Locust simulation load testing (1,000 tasks/second), vulnerability scans, and system operational documentation."
+    qty: 1
+    rate: 500000
+
+financials:
+  gst_rate: 18
+
+terms:
+  text: "Please remit payment via bank transfer to the following account: IntoAI Technologies Pvt Ltd, Bank of India, A/C: 90812234981, IFSC: BOID000981. Payments are due within 14 days of invoice issue date."
