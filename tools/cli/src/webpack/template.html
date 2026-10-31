@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=<%= VIEWPORT_FIT %>"
+    />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <title>Brightloop Software</title>
+    <style>
+      /* Suppress development error overlays (like production) */
+      #webpack-dev-server-client-overlay,
+      iframe#webpack-dev-server-client-overlay,
+      iframe[style*="z-index: 2147483647"],
+      [data-nextjs-dialog-overlay],
+      #webpack-dev-server-client-overlay-div {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
+    <script>
+      (function() {
+        try {
+          var theme = 'light';
+          var saved = localStorage.getItem('theme');
+          if (saved) {
+            theme = saved;
+          }
+          if (theme === 'system') {
+            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+
+      // Suppress runtime error popup overlay (like production)
+      window.addEventListener('error', function(e) {
+        if (e && e.stopImmediatePropagation) {
+          e.stopImmediatePropagation();
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e && e.stopImmediatePropagation) {
+          e.stopImmediatePropagation();
+        }
+      }, true);
+    </script>
+    <meta name="theme-color" content="#0f172a" />
+    <%= PRECONNECT %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    />
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brightloop-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/brightloop-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brightloop-icon.png" />
+    <link rel="shortcut icon" href="/brightloop-icon.png" />
+    <meta name="emotion-insertion-point" content="" />
+    <meta property="description" content="Brightloop Software — Unified Subscription Management, Recurring Billing, and Invoicing Platform." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://brightloop.local/" />
+    <meta
+      name="twitter:title"
+      content="Brightloop — Subscription Management & Recurring Billing System"
+    />
+    <meta name="twitter:description" content="Brightloop Software — Unified Subscription Management, Recurring Billing, and Invoicing Platform." />
+    <meta name="twitter:site" content="@Brightloop" />
+    <meta name="twitter:image" content="/favicon-192.png" />
+    <meta
+      property="og:title"
+      content="Brightloop — Subscription Management & Recurring Billing System"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Brightloop Software — Unified Subscription Management, Recurring Billing, and Invoicing Platform." />
+    <meta property="og:url" content="https://brightloop.local/" />
+    <meta property="og:image" content="/favicon-192.png" />
+  </head>
+
+  <body>
+    <div id="app" data-version="<%= GIT_SHORT_SHA %>"></div>
+  </body>
+</html>
