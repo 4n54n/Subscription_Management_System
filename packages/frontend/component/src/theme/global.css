@@ -1,0 +1,460 @@
+* {
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  box-sizing: border-box;
+}
+
+:root {
+  --noise-background: url(./noise.avif);
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
+}
+
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+address,
+figure,
+figcaption,
+menu,
+details {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption,
+th {
+  text-align: left;
+  font-weight: normal;
+}
+
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+  border: 0;
+}
+
+i,
+cite,
+em,
+var,
+address,
+dfn {
+  font-style: normal;
+}
+
+[hidefocus],
+summary {
+  outline: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small {
+  font-size: 100%;
+}
+
+sup,
+sub {
+  font-size: 83%;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: inherit;
+}
+
+q:before,
+q:after {
+  content: none;
+}
+
+textarea {
+  overflow: auto;
+  resize: none;
+}
+
+label,
+summary {
+  cursor: default;
+}
+
+a,
+button:not([disabled]) {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b {
+  font-weight: bold;
+}
+
+del,
+ins,
+u,
+s,
+a,
+a:hover {
+  text-decoration: none;
+}
+
+body,
+textarea,
+input,
+button,
+select,
+keygen,
+legend {
+  background-color: unset;
+  outline: 0;
+  border: 0;
+  font-size: var(--affine-font-base);
+  font-family: inherit;
+  font-feature-settings: 'calt' 0;
+}
+
+body {
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+input {
+  border: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  /*Solve the rounded corners of buttons on ios*/
+  border-radius: 0;
+  /*Solve the problem of rounded corners of the input box on ios*/
+  outline: medium;
+  /*Remove the default yellow border on mouse click*/
+  background-color: transparent;
+  caret-color: var(--affine-primary-color);
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+* {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Chrome Safari */
+  height: 0;
+}
+
+editor-host * {
+  scrollbar-width: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+editor-host *::-webkit-scrollbar {
+  width: auto;
+  height: auto;
+}
+
+.editor-wrapper {
+  position: relative;
+  padding-right: 0;
+}
+
+/* issue: https://github.com/toeverything/AFFiNE/issues/2004 */
+.editor-wrapper.edgeless-mode {
+  padding: 0;
+}
+
+.affine-default-page-block-title-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  transition: margin-top 0.2s;
+}
+
+.affine-default-page-block-container {
+  transition: max-width 0.2s;
+  min-width: 550px;
+}
+
+affine-block-hub {
+  position: unset !important;
+}
+
+.block-hub-menu-container {
+  position: unset !important;
+}
+
+@media (max-width: 768px) {
+  .affine-default-page-block-title-container {
+    margin-top: 24px;
+  }
+
+  .editor-wrapper {
+    width: 100%;
+  }
+
+  /* issue: https://github.com/toeverything/AFFiNE/issues/2004 */
+  .editor-wrapper.edgeless-mode {
+    padding: 0;
+  }
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  position: relative;
+  overflow: clip;
+}
+
+/**
+ * A hack to make the anchor wrapper not affect the layout of the page.
+ */
+[data-lit-react-wrapper],
+affine-lit-template-wrapper {
+  display: contents;
+}
+
+/* Avoid color overriden by user-agent */
+button,
+input {
+  color: inherit;
+}
+
+/* ==========================================================================
+   IntoAI 2.0 Design System Overrides
+   ========================================================================== */
+
+:root {
+  /* ── Font Families ── */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  /* ── Font Weights ── */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ── Standard CSS Variables Override for @toeverything/theme ── */
+  --affine-font-family: var(--font-sans) !important;
+  --affine-font-sans-family: var(--font-sans) !important;
+  --affine-font-serif-family: var(--font-serif) !important;
+  --affine-font-mono-family: var(--font-mono) !important;
+  --affine-font-code-family: var(--font-mono) !important;
+  --affine-font-number-family: var(--font-mono) !important;
+
+  --affine-font-base: 15.5px !important;  /* dense app default body size */
+  --affine-font-sm: 13.5px !important;
+  --affine-font-xs: 12px !important;
+
+  /* ── Web App Scale (smaller + denser) ── */
+  --app-type-page: 1.625rem;      /* 26px — page title max */
+  --app-type-section: 1.25rem;   /* 20px */
+  --app-type-panel: 1.03rem;  /* 16.5px */
+  --app-type-body: 0.96875rem;   /* 15.5px ── default for everything */
+  --app-type-label: 0.84375rem;    /* 13.5px */
+  --app-type-caption: 0.75rem;  /* 12px */
+  --app-type-code: 0.90625rem;  /* 14.5px */
+  --app-type-metric: 1.375rem;    /* 22px */
+
+  /* ── Web App Line-Heights ── */
+  --app-lh-heading: 1.2;
+  --app-lh-body: 1.5;
+  --app-lh-label: 1;
+  --app-lh-code: 1.6;
+}
+
+/* Light Theme Variables */
+html[data-theme="light"], :root {
+  --affine-brand-color: #0f62fe !important;
+  --affine-primary-color: #0f62fe !important;
+  --affine-brand-hover-color: #0043ce !important;
+  --affine-link-color: #0f62fe !important;
+  --affine-text-primary-color: #0a0a0a !important;
+  --affine-text-secondary-color: rgba(10, 10, 10, 0.58) !important;
+  --affine-text-disable-color: rgba(10, 10, 10, 0.38) !important;
+  --affine-background-primary-color: #ffffff !important;
+  --affine-background-secondary-color: #f2f5f9 !important; /* soft institutional slate-blue */
+  --affine-background-tertiary-color: #ebf0f6 !important;  /* deeper slate-blue */
+  --affine-background-overlay-panel-color: #ffffff !important;
+  --affine-border-color: rgba(15, 98, 254, 0.12) !important; /* subtle brand blue border */
+  --affine-divider-color: rgba(15, 98, 254, 0.08) !important;
+  --affine-hover-color: rgba(15, 98, 254, 0.05) !important;   /* soft blue hover tint */
+  --affine-hover-color-filled: #ebf0f6 !important;
+
+  /* Status Color Mappings */
+  --affine-success-color: #24a148 !important;
+  --affine-warning-color: #b08000 !important;
+  --affine-error-color: #da1e28 !important;
+
+  /* v2 styling overrides to eliminate old light blue */
+  --affine-v2-button-primary: #0f62fe !important;
+  --affine-v2-toggle-background: #0f62fe !important;
+  --affine-v2-radio-active-chekced: #0f62fe !important;
+  --affine-v2-loading-foreground: #0f62fe !important;
+  --affine-v2-text-emphasis: #0f62fe !important;
+  --affine-v2-icon-activated: #0f62fe !important;
+  --affine-v2-tab-divider-indicator: #0f62fe !important;
+  --affine-v2-table-indicator-activated: #0f62fe !important;
+  --affine-v2-table-focusBorder: #0f62fe !important;
+  --affine-v2-input-border-active: #0f62fe !important;
+  --affine-v2-layer-insideBorder-primaryBorder: #0f62fe !important;
+  --affine-v2-edgeless-frame-border-active: #0f62fe !important;
+  --affine-v2-edgeless-group-border-active: #0f62fe !important;
+  --affine-v2-edgeless-group-border-hover: #0f62fe !important;
+  --affine-v2-edgeless-group-fontColor-active: #0f62fe !important;
+  --affine-v2-edgeless-group-fontColor-hover: #0f62fe !important;
+  --affine-v2-aI-applyTextHighlight: #0f62fe !important;
+  --affine-v2-aI-applyTextHighlightBackground: rgba(15, 98, 254, 0.08) !important;
+}
+
+/* Dark Theme Variables */
+html[data-theme="dark"] {
+  --affine-brand-color: #78a9ff !important;
+  --affine-primary-color: #78a9ff !important;
+  --affine-brand-hover-color: #3b82f6 !important;
+  --affine-link-color: #78a9ff !important;
+  --affine-text-primary-color: #f4f4f4 !important;
+  --affine-text-secondary-color: rgba(244, 244, 244, 0.65) !important;
+  --affine-text-disable-color: rgba(244, 244, 244, 0.40) !important;
+  --affine-background-primary-color: #1a202c !important;   /* deep slate-blue */
+  --affine-background-secondary-color: #121620 !important; /* midnight slate-blue */
+  --affine-background-tertiary-color: #121620 !important;
+  --affine-background-overlay-panel-color: #1a202c !important;
+  --affine-border-color: rgba(120, 169, 255, 0.12) !important; /* subtle brand blue border */
+  --affine-divider-color: rgba(120, 169, 255, 0.12) !important;
+  --affine-hover-color: rgba(120, 169, 255, 0.06) !important;   /* subtle dark blue hover */
+  --affine-hover-color-filled: #1f2736 !important;
+
+  /* Status Color Mappings */
+  --affine-success-color: #42be65 !important;
+  --affine-warning-color: #f1c21b !important;
+  --affine-error-color: #fa4d56 !important;
+
+  /* v2 styling overrides to eliminate old light blue */
+  --affine-v2-button-primary: #78a9ff !important;
+  --affine-v2-toggle-background: #78a9ff !important;
+  --affine-v2-radio-active-chekced: #78a9ff !important;
+  --affine-v2-loading-foreground: #78a9ff !important;
+  --affine-v2-text-emphasis: #78a9ff !important;
+  --affine-v2-icon-activated: #78a9ff !important;
+  --affine-v2-tab-divider-indicator: #78a9ff !important;
+  --affine-v2-table-indicator-activated: #78a9ff !important;
+  --affine-v2-table-focusBorder: #78a9ff !important;
+  --affine-v2-input-border-active: #78a9ff !important;
+  --affine-v2-layer-insideBorder-primaryBorder: #78a9ff !important;
+  --affine-v2-edgeless-frame-border-active: #78a9ff !important;
+  --affine-v2-edgeless-group-border-active: #78a9ff !important;
+  --affine-v2-edgeless-group-border-hover: #78a9ff !important;
+  --affine-v2-edgeless-group-fontColor-active: #78a9ff !important;
+  --affine-v2-edgeless-group-fontColor-hover: #78a9ff !important;
+  --affine-v2-aI-applyTextHighlight: #78a9ff !important;
+  --affine-v2-aI-applyTextHighlightBackground: rgba(120, 169, 255, 0.08) !important;
+}
+
+/* Typography Resets to enforce Design system styling */
+body {
+  font-family: var(--font-sans) !important;
+  font-size: var(--app-type-body) !important;
+  line-height: var(--app-lh-body) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--app-lh-heading) !important;
+  letter-spacing: -0.018em !important;
+}
+
+h1 {
+  font-size: var(--app-type-page) !important;
+}
+
+h2 {
+  font-size: var(--app-type-section) !important;
+}
+
+h3 {
+  font-size: var(--app-type-panel) !important;
+}
+
+h4 {
+  font-size: var(--app-type-label) !important;
+}
+
