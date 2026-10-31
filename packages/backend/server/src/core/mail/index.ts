@@ -1,0 +1,19 @@
+import './config';
+
+import { Module } from '@nestjs/common';
+
+import { ServerConfigModule } from '../config';
+import { DocStorageModule } from '../doc';
+import { StorageModule } from '../storage';
+import { MailJob } from './job';
+import { Mailer } from './mailer';
+import { MailResolver } from './resolver';
+import { MailSender } from './sender';
+
+@Module({
+  imports: [DocStorageModule, StorageModule, ServerConfigModule],
+  providers: [MailSender, Mailer, MailJob, MailResolver],
+  exports: [Mailer, MailSender],
+})
+export class MailModule {}
+export { Mailer, MailSender };
