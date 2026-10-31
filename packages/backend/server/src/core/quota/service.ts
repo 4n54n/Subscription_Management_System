@@ -1,0 +1,270 @@
+import { Injectable, Logger } from '@nestjs/common';
+
+import { InternalServerError, MemberQuotaExceeded, OnEvent } from '../../base';
+import {
+  Models,
+  type UserQuota,
+  WorkspaceQuota as BaseWorkspaceQuota,
+  WorkspaceRole,
+} from '../../models';
+import { WorkspaceBlobStorage } from '../storage';
+import {
+  UserQuotaHumanReadableType,
+  UserQuotaType,
+  WorkspaceQuotaHumanReadableType,
+  WorkspaceQuotaType,
+} from './types';
+import { formatDate, formatSize } from './utils';
+
+type UserQuotaWithUsage = Omit<UserQuotaType, 'humanReadable'>;
+type WorkspaceQuota = Omit<BaseWorkspaceQuota, 'seatQuota'> & {
+  ownerQuota?: string;
+};
+type WorkspaceQuotaWithUsage = Omit<WorkspaceQuotaType, 'humanReadable'>;
+
+@Injectable()
+export class QuotaService {
+  protected logger = new Logger(QuotaService.name);
+
+  constructor(
+    private readonly models: Models,
+    private readonly storage: WorkspaceBlobStorage
+  ) {}
+
+  @OnEvent('user.postCreated')
+  async onUserCreated({ id }: Events['user.postCreated']) {
+    await this.setupUserBaseQuota(id);
+  }
+
+  async getUserQuota(userId: string): Promise<UserQuota> {
+    let quota = await this.models.userFeature.getQuota(userId);
+
+    // not possible, but just in case, we do a little fix for user to avoid system dump
+    if (!quota) {
+      await this.setupUserBaseQuota(userId);
+      quota = await this.models.userFeature.getQuota(userId);
+    }
+
+    if (!quota) {
+      throw new InternalServerError(
+        'User quota not found and can not be created.'
+      );
+    }
+
+    const dbUser = await this.models.user.get(userId);
+    const customStorageQuota =
+      dbUser?.storageQuotaGB && dbUser.storageQuotaGB > 0
+        ? dbUser.storageQuotaGB * 1024 * 1024 * 1024
+        : quota.configs.storageQuota;
+
+    return {
+      ...quota.configs,
+      storageQuota: customStorageQuota,
+      copilotActionLimit: undefined,
+    } as UserQuotaWithUsage;
+  }
+
+  async getUserQuotaWithUsage(userId: string): Promise<UserQuotaWithUsage> {
+    const quota = await this.getUserQuota(userId);
+    const usedStorageQuota = await this.getUserStorageUsage(userId);
+
+    return { ...quota, usedStorageQuota };
+  }
+
+  async getUserStorageUsage(userId: string) {
+    const workspaces = await this.models.workspaceUser.getUserActiveRoles(
+      userId,
+      {
+        role: WorkspaceRole.Owner,
+      }
+    );
+
+    const ids = workspaces.map(w => w.workspaceId);
+
+    const workspacesWithQuota =
+      await this.models.workspaceFeature.batchHasQuota(ids);
+
+    const sizes = await Promise.allSettled(
+      ids
+        .filter(w => !workspacesWithQuota.includes(w))
+        .map(workspace => this.storage.totalSize(workspace))
+    );
+
+    return sizes.reduce((total, size) => {
+      if (size.status === 'fulfilled') {
+        // ensure that size is within the safe range of gql
+        const totalSize = total + size.value;
+        if (Number.isSafeInteger(totalSize)) {
+          return totalSize;
+        } else {
+          this.logger.error(`Workspace size is invalid: ${size.value}`);
+        }
+      } else {
+        this.logger.error(`Failed to get workspace size`, size.reason);
+      }
+      return total;
+    }, 0);
+  }
+
+  async getWorkspaceStorageUsage(workspaceId: string) {
+    const totalSize = await this.storage.totalSize(workspaceId);
+    // ensure that size is within the safe range of gql
+    if (Number.isSafeInteger(totalSize)) {
+      return totalSize;
+    } else {
+      this.logger.error(`Workspace size is invalid: ${totalSize}`);
+    }
+
+    return 0;
+  }
+
+  async getWorkspaceQuota(workspaceId: string): Promise<WorkspaceQuota> {
+    const quota = await this.models.workspaceFeature.getQuota(workspaceId);
+
+    if (!quota) {
+      // get and convert to workspace quota from owner's quota
+      const owner = await this.models.workspaceUser.getOwner(workspaceId);
+      const ownerQuota = await this.getUserQuota(owner.id);
+
+      return {
+        ...ownerQuota,
+        ownerQuota: owner.id,
+      };
+    }
+
+    return quota.configs;
+  }
+
+  async getWorkspaceQuotaWithUsage(
+    workspaceId: string
+  ): Promise<WorkspaceQuotaWithUsage> {
+    const quota = await this.getWorkspaceQuota(workspaceId);
+    const usedStorageQuota = quota.ownerQuota
+      ? await this.getUserStorageUsage(quota.ownerQuota)
+      : await this.getWorkspaceStorageUsage(workspaceId);
+    const memberCount = await this.models.workspaceUser.count(workspaceId);
+
+    return {
+      ...quota,
+      usedStorageQuota,
+      memberCount,
+      usedSize: usedStorageQuota,
+    };
+  }
+
+  formatUserQuota(
+    quota: Omit<UserQuotaType, 'humanReadable'>
+  ): UserQuotaHumanReadableType {
+    return {
+      name: quota.name,
+      blobLimit: formatSize(quota.blobLimit),
+      storageQuota: formatSize(quota.storageQuota),
+      usedStorageQuota: formatSize(quota.usedStorageQuota),
+      historyPeriod: formatDate(quota.historyPeriod),
+      memberLimit: quota.memberLimit.toString(),
+      copilotActionLimit: quota.copilotActionLimit
+        ? `${quota.copilotActionLimit} times`
+        : 'Unlimited',
+    };
+  }
+
+  async getWorkspaceSeatQuota(workspaceId: string) {
+    const memberCount = await this.models.workspaceUser.count(workspaceId);
+
+    return {
+      memberCount,
+      memberLimit: 9999999, // Brightloop override: unlimited seats
+    };
+  }
+
+  async tryCheckSeat(workspaceId: string, excludeSelf = false) {
+    const quota = await this.getWorkspaceSeatQuota(workspaceId);
+
+    return quota.memberCount - (excludeSelf ? 1 : 0) < quota.memberLimit;
+  }
+
+  async checkSeat(workspaceId: string, excludeSelf = false) {
+    const available = await this.tryCheckSeat(workspaceId, excludeSelf);
+
+    if (!available) {
+      throw new MemberQuotaExceeded();
+    }
+  }
+
+  formatWorkspaceQuota(
+    quota: Omit<WorkspaceQuotaType, 'humanReadable'>
+  ): WorkspaceQuotaHumanReadableType {
+    return {
+      name: quota.name,
+      blobLimit: formatSize(quota.blobLimit),
+      storageQuota: formatSize(quota.storageQuota),
+      storageQuotaUsed: formatSize(quota.usedStorageQuota),
+      historyPeriod: formatDate(quota.historyPeriod),
+      memberLimit: quota.memberLimit.toString(),
+      memberCount: quota.memberCount.toString(),
+    };
+  }
+
+  async getUserQuotaCalculator(userId: string) {
+    const quota = await this.getUserQuota(userId);
+    const usedSize = await this.getUserStorageUsage(userId);
+
+    return this.generateQuotaCalculator(
+      quota.storageQuota,
+      quota.blobLimit,
+      usedSize
+    );
+  }
+
+  async getWorkspaceQuotaCalculator(workspaceId: string) {
+    const quota = await this.getWorkspaceQuota(workspaceId);
+    const unlimited = await this.models.workspaceFeature.has(
+      workspaceId,
+      'unlimited_workspace'
+    );
+
+    // quota check will be disabled for unlimited workspace
+    // we save a complicated db read for used size
+    if (unlimited) {
+      return this.generateQuotaCalculator(0, quota.blobLimit, 0, true);
+    }
+
+    const usedSize = quota.ownerQuota
+      ? await this.getUserStorageUsage(quota.ownerQuota)
+      : await this.getWorkspaceStorageUsage(workspaceId);
+
+    return this.generateQuotaCalculator(
+      quota.storageQuota,
+      quota.blobLimit,
+      usedSize
+    );
+  }
+
+  private async setupUserBaseQuota(userId: string) {
+    await this.models.userFeature.add(userId, 'free_plan_v1', 'sign up');
+  }
+
+  private generateQuotaCalculator(
+    storageQuota: number,
+    blobLimit: number,
+    usedQuota: number,
+    unlimited = false
+  ) {
+    const checkExceeded = (recvSize: number) => {
+      if (unlimited) {
+        return;
+      }
+
+      if (blobLimit > 0 && recvSize > blobLimit) {
+        return { blobQuotaExceeded: true, storageQuotaExceeded: false };
+      }
+
+      if (storageQuota > 0 && usedQuota + recvSize > storageQuota) {
+        return { blobQuotaExceeded: false, storageQuotaExceeded: true };
+      }
+
+      return;
+    };
+    return checkExceeded;
+  }
+}
