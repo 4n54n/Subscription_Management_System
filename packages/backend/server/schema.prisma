@@ -1,0 +1,1467 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "./node_modules/.prisma/client"
+  previewFeatures = ["metrics", "nativeDistinct", "postgresqlExtensions", "relationJoins"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model User {
+  id                           String                         @id @default(uuid()) @db.VarChar
+  name                         String                         @db.VarChar
+  userRole                     String?                        @map("user_role") @db.VarChar
+  email                        String                         @unique @db.VarChar
+  /// Not available if user signed up through OAuth providers
+  password                     String?                        @db.VarChar
+  createdAt                    DateTime                       @default(now()) @map("created_at") @db.Timestamptz(3)
+  emailVerifiedAt              DateTime?                      @map("email_verified") @db.Timestamptz(3)
+  avatarUrl                    String?                        @map("avatar_url") @db.VarChar
+  companyName                  String?                        @map("company_name") @db.VarChar
+  companyMail                  String?                        @map("company_mail") @db.VarChar
+  companyAddress               String?                        @map("company_address") @db.VarChar
+  cin                          String?                        @map("cin") @db.VarChar
+  companyLogo                  String?                        @map("company_logo") @db.Text
+  companySupportMail           String?                        @map("company_support_mail") @db.VarChar
+  storageQuotaGB               Int?                           @map("storage_quota_gb")
+  /// Indicate whether the user finished the signup progress.
+  /// for example, the value will be false if user never registered and invited into a workspace by others.
+  registered                   Boolean                        @default(true)
+  disabled                     Boolean                        @default(false)
+  createdAiJobs                AiJobs[]                       @relation("createdAiJobs")
+  aiSessions                   AiSession[]
+  appConfigs                   AppConfig[]
+  deprecatedAppRuntimeSettings DeprecatedAppRuntimeSettings[]
+  notifications                Notification[]                 @relation("user_notifications")
+  createdHistory               SnapshotHistory[]              @relation("createdHistory")
+  createdSnapshot              Snapshot[]                     @relation("createdSnapshot")
+  updatedSnapshot              Snapshot[]                     @relation("updatedSnapshot")
+  createdUpdate                Update[]                       @relation("createdUpdate")
+  connectedAccounts            ConnectedAccount[]
+  features                     UserFeature[]
+  sessions                     UserSession[]
+  settings                     UserSettings?
+  userSnapshots                UserSnapshot[]
+  userStripeCustomer           UserStripeCustomer?
+  docPermissions               WorkspaceDocUserRole[]
+  workspacePermissions         WorkspaceUserRole[]
+  presentationGuestSessions    PresentationGuestSession[]
+  projectMemberships           ProjectMember[]
+  assignedIssues               ProjectIssueAssignee[]
+  reportedIssues               ProjectIssue[]                 @relation("reportedIssues")
+  issueComments                ProjectIssueComment[]
+  ledModules                   ProjectModule[]
+  phishMonitoredUser           PhishMonitoredUser?
+  quotations                   Quotation[]
+  brightloopSubscriptions      BrightloopSubscription[]
+  brightloopInvoices           BrightloopInvoice[]
+  recordedPayments             PaymentRecord[]                @relation("RecordedPayments")
+
+  @@index([email])
+  @@map("users")
+}
+
+model ConnectedAccount {
+  id                String    @id @default(uuid()) @db.VarChar
+  userId            String    @map("user_id") @db.VarChar
+  provider          String    @db.VarChar
+  providerAccountId String    @map("provider_account_id") @db.VarChar
+  scope             String?
+  accessToken       String?   @map("access_token")
+  refreshToken      String?   @map("refresh_token")
+  expiresAt         DateTime? @map("expires_at") @db.Timestamptz(3)
+  createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([providerAccountId])
+  @@map("user_connected_accounts")
+}
+
+model Session {
+  id                   String        @id @default(uuid()) @db.VarChar
+  deprecated_expiresAt DateTime?     @map("expires_at") @db.Timestamptz(3)
+  createdAt            DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  userSessions         UserSession[]
+
+  @@map("multiple_users_sessions")
+}
+
+model UserSession {
+  id        String    @id @default(uuid()) @db.VarChar
+  sessionId String    @map("session_id") @db.VarChar
+  userId    String    @map("user_id") @db.VarChar
+  expiresAt DateTime? @map("expires_at") @db.Timestamptz(3)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  session   Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId])
+  @@map("user_sessions")
+}
+
+model VerificationToken {
+  token      String   @db.VarChar
+  type       Int      @db.SmallInt
+  credential String?
+  expiresAt  DateTime @db.Timestamptz(3)
+
+  @@unique([type, token])
+  @@map("verification_tokens")
+}
+
+model Workspace {
+  id                 String                 @id @default(uuid()) @db.VarChar
+  public             Boolean
+  createdAt          DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  enableUrlPreview   Boolean                @default(false) @map("enable_url_preview")
+  enableAi           Boolean                @default(true) @map("enable_ai")
+  avatarKey          String?                @map("avatar_key") @db.VarChar
+  name               String?                @db.VarChar
+  enableDocEmbedding Boolean                @default(true) @map("enable_doc_embedding")
+  blobs              Blob[]
+  features           WorkspaceFeature[]
+  docPermissions     WorkspaceDocUserRole[]
+  docs               WorkspaceDoc[]
+  permissions        WorkspaceUserRole[]
+  projects           Project[]
+  geminiSetting      WorkspaceGeminiSetting?
+  proposals          WorkspaceProposal[]
+  quotes             WorkspaceQuote[]
+  invoices           WorkspaceInvoice[]
+  letterheads        WorkspaceLetterhead[]
+  shareKey           String?                @map("share_key") @db.VarChar
+  sharePasswordHash  String?                @map("share_password_hash") @db.VarChar
+  shareCreatedAt     DateTime?              @map("share_created_at") @db.Timestamptz(3)
+
+  @@map("workspaces")
+}
+
+model WorkspaceDoc {
+  workspaceId String    @map("workspace_id") @db.VarChar
+  docId       String    @map("page_id") @db.VarChar
+  public      Boolean   @default(false)
+  mode        Int       @default(0) @db.SmallInt
+  defaultRole Int       @default(30) @db.SmallInt
+  summary     String?   @db.VarChar
+  title       String?   @db.VarChar
+  blocked     Boolean   @default(false)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@id([workspaceId, docId])
+  @@map("workspace_pages")
+}
+
+model WorkspaceUserRole {
+  id          String                @id @default(uuid()) @db.VarChar
+  workspaceId String                @map("workspace_id") @db.VarChar
+  userId      String                @map("user_id") @db.VarChar
+  type        Int                   @db.SmallInt
+  /// @deprecated Whether the permission invitation is accepted by the user
+  accepted    Boolean               @default(false)
+  createdAt   DateTime              @default(now()) @map("created_at") @db.Timestamptz(3)
+  /// Whether the invite status of the workspace member
+  status      WorkspaceMemberStatus @default(Pending)
+  /// When the invite status changed
+  updatedAt   DateTime              @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user        User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace             @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+  @@index([userId])
+  @@map("workspace_user_permissions")
+}
+
+model WorkspaceDocUserRole {
+  workspaceId String    @map("workspace_id") @db.VarChar
+  docId       String    @map("page_id") @db.VarChar
+  userId      String    @map("user_id") @db.VarChar
+  type        Int       @db.SmallInt
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@id([workspaceId, docId, userId])
+  @@map("workspace_page_user_permissions")
+}
+
+model Feature {
+  id                Int                @id @default(autoincrement())
+  name              String             @map("feature") @db.VarChar
+  /// TODO(@forehalo): remove in the coming version
+  /// @deprecated
+  /// we don't need to record all the historical version of features
+  deprecatedVersion Int                @default(0) @map("version")
+  /// @deprecated
+  /// we don't need to record type of features any more, there are always static,
+  /// but set it in `WorkspaceFeature` and `UserFeature` for fast query with just a little redundant.
+  deprecatedType    Int                @default(0) @map("type")
+  configs           Json               @default("{}") @db.Json
+  createdAt         DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(3)
+  userFeatures      UserFeature[]
+  workspaceFeatures WorkspaceFeature[]
+
+  @@unique([name, deprecatedVersion])
+  @@map("features")
+}
+
+model UserFeature {
+  id        Int       @id @default(autoincrement())
+  userId    String    @map("user_id") @db.VarChar
+  featureId Int       @map("feature_id")
+  reason    String    @db.VarChar
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  expiredAt DateTime? @map("expired_at") @db.Timestamptz(3)
+  activated Boolean   @default(false)
+  name      String    @default("") @map("name") @db.VarChar
+  type      Int       @default(0) @map("type")
+  feature   Feature   @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([name])
+  @@index([featureId])
+  @@map("user_features")
+}
+
+model WorkspaceFeature {
+  id          Int       @id @default(autoincrement())
+  workspaceId String    @map("workspace_id") @db.VarChar
+  featureId   Int       @map("feature_id")
+  reason      String    @db.VarChar
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  expiredAt   DateTime? @map("expired_at") @db.Timestamptz(3)
+  activated   Boolean   @default(false)
+  /// overrides for the default feature configs
+  configs     Json      @default("{}") @db.Json
+  name        String    @default("") @map("name") @db.VarChar
+  type        Int       @default(0) @map("type")
+  feature     Feature   @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([name])
+  @@index([featureId])
+  @@map("workspace_features")
+}
+
+model Snapshot {
+  id            String   @default(uuid()) @map("guid") @db.VarChar
+  workspaceId   String   @map("workspace_id") @db.VarChar
+  blob          Bytes
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime @map("updated_at") @db.Timestamptz(3)
+  seq           Int?     @default(0)
+  state         Bytes?
+  createdBy     String?  @map("created_by") @db.VarChar
+  updatedBy     String?  @map("updated_by") @db.VarChar
+  createdByUser User?    @relation("createdSnapshot", fields: [createdBy], references: [id])
+  updatedByUser User?    @relation("updatedSnapshot", fields: [updatedBy], references: [id])
+
+  @@id([workspaceId, id])
+  @@index([workspaceId, updatedAt])
+  @@map("snapshots")
+}
+
+model UserSnapshot {
+  userId    String   @map("user_id") @db.VarChar
+  id        String   @map("id") @db.VarChar
+  blob      Bytes
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, id])
+  @@map("user_snapshots")
+}
+
+model Update {
+  id            String   @map("guid") @db.VarChar
+  workspaceId   String   @map("workspace_id") @db.VarChar
+  blob          Bytes
+  createdAt     DateTime @map("created_at") @db.Timestamptz(3)
+  seq           Int?
+  createdBy     String?  @map("created_by") @db.VarChar
+  createdByUser User?    @relation("createdUpdate", fields: [createdBy], references: [id])
+
+  @@id([workspaceId, id, createdAt])
+  @@map("updates")
+}
+
+model SnapshotHistory {
+  workspaceId   String   @map("workspace_id") @db.VarChar
+  id            String   @map("guid") @db.VarChar
+  timestamp     DateTime @db.Timestamptz(3)
+  blob          Bytes
+  state         Bytes?
+  expiredAt     DateTime @map("expired_at") @db.Timestamptz(3)
+  createdBy     String?  @map("created_by") @db.VarChar
+  createdByUser User?    @relation("createdHistory", fields: [createdBy], references: [id])
+
+  @@id([workspaceId, id, timestamp])
+  @@map("snapshot_histories")
+}
+
+model AiPromptMessage {
+  promptId    Int          @map("prompt_id")
+  idx         Int
+  role        AiPromptRole
+  content     String
+  attachments Json?        @db.Json
+  params      Json?        @db.Json
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  prompt      AiPrompt     @relation(fields: [promptId], references: [id], onDelete: Cascade)
+
+  @@unique([promptId, idx])
+  @@map("ai_prompts_messages")
+}
+
+model AiPrompt {
+  id        Int               @id @default(autoincrement())
+  name      String            @unique @db.VarChar(32)
+  action    String?           @db.VarChar
+  model     String            @db.VarChar
+  createdAt DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  config    Json?             @db.Json
+  modified  Boolean           @default(false)
+  updatedAt DateTime          @default(now()) @map("updated_at") @db.Timestamptz(3)
+  messages  AiPromptMessage[]
+  sessions  AiSession[]
+
+  @@map("ai_prompts_metadata")
+}
+
+model AiSessionMessage {
+  id          String       @id @default(uuid()) @db.VarChar
+  sessionId   String       @map("session_id") @db.VarChar
+  role        AiPromptRole
+  content     String
+  attachments Json?        @db.Json
+  params      Json?        @db.Json
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  session     AiSession    @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@map("ai_sessions_messages")
+}
+
+model AiSession {
+  id              String             @id @default(uuid()) @db.VarChar
+  userId          String             @map("user_id") @db.VarChar
+  workspaceId     String             @map("workspace_id") @db.VarChar
+  docId           String             @map("doc_id") @db.VarChar
+  promptName      String             @map("prompt_name") @db.VarChar(32)
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  deletedAt       DateTime?          @map("deleted_at") @db.Timestamptz(3)
+  messageCost     Int                @default(0)
+  tokenCost       Int                @default(0)
+  parentSessionId String?            @map("parent_session_id") @db.VarChar
+  context         AiContext[]
+  messages        AiSessionMessage[]
+  prompt          AiPrompt           @relation(fields: [promptName], references: [name], onDelete: Cascade)
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, workspaceId])
+  @@map("ai_sessions_metadata")
+}
+
+model AiContext {
+  id        String    @id @default(uuid()) @db.VarChar
+  sessionId String    @map("session_id") @db.VarChar
+  config    Json      @db.Json
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  session   AiSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("ai_contexts")
+}
+
+model AiJobs {
+  id            String      @id @default(uuid()) @db.VarChar
+  workspaceId   String      @map("workspace_id") @db.VarChar
+  blobId        String      @map("blob_id") @db.VarChar
+  createdBy     String?     @map("created_by") @db.VarChar
+  type          AiJobType
+  status        AiJobStatus @default(pending)
+  payload       Json        @db.Json
+  startedAt     DateTime    @default(now()) @map("started_at") @db.Timestamptz(3)
+  finishedAt    DateTime?   @map("finished_at") @db.Timestamptz(3)
+  createdByUser User?       @relation("createdAiJobs", fields: [createdBy], references: [id])
+
+  @@unique([createdBy, workspaceId, blobId])
+  @@map("ai_jobs")
+}
+
+model DataMigration {
+  id         String    @id @default(uuid()) @db.VarChar
+  name       String    @unique @db.VarChar
+  startedAt  DateTime  @default(now()) @map("started_at") @db.Timestamptz(3)
+  finishedAt DateTime? @map("finished_at") @db.Timestamptz(3)
+
+  @@map("_data_migrations")
+}
+
+/// @deprecated use AppConfig instead
+model DeprecatedAppRuntimeSettings {
+  id                String            @id @db.VarChar
+  type              RuntimeConfigType
+  module            String            @db.VarChar
+  key               String            @db.VarChar
+  value             Json              @db.Json
+  description       String
+  updatedAt         DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+  deletedAt         DateTime?         @map("deleted_at") @db.Timestamptz(3)
+  lastUpdatedBy     String?           @map("last_updated_by") @db.VarChar
+  lastUpdatedByUser User?             @relation(fields: [lastUpdatedBy], references: [id])
+
+  @@unique([module, key])
+  @@map("app_runtime_settings")
+}
+
+model AppConfig {
+  id                String   @id @db.VarChar
+  value             Json
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  lastUpdatedBy     String?  @map("last_updated_by") @db.VarChar
+  lastUpdatedByUser User?    @relation(fields: [lastUpdatedBy], references: [id])
+
+  @@map("app_configs")
+}
+
+model DeprecatedUserSubscription {
+  id                   Int       @id @default(autoincrement())
+  userId               String    @map("user_id") @db.VarChar
+  plan                 String    @db.VarChar(20)
+  recurring            String    @db.VarChar(20)
+  stripeSubscriptionId String?   @unique @map("stripe_subscription_id")
+  status               String    @db.VarChar(20)
+  start                DateTime  @map("start") @db.Timestamptz(3)
+  end                  DateTime? @map("end") @db.Timestamptz(3)
+  nextBillAt           DateTime? @map("next_bill_at") @db.Timestamptz(3)
+  canceledAt           DateTime? @map("canceled_at") @db.Timestamptz(3)
+  trialStart           DateTime? @map("trial_start") @db.Timestamptz(3)
+  trialEnd             DateTime? @map("trial_end") @db.Timestamptz(3)
+  stripeScheduleId     String?   @map("stripe_schedule_id") @db.VarChar
+  createdAt            DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  variant              String?   @db.VarChar(20)
+
+  @@unique([userId, plan])
+  @@map("user_subscriptions")
+}
+
+model DeprecatedUserInvoice {
+  id               Int      @id @default(autoincrement())
+  userId           String   @map("user_id") @db.VarChar
+  stripeInvoiceId  String   @unique @map("stripe_invoice_id")
+  currency         String   @db.VarChar(3)
+  amount           Int
+  status           String   @db.VarChar(20)
+  plan             String?  @db.VarChar(20)
+  recurring        String?  @db.VarChar(20)
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  reason           String?  @db.VarChar
+  lastPaymentError String?  @map("last_payment_error")
+  link             String?
+
+  @@index([userId])
+  @@map("user_invoices")
+}
+
+model UserStripeCustomer {
+  userId           String   @id @map("user_id") @db.VarChar
+  stripeCustomerId String   @unique @map("stripe_customer_id") @db.VarChar
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_stripe_customers")
+}
+
+model Subscription {
+  id                   Int       @id @default(autoincrement())
+  targetId             String    @map("target_id") @db.VarChar
+  plan                 String    @db.VarChar(20)
+  recurring            String    @db.VarChar(20)
+  variant              String?   @db.VarChar(20)
+  quantity             Int       @default(1)
+  stripeSubscriptionId String?   @unique @map("stripe_subscription_id")
+  stripeScheduleId     String?   @map("stripe_schedule_id") @db.VarChar
+  status               String    @db.VarChar(20)
+  start                DateTime  @map("start") @db.Timestamptz(3)
+  end                  DateTime? @map("end") @db.Timestamptz(3)
+  nextBillAt           DateTime? @map("next_bill_at") @db.Timestamptz(3)
+  canceledAt           DateTime? @map("canceled_at") @db.Timestamptz(3)
+  trialStart           DateTime? @map("trial_start") @db.Timestamptz(3)
+  trialEnd             DateTime? @map("trial_end") @db.Timestamptz(3)
+  createdAt            DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@unique([targetId, plan])
+  @@map("subscriptions")
+}
+
+model Invoice {
+  stripeInvoiceId             String   @id @map("stripe_invoice_id")
+  targetId                    String   @map("target_id") @db.VarChar
+  currency                    String   @db.VarChar(3)
+  amount                      Int
+  status                      String   @db.VarChar(20)
+  createdAt                   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  reason                      String?  @db.VarChar
+  lastPaymentError            String?  @map("last_payment_error")
+  link                        String?
+  onetimeSubscriptionRedeemed Boolean  @default(false) @map("onetime_subscription_redeemed")
+
+  @@index([targetId])
+  @@map("invoices")
+}
+
+model License {
+  key         String    @id @map("key") @db.VarChar
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  revealedAt  DateTime? @map("revealed_at") @db.Timestamptz(3)
+  installedAt DateTime? @map("installed_at") @db.Timestamptz(3)
+  validateKey String?   @map("validate_key") @db.VarChar
+
+  @@map("licenses")
+}
+
+model InstalledLicense {
+  key         String    @id @map("key") @db.VarChar
+  workspaceId String    @unique @map("workspace_id") @db.VarChar
+  quantity    Int       @default(1)
+  recurring   String    @db.VarChar
+  installedAt DateTime  @default(now()) @map("installed_at") @db.Timestamptz(3)
+  validateKey String    @map("validate_key") @db.VarChar
+  validatedAt DateTime  @map("validated_at") @db.Timestamptz(3)
+  expiredAt   DateTime? @map("expired_at") @db.Timestamptz(3)
+
+  @@map("installed_licenses")
+}
+
+model Blob {
+  workspaceId String    @map("workspace_id") @db.VarChar
+  key         String    @db.VarChar
+  size        Int
+  mime        String    @db.VarChar
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  deletedAt   DateTime? @map("deleted_at") @db.Timestamptz(3)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@id([workspaceId, key])
+  @@map("blobs")
+}
+
+model Notification {
+  id        String            @id @default(uuid()) @db.VarChar
+  userId    String            @map("user_id") @db.VarChar
+  createdAt DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(3)
+  level     NotificationLevel
+  read      Boolean           @default(false)
+  type      NotificationType
+  body      Json
+  user      User              @relation("user_notifications", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt, read])
+  @@map("notifications")
+}
+
+model UserSettings {
+  userId    String   @id @map("user_id") @db.VarChar
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  payload   Json
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model PresentationRoom {
+  id            String    @id @default(uuid()) @db.VarChar
+  workspaceId   String    @map("workspace_id") @db.VarChar
+  docId         String    @map("doc_id") @db.VarChar
+  hostUserId    String    @map("host_user_id") @db.VarChar
+  inviteToken   String    @unique @map("invite_token") @db.VarChar
+  /// "active" | "ended"
+  status        String    @default("active") @db.VarChar
+  /// JSON: { allowGemini: boolean, allowVideo: boolean, allowAudio: boolean, allowScreenShare: boolean, allowWithoutPermission: boolean }
+  permissions   Json      @default("{}") @db.Json
+  geminiModel   String    @default("gemini-3.5-flash") @map("gemini_model") @db.VarChar
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  endedAt       DateTime? @map("ended_at") @db.Timestamptz(3)
+
+  guestSessions PresentationGuestSession[]
+
+  @@index([workspaceId, hostUserId])
+  @@index([inviteToken])
+  @@map("presentation_rooms")
+}
+
+/// Tracks temporary guest users created for a specific presentation room.
+/// Guests are identified by email ending with @guest.presentation.
+/// All records are deleted (cascading) when the room ends.
+model PresentationGuestSession {
+  id          String           @id @default(uuid()) @db.VarChar
+  userId      String           @map("user_id") @db.VarChar
+  roomId      String           @map("room_id") @db.VarChar
+  inviteToken String           @map("invite_token") @db.VarChar
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room        PresentationRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([roomId])
+  @@index([userId])
+  @@map("presentation_guest_sessions")
+}
+
+model CopilotChatMessage {
+  id            String    @id @default(uuid()) @db.VarChar
+  workspaceId   String    @map("workspace_id") @db.VarChar
+  userId        String    @map("user_id") @db.VarChar
+  sessionId     String?   @map("session_id") @db.VarChar
+  role          String    @db.VarChar // "user" | "assistant"
+  content       String    @db.Text
+  pendingAction Json?     @map("pending_action") @db.Json
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([workspaceId, userId, createdAt])
+  @@map("copilot_chat_messages")
+}
+
+enum WorkspaceMemberStatus {
+  Pending
+  NeedMoreSeat
+  NeedMoreSeatAndReview
+  UnderReview
+  Accepted
+}
+
+enum AiPromptRole {
+  system
+  assistant
+  user
+}
+
+enum AiJobStatus {
+  pending
+  running
+  finished
+  claimed
+  failed
+}
+
+enum AiJobType {
+  transcription
+}
+
+enum RuntimeConfigType {
+  String
+  Number
+  Boolean
+  Object
+  Array
+}
+
+enum NotificationType {
+  Mention
+  Invitation
+  InvitationAccepted
+  InvitationBlocked
+  InvitationRejected
+  InvitationReviewRequest
+  InvitationReviewApproved
+  InvitationReviewDeclined
+}
+
+enum NotificationLevel {
+  High
+  Default
+  Low
+  Min
+  None
+}
+
+model Project {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  name               String          @db.VarChar
+  description        String?         @db.VarChar
+  icon               String?         @db.VarChar
+  banner             String?         @db.VarChar
+  color              String?         @db.VarChar
+  category           String?         @db.VarChar
+  status             String          @db.VarChar // Planning, Active, Maintenance, Completed
+  visibility         String          @db.VarChar // WorkspaceWide, Restricted
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  workspace          Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  modules            ProjectModule[]
+  cycles             ProjectCycle[]
+  releases           ProjectRelease[]
+  issues             ProjectIssue[]
+  restrictedMembers  ProjectMember[]
+  labels             ProjectIssueLabel[]
+  documents          ProjectDocument[]
+  docsConfig         ProjectDocsConfig?
+  shareKey           String?                @map("share_key") @db.VarChar
+  sharePasswordHash  String?                @map("share_password_hash") @db.VarChar
+  shareCreatedAt     DateTime?              @map("share_created_at") @db.Timestamptz(3)
+  projectManagerId   String?                @map("project_manager_id") @db.VarChar
+  projectManagerName String?                @map("project_manager_name") @db.VarChar
+
+  @@map("projects")
+}
+
+model ProjectMember {
+  projectId          String          @map("project_id") @db.VarChar
+  userId             String          @map("user_id") @db.VarChar
+
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, userId])
+  @@map("project_members")
+}
+
+model ProjectModule {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  projectId          String          @map("project_id") @db.VarChar
+  name               String          @db.VarChar
+  description        String?         @db.VarChar
+  leadId             String?         @map("lead_id") @db.VarChar
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  lead               User?           @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  issues             ProjectIssue[]
+
+  @@map("project_modules")
+}
+
+model ProjectCycle {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  projectId          String          @map("project_id") @db.VarChar
+  name               String          @db.VarChar
+  goal               String?         @db.VarChar
+  startDate          DateTime?       @map("start_date") @db.Timestamptz(3)
+  endDate            DateTime?       @map("end_date") @db.Timestamptz(3)
+  status             String          @db.VarChar // Planned, Active, Completed
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  issues             ProjectIssue[]
+
+  @@map("project_cycles")
+}
+
+model ProjectRelease {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  projectId          String          @map("project_id") @db.VarChar
+  name               String          @db.VarChar
+  description        String?         @db.VarChar
+  plannedDate        DateTime?       @map("planned_date") @db.Timestamptz(3)
+  status             String          @db.VarChar // Planned, InDevelopment, Testing, Released
+  checklist          Json?           @db.Json
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  issues             ProjectIssue[]
+  documents          ProjectDocument[]
+
+  @@map("project_releases")
+}
+
+model ProjectIssue {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  projectId          String          @map("project_id") @db.VarChar
+  title              String          @db.VarChar
+  description        String?         @db.VarChar
+  type               String          @db.VarChar // Task, Bug, Feature, Improvement, Research
+  priority           String          @db.VarChar // Low, Medium, High, Critical
+  status             String          @db.VarChar // Backlog, Todo, InProgress, InReview, Testing, Done
+  dueDate            DateTime?       @map("due_date") @db.Timestamptz(3)
+  estimatedTime      Float?          @map("estimated_time")
+  timeSpent          Float?          @map("time_spent") @default(0)
+  reporterId         String          @map("reporter_id") @db.VarChar
+  cycleId            String?         @map("cycle_id") @db.VarChar
+  moduleId           String?         @map("module_id") @db.VarChar
+  releaseId          String?         @map("release_id") @db.VarChar
+  parentIssueId      String?         @map("parent_issue_id") @db.VarChar
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  reporter           User            @relation("reportedIssues", fields: [reporterId], references: [id])
+  cycle              ProjectCycle?   @relation(fields: [cycleId], references: [id], onDelete: SetNull)
+  module             ProjectModule?  @relation(fields: [moduleId], references: [id], onDelete: SetNull)
+  release            ProjectRelease? @relation(fields: [releaseId], references: [id], onDelete: SetNull)
+  
+  parentIssue        ProjectIssue?   @relation("SubTasks", fields: [parentIssueId], references: [id], onDelete: SetNull)
+  subtasks           ProjectIssue[]  @relation("SubTasks")
+
+  assignees          ProjectIssueAssignee[]
+  comments           ProjectIssueComment[]
+  attachments        ProjectIssueAttachment[]
+
+  blockedIssues      ProjectIssueDependency[] @relation("BlockedIssue")
+  blockerIssues      ProjectIssueDependency[] @relation("BlockerIssue")
+  labels             ProjectIssueLabelMapping[]
+
+  @@map("project_issues")
+}
+
+model ProjectIssueAssignee {
+  issueId            String          @map("issue_id") @db.VarChar
+  userId             String          @map("user_id") @db.VarChar
+
+  issue              ProjectIssue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([issueId, userId])
+  @@map("project_issue_assignees")
+}
+
+model ProjectIssueDependency {
+  blockedIssueId     String          @map("blocked_issue_id") @db.VarChar
+  blockerIssueId     String          @map("blocker_issue_id") @db.VarChar
+
+  blockedIssue       ProjectIssue    @relation("BlockedIssue", fields: [blockedIssueId], references: [id], onDelete: Cascade)
+  blockerIssue       ProjectIssue    @relation("BlockerIssue", fields: [blockerIssueId], references: [id], onDelete: Cascade)
+
+  @@id([blockedIssueId, blockerIssueId])
+  @@map("project_issue_dependencies")
+}
+
+model ProjectIssueComment {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  issueId            String          @map("issue_id") @db.VarChar
+  userId             String          @map("user_id") @db.VarChar
+  content            String          @db.VarChar
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  issue              ProjectIssue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("project_issue_comments")
+}
+
+model ProjectIssueAttachment {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  issueId            String          @map("issue_id") @db.VarChar
+  name               String          @db.VarChar
+  blobKey            String          @map("blob_key") @db.VarChar
+  size               Int
+  mime               String          @db.VarChar
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  issue              ProjectIssue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+
+  @@map("project_issue_attachments")
+}
+
+model ProjectIssueLabel {
+  id                 String          @id @default(uuid()) @db.VarChar
+  workspaceId        String          @map("workspace_id") @db.VarChar
+  projectId          String          @map("project_id") @db.VarChar
+  name               String          @db.VarChar
+  color              String?         @db.VarChar
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  issues             ProjectIssueLabelMapping[]
+
+  @@map("project_issue_labels")
+}
+
+model ProjectIssueLabelMapping {
+  issueId            String          @map("issue_id") @db.VarChar
+  labelId            String          @map("label_id") @db.VarChar
+
+  issue              ProjectIssue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  label              ProjectIssueLabel @relation(fields: [labelId], references: [id], onDelete: Cascade)
+
+  @@id([issueId, labelId])
+  @@map("project_issue_label_mappings")
+}
+
+model WorkspaceGeminiSetting {
+  workspaceId             String    @id @map("workspace_id") @db.VarChar
+  apiKey                  String?   @map("api_key") @db.VarChar
+  model                   String    @default("gemini-3.5-flash") @db.VarChar
+  meetingModel            String    @default("gemini-3.5-flash") @map("meeting_model") @db.VarChar
+  allowGemini             Boolean   @default(true) @map("allow_gemini")
+  limitOutput             Boolean   @default(false) @map("limit_output")
+  sshHost                 String?   @map("ssh_host") @db.VarChar
+  sshUser                 String?   @map("ssh_user") @db.VarChar
+  sshPass                 String?   @map("ssh_pass") @db.VarChar
+  allowWithoutPermission   Boolean   @default(true) @map("allow_without_permission")
+  lockContentFor          Json?     @map("lock_content_for") @db.Json
+
+  workspace               Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("workspace_gemini_settings")
+}
+
+model ProjectDocument {
+  id                        String          @id @default(uuid()) @db.VarChar
+  workspaceId               String          @map("workspace_id") @db.VarChar
+  projectId                 String          @map("project_id") @db.VarChar
+  releaseId                 String          @map("release_id") @db.VarChar
+  type                      String          @db.VarChar // e.g. BRD, SRS, Architecture, ProjectPlan, etc.
+  title                     String          @db.VarChar
+  content                   String          @db.Text
+  status                    String          @db.VarChar // Draft, ApprovedInternally, ApprovedByClient, SignedByClient
+  approvedInternallyBy      String?         @map("approved_internally_by") @db.VarChar
+  version                   Int             @default(1)
+  lastEditTime              DateTime        @default(now()) @updatedAt @map("last_edit_time") @db.Timestamptz(3)
+  
+  // Client sign-off/approval audit log
+  approvalIp                String?         @map("approval_ip") @db.VarChar
+  approvalTimestamp         DateTime?       @map("approval_timestamp") @db.Timestamptz(3)
+  approvalBrowser           String?         @map("approval_browser") @db.VarChar
+  approvalDevice            String?         @map("approval_device") @db.VarChar
+  approvalEmail             String?         @map("approval_email") @db.VarChar
+
+  project                   Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  release                   ProjectRelease  @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, releaseId, type])
+  @@map("project_documents")
+}
+
+model ProjectDocsConfig {
+  projectId                 String          @id @map("project_id") @db.VarChar
+  
+  // Public Audit Settings (All versions visible)
+  docsPublicUntil           DateTime?       @map("docs_public_until") @db.Timestamptz(3)
+  docsPublicActive          Boolean         @default(false) @map("docs_public_active")
+  
+  // Client Shared Approval Settings (One version only, specific documents)
+  docsSharedVersionId       String?         @map("docs_shared_version_id") @db.VarChar
+  docsSharedDocumentTypes   String?         @map("docs_shared_document_types") @db.Text // Comma-separated document types (e.g. BRD,SRS)
+  docsSharedUntil           DateTime?       @map("docs_shared_until") @db.Timestamptz(3)
+  docsSharedActive          Boolean         @default(false) @map("docs_shared_active")
+
+  project                   Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_docs_configs")
+}
+
+model ProjectDocOtp {
+  id                        String          @id @default(uuid()) @db.VarChar
+  email                     String          @db.VarChar
+  code                      String          @db.VarChar
+  expiresAt                 DateTime        @map("expires_at") @db.Timestamptz(3)
+  purpose                   String          @db.VarChar // DeleteDocument, ClientSignature
+
+  @@map("project_doc_otps")
+}
+
+model WorkspaceProposal {
+  id                        String          @id @default(uuid()) @db.VarChar
+  workspaceId               String          @map("workspace_id") @db.VarChar
+  proposalId                String          @map("proposal_id") @db.VarChar // e.g. PROP-2026-VRSS-084
+  version                   String          @db.VarChar
+  title                     String          @db.VarChar
+  preparedFor               String          @map("prepared_for") @db.VarChar
+  preparedDate              DateTime        @map("prepared_date") @db.Timestamptz(3)
+  content                   String          @db.Text
+  projectIdConnect          String?         @map("project_id_connect") @db.VarChar
+  createdAt                 DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                 DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  workspace                 Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, proposalId, version])
+  @@map("workspace_proposals")
+}
+
+model WorkspaceQuote {
+  id                        String          @id @default(uuid()) @db.VarChar
+  workspaceId               String          @map("workspace_id") @db.VarChar
+  quoteId                   String          @map("quote_id") @db.VarChar
+  version                   String          @db.VarChar
+  title                     String          @db.VarChar
+  preparedFor               String          @map("prepared_for") @db.VarChar
+  preparedDate              DateTime        @map("prepared_date") @db.Timestamptz(3)
+  content                   String          @db.Text
+  status                    String          @db.VarChar // e.g. pending, approved, paid, unpaid
+  proposalIdConnect         String?         @map("proposal_id_connect") @db.VarChar
+  createdAt                 DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                 DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  workspace                 Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, quoteId, version])
+  @@map("workspace_quotes")
+}
+
+model WorkspaceInvoice {
+  id                        String          @id @default(uuid()) @db.VarChar
+  workspaceId               String          @map("workspace_id") @db.VarChar
+  invoiceId                 String          @map("invoice_id") @db.VarChar
+  version                   String          @db.VarChar
+  title                     String          @db.VarChar
+  preparedFor               String          @map("prepared_for") @db.VarChar
+  preparedDate              DateTime        @map("prepared_date") @db.Timestamptz(3)
+  content                   String          @db.Text
+  status                    String          @db.VarChar // e.g. unpaid, paid, overdue
+  quoteIdConnect            String?         @map("quote_id_connect") @db.VarChar
+  proposalIdConnect         String?         @map("proposal_id_connect") @db.VarChar
+  createdAt                 DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                 DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  // Recurring Invoices fields
+  isRecurring               Boolean         @default(false) @map("is_recurring")
+  isRecurringParent         Boolean         @default(false) @map("is_recurring_parent")
+  parentInvoiceId           String?         @map("parent_invoice_id") @db.VarChar
+  recurringFrequency        String?         @map("recurring_frequency") @db.VarChar
+  recurringStartDate        DateTime?       @map("recurring_start_date") @db.Timestamptz(3)
+  recurringNextDate         DateTime?       @map("recurring_next_date") @db.Timestamptz(3)
+  recurringCreatorId        String?         @map("recurring_creator_id") @db.VarChar
+  recurringRecipient        String?         @map("recurring_recipient") @db.VarChar
+  recurringCc               String?         @map("recurring_cc") @db.VarChar
+
+  workspace                 Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, invoiceId, version])
+  @@index([workspaceId, parentInvoiceId])
+  @@map("workspace_invoices")
+}
+
+model WorkspaceLetterhead {
+  id               String          @id @default(uuid()) @db.VarChar
+  workspaceId      String          @map("workspace_id") @db.VarChar
+  letterheadId     String          @map("letterhead_id") @db.VarChar
+  title            String          @db.VarChar
+  preparedDate     DateTime        @map("prepared_date") @db.Timestamptz(3)
+  content          String          @db.Text
+  authorizedDocUrl String          @default("") @map("authorized_doc_url") @db.VarChar
+  createdAt        DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  workspace        Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, letterheadId])
+  @@map("workspace_letterheads")
+}
+
+model PhishMonitoredUser {
+  id              String             @id @default(uuid()) @db.VarChar
+  userId          String             @unique @map("user_id") @db.VarChar
+  email           String             @map("email") @db.VarChar
+  status          String             @default("unchecked") @map("status") @db.VarChar // "monitored", "not_registered", "failed", "unchecked"
+  msUserId        String?            @map("ms_user_id") @db.VarChar
+  msMailboxStatus String?            @map("ms_mailbox_status") @db.VarChar
+  totalReceivedMails Int             @default(0) @map("total_received_mails")
+  lastCheckedAt   DateTime?          @map("last_checked_at") @db.Timestamptz(3)
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emails          PhishEmailQueue[]
+  incidents       PhishIncident[]
+
+  @@index([email])
+  @@index([status])
+  @@map("phish_monitored_users")
+}
+
+model PhishEmailQueue {
+  id              String             @id @default(uuid()) @db.VarChar
+  monitoredUserId String             @map("monitored_user_id") @db.VarChar
+  messageId       String?            @map("message_id") @db.VarChar
+  sender          String             @map("sender") @db.VarChar
+  recipient       String             @map("recipient") @db.VarChar
+  subject         String             @map("subject") @db.VarChar
+  bodySnippet     String?            @map("body_snippet") @db.Text
+  attachmentNames String[]           @default([]) @map("attachment_names")
+  status          String             @default("pending") @map("status") @db.VarChar // "pending", "analyzing", "completed", "failed"
+  retryCount      Int                @default(0) @map("retry_count")
+  errorMessage    String?            @map("error_message") @db.Text
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  monitoredUser   PhishMonitoredUser @relation(fields: [monitoredUserId], references: [id], onDelete: Cascade)
+  incident        PhishIncident?
+
+  @@index([monitoredUserId])
+  @@index([status])
+  @@map("phish_email_queues")
+}
+
+model PhishIncident {
+  id              String             @id @default(uuid()) @db.VarChar
+  emailQueueId    String             @unique @map("email_queue_id") @db.VarChar
+  monitoredUserId String             @map("monitored_user_id") @db.VarChar
+  riskLevel       String             @default("clean") @map("risk_level") @db.VarChar // "clean", "suspicious", "phishing"
+  riskScore       Int                @default(0) @map("risk_score")
+  summary         String             @map("summary") @db.Text
+  indicators      String[]           @default([]) @map("indicators")
+  alertSent       Boolean            @default(false) @map("alert_sent")
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  emailQueue      PhishEmailQueue    @relation(fields: [emailQueueId], references: [id], onDelete: Cascade)
+  monitoredUser   PhishMonitoredUser @relation(fields: [monitoredUserId], references: [id], onDelete: Cascade)
+
+  @@index([monitoredUserId])
+  @@index([riskLevel])
+  @@map("phish_incidents")
+}
+
+// ==========================================
+// Brightloop Software: Subscription Management System
+// ==========================================
+
+enum BrightloopUserRole {
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum BrightloopProductType {
+  SERVICE
+  PHYSICAL
+  SOFTWARE
+  SUBSCRIPTION
+}
+
+enum BrightloopBillingFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum BrightloopSubscriptionStatus {
+  DRAFT
+  CONFIRMED
+  ACTIVE
+  PAUSED
+  EXPIRED
+  CLOSED
+}
+
+enum BrightloopInvoiceStatus {
+  DRAFT
+  CONFIRMED
+  PAID
+  CANCELLED
+  OVERDUE
+}
+
+enum BrightloopDiscountType {
+  FIXED
+  PERCENTAGE
+}
+
+enum BrightloopPaymentMethod {
+  BANK_TRANSFER
+  CREDIT_CARD
+  CASH
+  CHEQUE
+  ONLINE
+}
+
+model Product {
+  id              String                @id @default(uuid()) @db.VarChar
+  workspaceId     String                @map("workspace_id") @db.VarChar
+  name            String                @db.VarChar
+  productType     BrightloopProductType @default(SERVICE) @map("product_type")
+  salesPrice      Decimal               @default(0.00) @map("sales_price") @db.Decimal(12, 2)
+  costPrice       Decimal               @default(0.00) @map("cost_price") @db.Decimal(12, 2)
+  notes           String?               @db.Text
+  createdAt       DateTime              @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  variants        ProductVariant[]
+  quotationLines  QuotationLine[]
+  subscriptionLines SubscriptionItem[]
+  invoiceLines    InvoiceItem[]
+  discounts       DiscountRule[]        @relation("ProductDiscounts")
+
+  @@map("brightloop_products")
+}
+
+model ProductVariant {
+  id              String          @id @default(uuid()) @db.VarChar
+  productId       String          @map("product_id") @db.VarChar
+  name            String          @db.VarChar // e.g. "Brand: Odoo"
+  variantType     String          @default("brand") @map("variant_type") @db.VarChar
+  priceAdjustment Decimal         @default(0.00) @map("price_adjustment") @db.Decimal(12, 2) // e.g. +560
+  sku             String?         @db.VarChar
+  createdAt       DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  product         Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quotationLines  QuotationLine[]
+  subscriptionLines SubscriptionItem[]
+  invoiceLines    InvoiceItem[]
+
+  @@map("brightloop_product_variants")
+}
+
+model SubscriptionPlan {
+  id               String                     @id @default(uuid()) @db.VarChar
+  workspaceId      String                     @map("workspace_id") @db.VarChar
+  name             String                     @db.VarChar
+  description      String?                    @db.Text
+  price            Decimal                    @default(0.00) @db.Decimal(12, 2)
+  billingFrequency BrightloopBillingFrequency @default(MONTHLY) @map("billing_frequency")
+  minQuantity      Int                        @default(1) @map("min_quantity")
+  startDate        DateTime?                  @map("start_date") @db.Timestamptz(3)
+  endDate          DateTime?                  @map("end_date") @db.Timestamptz(3)
+  isActive         Boolean                    @default(true) @map("is_active")
+  createdAt        DateTime                   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime                   @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  quotationTemplates QuotationTemplate[]
+  subscriptions      BrightloopSubscription[]
+
+  @@map("brightloop_subscription_plans")
+}
+
+model QuotationTemplate {
+  id              String           @id @default(uuid()) @db.VarChar
+  workspaceId     String           @map("workspace_id") @db.VarChar
+  name            String           @db.VarChar
+  description     String?          @db.Text
+  planId          String?          @map("plan_id") @db.VarChar
+  validityDays    Int              @default(30) @map("validity_days")
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  plan            SubscriptionPlan? @relation(fields: [planId], references: [id], onDelete: SetNull)
+  lines           QuotationLine[]
+  quotes          Quotation[]
+
+  @@map("brightloop_quotation_templates")
+}
+
+model Quotation {
+  id              String           @id @default(uuid()) @db.VarChar
+  workspaceId     String           @map("workspace_id") @db.VarChar
+  quotationNumber String           @unique @map("quotation_number") @db.VarChar
+  templateId      String?          @map("template_id") @db.VarChar
+  customerId      String           @map("customer_id") @db.VarChar
+  planId          String?          @map("plan_id") @db.VarChar
+  title           String           @db.VarChar
+  validUntil      DateTime         @map("valid_until") @db.Timestamptz(3)
+  paymentTerms    String           @default("Immediate Payment") @map("payment_terms") @db.VarChar
+  status          String           @default("draft") @db.VarChar // draft, sent, confirmed, converted, expired, rejected
+  notes           String?          @db.Text
+  subtotal        Decimal          @default(0.00) @db.Decimal(12, 2)
+  taxAmount       Decimal          @default(0.00) @map("tax_amount") @db.Decimal(12, 2)
+  discountAmount  Decimal          @default(0.00) @map("discount_amount") @db.Decimal(12, 2)
+  totalAmount     Decimal          @default(0.00) @map("total_amount") @db.Decimal(12, 2)
+  convertedSubId  String?          @unique @map("converted_sub_id") @db.VarChar
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  template        QuotationTemplate?      @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  customer        User                    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  lines           QuotationLine[]
+  subscription    BrightloopSubscription? @relation("QuoteToSub")
+
+  @@map("brightloop_quotations")
+}
+
+model QuotationLine {
+  id              String           @id @default(uuid()) @db.VarChar
+  quotationId     String?          @map("quotation_id") @db.VarChar
+  templateId      String?          @map("template_id") @db.VarChar
+  productId       String           @map("product_id") @db.VarChar
+  variantId       String?          @map("variant_id") @db.VarChar
+  quantity        Int              @default(1)
+  unitPrice       Decimal          @map("unit_price") @db.Decimal(12, 2)
+  taxRate         Decimal          @default(18.00) @map("tax_rate") @db.Decimal(5, 2)
+  taxAmount       Decimal          @default(0.00) @map("tax_amount") @db.Decimal(12, 2)
+  totalAmount     Decimal          @map("total_amount") @db.Decimal(12, 2)
+
+  quotation       Quotation?       @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  template        QuotationTemplate? @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  product         Product          @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant         ProductVariant?  @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  @@map("brightloop_quotation_lines")
+}
+
+model BrightloopSubscription {
+  id                  String                       @id @default(uuid()) @db.VarChar
+  workspaceId         String                       @map("workspace_id") @db.VarChar
+  subscriptionNumber  String                       @unique @map("subscription_number") @db.VarChar
+  customerId          String                       @map("customer_id") @db.VarChar
+  planId              String                       @map("plan_id") @db.VarChar
+  quotationId         String?                      @unique @map("quotation_id") @db.VarChar
+  status              BrightloopSubscriptionStatus @default(DRAFT)
+  startDate           DateTime                     @map("start_date") @db.Timestamptz(3)
+  expiryDate          DateTime?                    @map("expiry_date") @db.Timestamptz(3)
+  nextBillingDate     DateTime                     @map("next_billing_date") @db.Timestamptz(3)
+  lastInvoicedDate    DateTime?                    @map("last_invoiced_date") @db.Timestamptz(3)
+  paymentTerms        String                       @default("Net 15") @map("payment_terms") @db.VarChar
+  billingFrequency    BrightloopBillingFrequency   @default(MONTHLY) @map("billing_frequency")
+  subtotal            Decimal                      @default(0.00) @db.Decimal(12, 2)
+  taxAmount           Decimal                      @default(0.00) @map("tax_amount") @db.Decimal(12, 2)
+  discountAmount      Decimal                      @default(0.00) @map("discount_amount") @db.Decimal(12, 2)
+  totalAmount         Decimal                      @default(0.00) @map("total_amount") @db.Decimal(12, 2)
+  autoRenew           Boolean                      @default(true) @map("auto_renew")
+  pausedAt            DateTime?                    @map("paused_at") @db.Timestamptz(3)
+  closedAt            DateTime?                    @map("closed_at") @db.Timestamptz(3)
+  closureReason       String?                      @map("closure_reason") @db.VarChar
+  notes               String?                      @db.Text
+  createdAt           DateTime                     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt           DateTime                     @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  customer            User                         @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  plan                SubscriptionPlan             @relation(fields: [planId], references: [id], onDelete: Restrict)
+  quotation           Quotation?                   @relation("QuoteToSub", fields: [quotationId], references: [id], onDelete: SetNull)
+  items               SubscriptionItem[]
+  invoices            BrightloopInvoice[]
+
+  @@index([customerId])
+  @@index([status])
+  @@index([nextBillingDate])
+  @@map("brightloop_subscriptions")
+}
+
+model SubscriptionItem {
+  id              String                 @id @default(uuid()) @db.VarChar
+  subscriptionId  String                 @map("subscription_id") @db.VarChar
+  productId       String                 @map("product_id") @db.VarChar
+  variantId       String?                @map("variant_id") @db.VarChar
+  quantity        Int                    @default(1)
+  unitPrice       Decimal                @map("unit_price") @db.Decimal(12, 2)
+  taxRate         Decimal                @default(18.00) @map("tax_rate") @db.Decimal(5, 2)
+  taxAmount       Decimal                @default(0.00) @map("tax_amount") @db.Decimal(12, 2)
+  totalAmount     Decimal                @map("total_amount") @db.Decimal(12, 2)
+
+  subscription    BrightloopSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  product         Product                @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant         ProductVariant?        @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  @@map("brightloop_subscription_items")
+}
+
+model BrightloopInvoice {
+  id                String                  @id @default(uuid()) @db.VarChar
+  workspaceId       String                  @map("workspace_id") @db.VarChar
+  invoiceNumber     String                  @unique @map("invoice_number") @db.VarChar
+  subscriptionId    String?                 @map("subscription_id") @db.VarChar
+  customerId        String                  @map("customer_id") @db.VarChar
+  billingCycleStart DateTime                @map("billing_cycle_start") @db.Timestamptz(3)
+  billingCycleEnd   DateTime                @map("billing_cycle_end") @db.Timestamptz(3)
+  issueDate         DateTime                @default(now()) @map("issue_date") @db.Timestamptz(3)
+  dueDate           DateTime                @map("due_date") @db.Timestamptz(3)
+  status            BrightloopInvoiceStatus @default(DRAFT)
+  subtotal          Decimal                 @default(0.00) @db.Decimal(12, 2)
+  taxAmount         Decimal                 @default(0.00) @map("tax_amount") @db.Decimal(12, 2)
+  discountAmount    Decimal                 @default(0.00) @map("discount_amount") @db.Decimal(12, 2)
+  totalAmount       Decimal                 @default(0.00) @map("total_amount") @db.Decimal(12, 2)
+  paidAmount        Decimal                 @default(0.00) @map("paid_amount") @db.Decimal(12, 2)
+  balanceAmount     Decimal                 @default(0.00) @map("balance_amount") @db.Decimal(12, 2)
+  paymentTerms      String                  @default("Net 15") @map("payment_terms") @db.VarChar
+  notes             String?                 @db.Text
+  sentAt            DateTime?               @map("sent_at") @db.Timestamptz(3)
+  createdAt         DateTime                @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime                @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  subscription      BrightloopSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  customer          User                    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  items             InvoiceItem[]
+  payments          PaymentRecord[]
+
+  @@unique([subscriptionId, billingCycleStart, billingCycleEnd])
+  @@index([customerId])
+  @@index([status])
+  @@index([dueDate])
+  @@map("brightloop_invoices")
+}
+
+model InvoiceItem {
+  id              String            @id @default(uuid()) @db.VarChar
+  invoiceId       String            @map("invoice_id") @db.VarChar
+  productId       String            @map("product_id") @db.VarChar
+  variantId       String?           @map("variant_id") @db.VarChar
+  description     String?           @db.VarChar
+  quantity        Int               @default(1)
+  unitPrice       Decimal           @map("unit_price") @db.Decimal(12, 2)
+  taxRate         Decimal           @default(18.00) @map("tax_rate") @db.Decimal(5, 2)
+  taxAmount       Decimal           @default(0.00) @map("tax_amount") @db.Decimal(12, 2)
+  totalAmount     Decimal           @map("total_amount") @db.Decimal(12, 2)
+
+  invoice         BrightloopInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  product         Product           @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant         ProductVariant?   @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  @@map("brightloop_invoice_items")
+}
+
+model DiscountRule {
+  id              String                 @id @default(uuid()) @db.VarChar
+  workspaceId     String                 @map("workspace_id") @db.VarChar
+  code            String                 @unique @db.VarChar
+  description     String?                @db.VarChar
+  discountType    BrightloopDiscountType @default(PERCENTAGE) @map("discount_type")
+  value           Decimal                @map("value") @db.Decimal(12, 2)
+  minPurchase     Decimal                @default(0.00) @map("min_purchase") @db.Decimal(12, 2)
+  minQuantity     Int                    @default(1) @map("min_quantity")
+  startDate       DateTime?              @map("start_date") @db.Timestamptz(3)
+  endDate         DateTime?              @map("end_date") @db.Timestamptz(3)
+  maxUses         Int?                   @map("max_uses")
+  currentUses     Int                    @default(0) @map("current_uses")
+  appliesToAll    Boolean                @default(true) @map("applies_to_all")
+  productId       String?                @map("product_id") @db.VarChar
+  isActive        Boolean                @default(true) @map("is_active")
+  createdAt       DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  product         Product?               @relation("ProductDiscounts", fields: [productId], references: [id], onDelete: SetNull)
+
+  @@map("brightloop_discount_rules")
+}
+
+model PaymentRecord {
+  id              String                  @id @default(uuid()) @db.VarChar
+  invoiceId       String                  @map("invoice_id") @db.VarChar
+  paymentNumber   String                  @unique @map("payment_number") @db.VarChar
+  amount          Decimal                 @map("amount") @db.Decimal(12, 2)
+  paymentDate     DateTime                @default(now()) @map("payment_date") @db.Timestamptz(3)
+  paymentMethod   BrightloopPaymentMethod @default(BANK_TRANSFER) @map("payment_method")
+  referenceNumber String?                 @map("reference_number") @db.VarChar
+  notes           String?                 @db.Text
+  recordedById    String?                 @map("recorded_by_id") @db.VarChar
+  createdAt       DateTime                @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  invoice         BrightloopInvoice       @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  recordedBy      User?                   @relation("RecordedPayments", fields: [recordedById], references: [id], onDelete: SetNull)
+
+  @@index([invoiceId])
+  @@index([paymentDate])
+  @@map("brightloop_payment_records")
+}
+
+
