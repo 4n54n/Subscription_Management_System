@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Corporate Letterhead - IntoAI Technologies Pvt Ltd">
+  <title>Corporate Letterhead | IntoAI Technologies</title>
+  <link rel="stylesheet" href="letterhead_style.css?v=1">
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="page">
+      <!-- Bottom Brand Strip with Angled Accent Section -->
+      <div class="top-brand-bar"></div>
+      
+      <div class="content-wrapper">
+        
+        <!-- HEADER LAYOUT -->
+        <header class="header-container">
+          <div class="header-left">
+            <div class="logo-wrap">
+              <img src="{{company.logo}}" alt="Company Logo" class="logo-img">
+              <div class="brand-details">
+                <span class="brand-name">{{company.name}}</span>
+                <span class="brand-sub">{{company.tagline}}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="header-right">
+            <div class="company-address">
+              <p>{{company.address}}</p>
+              <p class="company-comms">
+                <span>Phone:</span> {{company.phone}} &nbsp;|&nbsp; 
+                <span>Email:</span> {{company.email}}
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <!-- SUBTLE HEADER DIVIDER LINE -->
+        <div class="header-divider"></div>
+
+        <!-- CONTENT AREA (70-75% of page) -->
+        <main class="letter-content-area">
+          {{letter_content}}
+        </main>
+
+        <!-- FOOTER SECTION -->
+        <footer class="footer-container">
+          <div class="footer-strip">
+            <span class="footer-item"><span>CIN:</span> {{company.cin}}</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-item"><span>PAN:</span> {{company.pan}}</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-item"><span>GSTIN:</span> {{company.gstin}}</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-item"><span>Web:</span> {{company.website}}</span>
+          </div>
+        </footer>
+
+      </div><!-- /content-wrapper -->
+      
+      <!-- Bottom Brand Strip with Angled Accent Section -->
+      <div class="bottom-brand-bar"></div>
+    </div><!-- /page -->
+  </div><!-- /page-container -->
+
+</body>
+</html>

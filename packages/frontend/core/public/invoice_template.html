@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tax Invoice - IntoAI Technologies Pvt Ltd">
+  <title>Tax Invoice | IntoAI Technologies</title>
+  <link rel="stylesheet" href="invoice_style.css?v=5">
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="page">
+      <!-- Thin blue brand stripe across the top -->
+      <div class="top-accent-strip"></div>
+      
+      <div class="content-wrapper">
+        
+        <!-- SECTION 1: HEADER -->
+        <header class="header-container">
+          <div class="header-left">
+            <div class="logo-wrap">
+              <img src="CompanyLogo.png" alt="IntoAI Technologies Logo" class="logo-img">
+              <div class="brand-details">
+                <span class="brand-name">IntoAI Technologies Pvt Ltd</span>
+                <span class="brand-sub">Enterprise AI Research & Solutions</span>
+              </div>
+            </div>
+            <div class="company-contact">
+              <p>No.472/7 Balaji Arcade, 2nd & 3rd Floor, A.V.S. Compound,</p>
+              <p>20th L Cross Road, Koramangala 4th Block, Bangalore, India — 560095</p>
+              <p><span>Email:</span> connect@intoai.ai &nbsp;|&nbsp; <span>Web:</span> www.intoai.ai &nbsp;|&nbsp; <span>Phone:</span> +91 7510711617</p>
+            </div>
+          </div>
+          
+          <div class="header-right">
+            <h1 class="invoice-title">Tax Invoice</h1>
+
+            <div class="invoice-meta-grid">
+              <span class="meta-label">Invoice No:</span>
+              <span class="meta-val">{{invoice.number}}</span>
+              
+              <span class="meta-label">Invoice Date:</span>
+              <span class="meta-val">{{invoice.date}}</span>
+              
+              <span class="meta-label">Due Date:</span>
+              <span class="meta-val" style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                <span>{{invoice.due_date}}</span>
+                <span class="status-badge {{invoice.status_class}}">{{invoice.status}}</span>
+              </span>
+            </div>
+          </div>
+        </header>
+
+        <!-- SECTION 2: BILL TO -->
+        <section class="billing-section">
+          <div class="billing-grid">
+            <div class="billing-col">
+              <h4>Bill To</h4>
+              <div class="billing-details">
+                <div class="client-name">{{client.company_name}}</div>
+                <p>Attn: {{client.contact_name}}</p>
+                <p>{{client.address}}</p>
+              </div>
+            </div>
+            
+            <div class="billing-col">
+              <h4>Client Contact Info</h4>
+              <div class="billing-details">
+                <p><span>Email:</span> {{client.email}}</p>
+                <p><span>Phone:</span> {{client.phone}}</p>
+                <p><span>GSTIN:</span> {{client.gst}}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: PROJECT DETAILS & REFERENCES -->
+        <section class="details-reference-section">
+          <div class="details-col">
+            <h4>Project Details</h4>
+            <div class="details-grid">
+              <span class="details-lbl">Project Name:</span>
+              <span class="details-val">{{project.name}}</span>
+              
+              <span class="details-lbl">Project ID:</span>
+              <span class="details-val">{{project.id}}</span>
+            </div>
+          </div>
+          <div class="details-col">
+            <h4>References</h4>
+            <div class="details-grid">
+              <span class="details-lbl">Proposal Ref:</span>
+              <span class="details-val">{{proposal.reference}}</span>
+              
+              <span class="details-lbl">Quote Ref:</span>
+              <span class="details-val">{{quote.reference}}</span>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- SECTION 4: INVOICE ITEMS TABLE -->
+        <section class="items-table-section">
+          <table class="invoice-table">
+            <thead>
+              <tr>
+                <th style="width: 8%">Item</th>
+                <th style="width: 57%">Description</th>
+                <th style="width: 10%" class="align-center">Qty</th>
+                <th style="width: 12%" class="align-right">Rate</th>
+                <th style="width: 13%" class="align-right">Amount</th>
+                <th style="width: 60px;" class="table-action-btn-col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#invoice.items}}
+              <tr>
+                <td class="item-num align-center">01</td>
+                <td class="col-desc">
+                  <div class="item-title">{{title}}</div>
+                  <div class="item-desc">{{description}}</div>
+                </td>
+                <td class="align-center">{{quantity}}</td>
+                <td class="align-right">{{rate}}</td>
+                <td class="align-right amount-col">{{amount}}</td>
+              </tr>
+              {{/invoice.items}}
+            </tbody>
+          </table>
+        </section>
+
+        <!-- SECTION 5: FINANCIAL SUMMARY & NOTES -->
+        <div class="summary-notes-wrapper">
+          <!-- Left side Notes -->
+          <div class="notes-container">
+            {{#invoice.notes}}
+            <section class="notes-section">
+              <h4>Notes</h4>
+              <p>{{invoice.notes}}</p>
+            </section>
+            {{/invoice.notes}}
+          </div>
+
+          <!-- Right side Financials -->
+          <div class="financial-summary-block">
+            <div class="totals-row">
+              <span class="totals-lbl">Subtotal</span>
+              <span class="totals-val">{{invoice.subtotal}}</span>
+            </div>
+            <div class="totals-row">
+              <span class="totals-lbl">GST (18%)</span>
+              <span class="totals-val">{{invoice.tax}}</span>
+            </div>
+            <div class="totals-row grand-total">
+              <span class="totals-lbl">Total Invoice Value</span>
+              <span class="totals-val">{{invoice.total}}</span>
+            </div>
+            <div class="totals-row paid-highlight">
+              <span class="totals-lbl">Paid</span>
+              <span class="totals-val">{{invoice.amount_paid}}</span>
+            </div>
+            {{#invoice.paid_details}}
+            <div class="paid-details-inline">
+              <span>✓ Paid On: {{invoice.paid_date}} (Txn ID: {{invoice.txn_id}})</span>
+            </div>
+            {{/invoice.paid_details}}
+            <div class="totals-row amount-due">
+              <span class="totals-lbl">{{invoice.final_label}}</span>
+              <span class="totals-val">{{invoice.amount_due}}</span>
+            </div>
+          </div>
+        </div>
+
+          <!-- SECTION 7: FOOTER -->
+        <footer class="footer-container">
+          <div class="footer-strip">
+            <div class="footer-left">
+              <span class="footer-confidential"><span class="footer-dot">●</span> IntoAI Confidential</span>
+              <span class="footer-divider">|</span>
+              <span>{{company.reg_info}}</span>
+              <span class="footer-divider">|</span>
+              <span>{{company.gst_info}}</span>
+              <span class="footer-divider">|</span>
+              <span>Invoice No: {{invoice.number}}</span>
+            </div>
+          </div>
+          <div class="footer-page-row">
+            <span class="footer-page">Page 1 of 1</span>
+          </div>
+        </footer>
+
+      </div><!-- /content-wrapper -->
+    </div><!-- /page -->
+  </div><!-- /page-container -->
+
+  <!-- Client-side Javascript Mock-Renderer for direct browser previews -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!window.location.href || window.location.href.startsWith('about:')) return;
+      const bodyHtml = document.body.innerHTML;
+      if (bodyHtml.includes("{{invoice.number}}") || bodyHtml.includes("{{client.company_name}}")) {
+        console.log("Mocking invoice data for browser preview...");
+        
+        const data = {
+          "invoice.number": "INV-2026-INTOAI-084",
+          "invoice.date": "06 June 2026",
+          "invoice.due_date": "20 June 2026",
+          "invoice.status": "UNPAID",
+          "invoice.status_class": "unpaid",
+          "client.company_name": "Example Company Inc.",
+          "client.contact_name": "Sarah Jenkins",
+          "client.address": "No.100 Pine Street, Suite 2400, San Francisco, CA 94111",
+          "client.email": "sarah.jenkins@example.com",
+          "client.phone": "+1 (555) 902-3481",
+          "client.gst": "GSTIN06EXMPL1234F",
+          "proposal.reference": "PROP-2026-INTOAI-012",
+          "quote.reference": "QT-2026-INTOAI-042",
+          "project.name": "Autonomous AI Agent Project Management Platform",
+          "project.id": "PROJ-INTOAI-PM01",
+          "invoice.subtotal": "₹35,40,000.00",
+          "invoice.discount": "₹0.00",
+          "invoice.tax": "₹6,37,200.00 (GST 18%)",
+          "invoice.total": "₹41,77,200.00",
+          "invoice.amount_paid": "₹0.00",
+          "invoice.amount_due": "₹41,77,200.00",
+          "invoice.final_label": "Amount Due",
+          "invoice.paid_date": "06 Jun 2026",
+          "invoice.txn_id": "RZP_7824194",
+          "payment.account_name": "IntoAI Technologies Pvt Ltd",
+          "payment.bank_name": "ICICI Bank",
+          "payment.account_number": "98765432101",
+          "payment.ifsc": "ICIC0000104",
+          "payment.upi_id": "intoai@icici",
+          "payment.link": "https://pay.intoai.ai/invoice/QT-2026-INTOAI-042",
+          "invoice.notes": "Payment is due within 14 days of invoice date. Please mention invoice number INV-2026-INTOAI-084 in bank transfer remarks.",
+          "invoice.generated_date": "06 Jun 2026 12:00 PM",
+          "company.reg_info": "CIN: U72900KA2023PTC174829 · Startup India Reg: DIPP123456",
+          "company.gst_info": "IntoAI GSTIN: 29AAACI4567B1Z4"
+        };
+
+        // Fetch raw template text to prevent browser auto-hoisting of table text
+        fetch(window.location.href + '?t=' + Date.now())
+          .then(response => response.text())
+          .then(htmlText => {
+            let rendered = htmlText;
+            
+            // Loop replacement
+            const loopRegex = /\{\{#invoice\.items\}\}([\s\S]*?)\{\{\/invoice\.items\}\}/g;
+            const match = loopRegex.exec(rendered);
+            if (match) {
+              const rowTemplate = match[1];
+
+              const items = [
+                {
+                  title: "Phase 1: Diagnostic Study & Ontological Mapping",
+                  description: "Discovery workshops, telemetry audit of internal task flows, and Neo4j task-routing schema design.",
+                  quantity: "1.0",
+                  rate: "₹4,50,000.00",
+                  amount: "₹4,50,000.00"
+                },
+                {
+                  title: "Phase 2: AI Agent Core & Graph Orchestration Engine",
+                  description: "Implementation of autonomous worker agents, context vector ingestion, and sub-second prompt routing.",
+                  quantity: "1.0",
+                  rate: "₹12,50,000.00",
+                  amount: "₹12,50,000.00"
+                },
+                {
+                  title: "Phase 3: Operator Dashboard & System Integration",
+                  description: "React management portal, manual override controls, telemetry dashboards, and webhooks routing pipelines.",
+                  quantity: "1.0",
+                  rate: "₹8,00,000.00",
+                  amount: "₹8,00,000.00"
+                },
+                {
+                  title: "Phase 4: Load Testing, Security Audit & Go-Live",
+                  description: "Locust simulation load testing (1,000 tasks/second), vulnerability scans, and system operational documentation.",
+                  quantity: "1.0",
+                  rate: "₹5,00,000.00",
+                  amount: "₹5,00,000.00"
+                },
+                {
+                  title: "Phase 5: Managed Support & Telemetry Monitoring",
+                  description: "Continuous telemetry tracking, performance optimization, and incident response SLA support.",
+                  quantity: "1.0",
+                  rate: "₹3,00,000.00",
+                  amount: "₹3,00,000.00"
+                },
+                {
+                  title: "Change Request #1: Multi-tenant SSO & SAML Integration",
+                  description: "Configuration of Okta, Azure AD integration, and dynamic role-based access control.",
+                  quantity: "1.0",
+                  rate: "₹2,40,000.00",
+                  amount: "₹2,40,000.00"
+                }
+              ];
+
+              let rowsHtml = "";
+              items.forEach((item, idx) => {
+                let row = rowTemplate;
+                row = row.replace(/01/g, String(idx + 1).padStart(2, '0'));
+                row = row.replace(/\{\{title\}\}/g, item.title);
+                row = row.replace(/\{\{description\}\}/g, item.description);
+                row = row.replace(/\{\{quantity\}\}/g, item.quantity);
+                row = row.replace(/\{\{rate\}\}/g, item.rate);
+                row = row.replace(/\{\{amount\}\}/g, item.amount);
+                rowsHtml += row;
+              });
+              rendered = rendered.replace(loopRegex, rowsHtml);
+            }
+
+            // Conditional block parsing helper
+            function parseConditionalBlock(text, key, condition, subData) {
+              const regex = new RegExp(`\\{\\{#${key}\\}\\}([\\s\\S]*?)\\{\\{\\/${key}\\}\\}`, 'g');
+              if (condition) {
+                return text.replace(regex, (match, innerText) => {
+                  let renderedInner = innerText;
+                  for (const subKey in subData) {
+                    renderedInner = renderedInner.replaceAll(`{{${subKey}}}`, subData[subKey]);
+                  }
+                  return renderedInner;
+                });
+              } else {
+                return text.replace(regex, '');
+              }
+            }
+
+            // Parse conditional blocks
+            rendered = parseConditionalBlock(rendered, 'invoice.notes', !!data['invoice.notes'], data);
+            const isPaid = data['invoice.status'] === 'PAID';
+            rendered = parseConditionalBlock(rendered, 'invoice.paid_details', isPaid, data);
+
+            // Replace simple placeholders
+            for (const key in data) {
+              rendered = rendered.replaceAll(`{{${key}}}`, data[key]);
+            }
+
+            // Remove the script block itself to avoid repeating or execution issues
+            rendered = rendered.replace(/<script>[\s\S]*?<\/script>/, "");
+
+            // Update DOM
+            document.open();
+            document.write(rendered);
+            document.close();
+          })
+          .catch(err => {
+            console.error("Error loading template text:", err);
+          });
+      }
+    });
+  </script>
+
+</body>
+</html>

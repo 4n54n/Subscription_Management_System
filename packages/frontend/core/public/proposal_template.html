@@ -1,0 +1,3026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="IntoAI Research & Software Systems â€” Technical Proposal for Apex Global Logistics. Enterprise Intelligence Platform.">
+  <title>Project Proposal â€” Integrated Enterprise Intelligence Platform | IntoAI Research</title>
+  <link rel="stylesheet" href="proposal_style.css?v=2">
+</head>
+
+<body>
+
+  <div class="page-container">
+    <div style="display: none;">{{metadata.short_title}}</div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 01 Â· COVER
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page page-cover">
+
+      <!-- PLUS GRID PATTERN -->
+      <div class="plus-grid"></div>
+
+      <!--
+      SINGLE UNIFIED SVG â€” image clip + rounded-tip chevron.
+
+      Geometry: straight diagonal arms, rounded ONLY at the V-tip corner.
+      Tip rounding uses a short quadratic bezier at the junction.
+
+      topX=556   tipX=468   tipY=540   botX=714   cornerR=50
+        Upper arm back-off point: (474, 500)   [50px before tip on upper arm]
+        Lower arm start point:    (484, 577)   [50px after tip on lower arm]
+        Control point = the actual tip (468, 540)
+
+      Stroke path:
+        M 556,0  L 474,500  Q 468,540  484,577  L 714,1123
+
+      Tune: open vcut_tuner.html in your browser.
+    -->
+      <svg class="cover-bg-svg" viewBox="0 0 794 1123" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <defs>
+          <!--
+          CLIP PATH: straight arms + rounded V-tip.
+          Right-side region = building visible area.
+        -->
+          <clipPath id="building-v-clip" clipPathUnits="userSpaceOnUse">
+            <path id="vcut-clip-path" d="M 521,0 L 301.0,383.2 Q 289,404 300.9,424.9 L 591,934 L 1200,913 L 795,-1 Z" />
+          </clipPath>
+
+          <!-- Cover Page Background & Grid inside SVG to enable backdrop-filter blurring -->
+          <linearGradient id="cover-bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F8F9FB" />
+            <stop offset="100%" stop-color="#FFFFFF" />
+          </linearGradient>
+
+          <pattern id="svg-plus-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M20 15V25M15 20H25" stroke="#CAD5FF" stroke-width="1.2" stroke-linecap="round" />
+          </pattern>
+
+          <!-- Premium soft glass drop shadow filter -->
+          <filter id="glass-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0A102D" flood-opacity="0.12" />
+          </filter>
+
+          <!-- Mask to hide the part of p2 overlapping under p1 -->
+          <mask id="p2-mask" maskUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="794" height="1123" fill="white" />
+            <g id="p2-mask-p1-group" transform="translate(440,149) rotate(23)">
+              <path id="p2-mask-p1-path" d="" fill="black" />
+            </g>
+          </mask>
+
+          <!-- Mask to show the thickness only outside the V-cut -->
+          <mask id="outside-v-mask" maskUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="794" height="1123" fill="white" />
+            <use href="#vcut-clip-path" fill="black" />
+          </mask>
+
+          <!-- Blue â†’ Cyan â†’ Blue gradient -->
+          <linearGradient id="chev-grad" x1="521" y1="0" x2="591" y2="934" gradientUnits="userSpaceOnUse">
+            <stop id="chev-grad-stop0" offset="0%" stop-color="#ffffff" />
+            <stop id="chev-grad-stop38" offset="38%" stop-color="#ffffff" />
+            <stop id="chev-grad-stop100" offset="100%" stop-color="#ffffff" />
+          </linearGradient>
+
+          <!-- p2-grad: very top panel (lighter corporate blue, higher opacity) -->
+          <linearGradient id="p2-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop id="p2-grad-stop0" offset="0%" stop-color="#0b47e0" stop-opacity="0.65" />
+            <stop id="p2-grad-stop100" offset="100%" stop-color="#0b47e0" stop-opacity="0.82" />
+          </linearGradient>
+
+          <!-- p1-grad: middle panel white glass base -->
+          <linearGradient id="p1-grad" x1="0%" y1="0%" x2="0%" y2="100%" gradientTransform="rotate(-23)">
+            <stop id="p1-grad-stop0" offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+            <stop id="p1-grad-stop100" offset="100%" stop-color="#ffffff" stop-opacity="0.34" />
+          </linearGradient>
+
+          <!-- p1-grad-blue: middle panel blue spread overlay (clipped to V-cut) -->
+          <linearGradient id="p1-grad-blue" x1="0%" y1="0%" x2="0%" y2="100%" gradientTransform="rotate(-23)">
+            <stop id="p1-grad-blue-stop0" offset="0%" stop-color="#0a0094" stop-opacity="1" />
+            <stop id="p1-grad-blue-stop100" offset="100%" stop-color="#0084ff" stop-opacity="0.34" />
+          </linearGradient>
+
+          <!-- p3-grad: bottom panel (more white glassy) -->
+          <linearGradient id="p3-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop id="p3-grad-stop0" offset="0%" stop-color="#E8EFFF" stop-opacity="0.55" />
+            <stop id="p3-grad-stop100" offset="100%" stop-color="#6195f5" stop-opacity="0.73" />
+          </linearGradient>
+        </defs>
+
+        <!-- Background gradient and grid lines rendered inside the SVG, allowing the backdrop-filter to blur them -->
+        <rect x="0" y="0" width="794" height="1123" fill="url(#cover-bg-gradient)" />
+        <rect x="0" y="0" width="794" height="1123" fill="url(#svg-plus-pattern)" opacity="0.25" />
+
+        <!-- â‘  Building image clipped to rounded-tip V region (aligned to show daytime city skyline) -->
+        <image id="vcut-building-image" href="first page.jpg" x="-101" y="0" height="800" preserveAspectRatio="none"
+          clip-path="url(#building-v-clip)" />
+
+        <!-- â‘¡ Outer ambient glow -->
+        <path id="vcut-outer-glow" d="M 521,0 L 301.0,383.2 Q 289,404 300.9,424.9 L 591,934" fill="none"
+          stroke="#ffffff" stroke-width="32" stroke-linejoin="round" stroke-miterlimit="20" opacity="0.10" />
+
+        <!-- â‘¢ Inner soft glow -->
+        <path id="vcut-inner-glow" d="M 521,0 L 301.0,383.2 Q 289,404 300.9,424.9 L 591,934" fill="none"
+          stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-miterlimit="20" opacity="0.22" />
+
+        <!-- â‘£ Crisp gradient boundary line -->
+        <path id="vcut-boundary-line" d="M 521,0 L 301.0,383.2 Q 289,404 300.9,424.9 L 591,934" fill="none"
+          stroke="url(#chev-grad)" stroke-width="7" stroke-linejoin="round" stroke-miterlimit="20" />
+
+        <!-- Glass panels sitting ABOVE the image and blue lines (blending the blue lines going below them) -->
+        <g id="glass-root" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+          <!-- p2: very top trapezoidal panel (more dark blue, aligned parallel and touching V-cut edge) -->
+          <g mask="url(#p2-mask)">
+            <g id="glass-p2-group" transform="translate(563,40) rotate(28)" filter="url(#glass-shadow)">
+              <path id="glass-p2-path"
+                d="M -45,-96 L 45,-96 Q 63,-96 62,-79 L 53,79 Q 52,97 34,97 L -33,97 Q -51,97 -53,79 L -62,-79 Q -63,-96 -45,-96 Z"
+                fill="url(#p2-grad)" stroke="rgba(41,93,255,0.8)" stroke-width="1.5" stroke-linejoin="round" />
+            </g>
+          </g>
+
+          <!-- p1 thickness edge (placed under the main glass p1 path) -->
+          <g id="glass-p1-thickness-group" transform="translate(440,149) rotate(23)" mask="url(#outside-v-mask)"
+            filter="url(#glass-shadow)">
+            <path id="glass-p1-thickness-path"
+              d="M -98,-109 L 98,-109 Q 116,-109 112,-92 L 65,92 Q 61,109 43,109 L -42,109 Q -60,109 -65,92 L -112,-92 Q -116,-109 -98,-109 Z"
+              transform="translate(-3.5, 3.5)" fill="rgba(255, 255, 255, 0.12)" stroke="rgba(255, 255, 255, 0.65)"
+              stroke-width="4.5" stroke-linejoin="round" />
+          </g>
+
+          <!-- p1: middle trapezoidal panel (more white glassy, blending blue line underneath) -->
+          <g id="glass-p1-group" transform="translate(440,149) rotate(23)" filter="url(#glass-shadow)">
+            <path id="glass-p1-path"
+              d="M -98,-109 L 98,-109 Q 116,-109 112,-92 L 65,92 Q 61,109 43,109 L -42,109 Q -60,109 -65,92 L -112,-92 Q -116,-109 -98,-109 Z"
+              fill="url(#p1-grad)" stroke="rgba(255,255,255,1)" stroke-width="2.5" stroke-linejoin="round" />
+            <path id="glass-p1-reflection"
+              d="M -108,-109 L 108,-109 Q 116,-109 110,-104 L 42,-49 Q 36,-44 28,-44 L -62,-44 Q -70,-44 -74,-50 L -111,-102 Q -116,-109 -108,-109 Z"
+              fill="rgba(255,255,255,0.25)" />
+          </g>
+
+          <!-- p1 blue overlay: clipped only to the V image container -->
+          <g clip-path="url(#building-v-clip)">
+            <g id="glass-p1-blue-group" transform="translate(440,149) rotate(23)">
+              <path id="glass-p1-blue-path"
+                d="M -98,-109 L 98,-109 Q 116,-109 112,-92 L 65,92 Q 61,109 43,109 L -42,109 Q -60,109 -65,92 L -112,-92 Q -116,-109 -98,-109 Z"
+                fill="url(#p1-grad-blue)" stroke="none" stroke-linejoin="round" />
+            </g>
+          </g>
+
+          <!-- p3: bottom rectangular panel (more white glassy, aligned to touch V-cut line at x=478) -->
+          <g id="glass-p3-group" transform="translate(433,592) rotate(-24)" filter="url(#glass-shadow)">
+            <path id="glass-p3-path"
+              d="M -6,-250 L 6,-250 Q 24,-250 24,-232 L 24,232 Q 24,250 6,250 L -6,250 Q -24,250 -24,232 L -24,-232 Q -24,-250 -6,-250 Z"
+              fill="url(#p3-grad)" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linejoin="round" />
+            <path id="glass-p3-reflection"
+              d="M -16,-250 L 16,-250 Q 24,-250 23,-242 L 15,-108 Q 14,-100 6,-100 L -6,-100 Q -14,-100 -15,-108 L -23,-242 Q -24,-250 -16,-250 Z"
+              fill="rgba(255,255,255,0.25)" />
+          </g>
+        </g>
+      </svg>
+
+      <!-- HEADER -->
+      <div class="header">
+        <div class="logo-wrap">
+          <img src="CompanyLogo.png" alt="IntoAI Logo" class="cover-logo-img">
+          <div>
+            <div class="brand">INTOAI</div>
+            <div class="sub-brand">RESEARCH &amp; SOFTWARE SYSTEMS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROPOSAL TAG -->
+      <div class="proposal-tag">
+        <!-- Premium Document Outline SVG -->
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 1H7L10 4V13H2V1Z" stroke="#295DFF" stroke-width="1.5" stroke-linejoin="round" />
+          <path d="M7 1V4H10" stroke="#295DFF" stroke-width="1.5" stroke-linejoin="round" />
+          <path d="M4 7H8M4 9.5H8" stroke="#295DFF" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <span>{{cover.proposal_tag}}</span>
+      </div>
+
+      <!-- TITLE -->
+      <div class="title">
+        <h1>
+          {{cover.title}}<br>
+          <span class="platform-title">{{cover.title_platform}}</span>
+        </h1>
+        <!-- Blue accent underline beneath the title -->
+        <span class="title-accent"></span>
+        <p>
+          {{cover.subtitle}}
+        </p>
+      </div>
+
+      <!-- INFO PANEL -->
+      <div class="info-panel">
+        <div class="top-row">
+          <div class="cell">
+            <div class="icon">
+              <!-- Organization / Users SVG -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#295DFF" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <small>PREPARED FOR</small>
+            <h3>{{cover.prepared_for.company_name}}</h3>
+          </div>
+          <div class="cell">
+            <div class="icon">
+              <!-- Author / Profile User SVG -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#295DFF" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <small>PREPARED BY</small>
+            <h3>{{cover.presented_by.company_name}}</h3>
+          </div>
+          <div class="cell">
+            <div class="icon">
+              <!-- Calendar SVG -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#295DFF" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
+            <small>DATE</small>
+            <h3>{{metadata.date}}</h3>
+          </div>
+          <div class="cell">
+            <div class="icon">
+              <!-- Clock / Duration SVG -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#295DFF" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <small>PROJECT DURATION</small>
+            <h3>{{cover.project_duration}}</h3>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="mission">
+          <div class="mission-icon">
+            <!-- Rocket / Solution Overview SVG -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#295DFF" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div>
+            <span class="mission-label">SOLUTION OVERVIEW</span>
+            <p>
+              {{cover.tagline}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <img src="CompanyLogo.png" alt="IntoAI Logo" class="footer-logo-img">
+          <span>{{metadata.proposal_id}} &nbsp; | &nbsp; v{{metadata.version}}</span>
+        </div>
+        <div>
+          Page 1 of 21
+        </div>
+      </div>
+
+    </div><!-- /page-cover -->
+
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 02 Â· TABLE OF CONTENTS
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">Index Â· Table of Contents</span>
+      </div>
+
+      <div class="page-content">
+        <!-- Section Title Badge -->
+        <div class="section-header-container">
+          <span class="section-header-badge">Idx</span>
+          <h2 class="section-header-title">Table of Contents</h2>
+        </div>
+
+        <!-- Single-Column TOC -->
+        <div class="toc-list" style="margin-top: 16px;">
+
+          <div class="toc-section-group">
+            <div class="toc-section-title">01 Â· Context &amp; Baseline</div>
+            <div class="toc-item">
+              <span class="toc-item-title">Document Control &amp; Overview</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">03</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Executive Summary</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">04</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Workflow Research &amp; Baseline</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">05</span>
+            </div>
+          </div>
+
+          <div class="toc-section-group">
+            <div class="toc-section-title">02 Â· Platform Architecture</div>
+            <div class="toc-item">
+              <span class="toc-item-title">Project Overview &amp; Focus</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">06</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Scope of Work &amp; Parameters</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">07</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">System Architecture Core</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">08</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Delivery Methodology</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">09</span>
+            </div>
+          </div>
+
+          <div class="toc-section-group">
+            <div class="toc-section-title">03 Â· System Features</div>
+            <div class="toc-item">
+              <span class="toc-item-title">Autonomous AI Worker Agents</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">10</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Operator Control Dashboard</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">11</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Key Project Deliverables</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">12</span>
+            </div>
+          </div>
+
+          <div class="toc-section-group">
+            <div class="toc-section-title">04 Â· Planning &amp; Value</div>
+            <div class="toc-item">
+              <span class="toc-item-title">Gantt Timeline &amp; Schedule</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">13</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Business Impact KPIs</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">14</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Delivery Gates &amp; Milestones</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">15</span>
+            </div>
+          </div>
+
+          <div class="toc-section-group">
+            <div class="toc-section-title">05 Â· Company &amp; Standards</div>
+            <div class="toc-item">
+              <span class="toc-item-title">About IntoAI Technologies</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">16</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Security &amp; Reliability Commitment</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">17</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Risks, Mitigations &amp; Dependencies</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">18</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Assumptions &amp; Prerequisites</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">19</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Support SLA &amp; Severity Response</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">20</span>
+            </div>
+            <div class="toc-item">
+              <span class="toc-item-title">Terms, Acceptance &amp; Sign-off</span>
+              <span class="toc-item-dots"></span>
+              <span class="toc-item-page">21</span>
+            </div>
+          </div>
+
+        </div><!-- end toc-list -->
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+        </div>
+        <span class="footer-page">2 of 21</span>
+      </div>
+    </div>
+
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 03 Â· DOCUMENT CONTROL
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">{{metadata.proposal_id}} &middot; Document Information</span>
+      </div>
+
+      <div class="page-content">
+
+        <!-- Section Title Badge -->
+        <div class="section-header-container">
+          <span class="section-header-badge">00</span>
+          <h2 class="section-header-title">Document Control</h2>
+        </div>
+
+        <!-- Dashboard cards -->
+        <div class="doc-info-grid">
+          <!-- Distribution -->
+          <div class="glass-panel">
+            <h3 class="subsection-title" style="margin-top:0; margin-bottom:12px;">Distribution List</h3>
+            <div class="distribution-list">
+              {{distribution_list_items}}
+            </div>
+          </div>
+
+          <!-- Document Control -->
+          <div class="glass-panel">
+            <h3 class="subsection-title" style="margin-top:0; margin-bottom:10px;">Document Information</h3>
+            <div class="doc-info-row">
+              <span class="doc-info-key">Document Title</span>
+              <span class="doc-info-val">{{cover.title}}</span>
+            </div>
+            <div class="doc-info-row">
+              <span class="doc-info-key">Document ID</span>
+              <span class="doc-info-val">{{metadata.proposal_id}}</span>
+            </div>
+            <div class="doc-info-row">
+              <span class="doc-info-key">Status</span>
+              <span class="doc-info-val"><span class="doc-status-pill">{{metadata.status}}</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Version History -->
+        <h3 class="subsection-title" style="margin-top:8px;">Version History</h3>
+        <table class="version-table">
+          <thead>
+            <tr>
+              <th style="width:10%">Ver.</th>
+              <th style="width:20%">Date</th>
+              <th style="width:28%">Author</th>
+              <th style="width:42%">Description of Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{version_history_rows}}
+          </tbody>
+        </table>
+
+        <!-- Brief research validation -->
+        <div class="validation-banner">
+          <div class="validation-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+              style="width:1em;height:1em;vertical-align:-0.15em;">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></div>
+          <div class="validation-text">
+            {{document_info.research_validation}}
+          </div>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div><!-- /page-content -->
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">3 of 21</span>
+      </div>
+    </div><!-- /page -->
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 03 Â· EXECUTIVE SUMMARY
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">01 Â· Executive Summary</span>
+      </div>
+
+      <div class="page-content">
+
+        <!-- Section Title Badge -->
+        <div class="section-header-container">
+          <span class="section-header-badge">01</span>
+          <h2 class="section-header-title">Executive Summary</h2>
+        </div>
+
+        <p class="body-text">
+          {{executive_summary.intro}}
+        </p>
+
+        <!-- Narrative Blocks with Inline Icons -->
+        <div class="narrative-block">
+          <div class="narrative-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+              style="width:1em;height:1em;vertical-align:-0.15em;">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 3v18M15 3v18M3 9h18M3 15h18" />
+            </svg></div>
+          <div class="narrative-content">
+            <div class="narrative-title">Context &amp; Business Background</div>
+            <p class="narrative-text">
+              {{executive_summary.context_narrative}}
+            </p>
+          </div>
+        </div>
+
+        <div class="narrative-block">
+          <div class="narrative-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+              style="width:1em;height:1em;vertical-align:-0.15em;">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg></div>
+          <div class="narrative-content">
+            <div class="narrative-title">The Technical Challenge</div>
+            <p class="narrative-text">
+              {{executive_summary.challenge_narrative}}
+            </p>
+          </div>
+        </div>
+
+        <div class="narrative-block">
+          <div class="narrative-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+              style="width:1em;height:1em;vertical-align:-0.15em;">
+              <line x1="9" y1="18" x2="15" y2="18" />
+              <line x1="10" y1="22" x2="14" y2="22" />
+              <path
+                d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+            </svg></div>
+          <div class="narrative-content">
+            <div class="narrative-title">Our Proposed Solution</div>
+            <p class="narrative-text">
+              {{executive_summary.solution_narrative}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Summary Metrics -->
+        <div class="metrics-row">
+          <div class="metric-panel">
+            <div class="metric-panel-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                <polyline points="17 18 23 18 23 12"></polyline>
+              </svg></div>
+            <div class="metric-panel-val">{{executive_summary.metrics.0.value}}</div>
+            <div class="metric-panel-label">{{executive_summary.metrics.0.label}}</div>
+          </div>
+          <div class="metric-panel">
+            <div class="metric-panel-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg></div>
+            <div class="metric-panel-val">{{executive_summary.metrics.1.value}}</div>
+            <div class="metric-panel-label">{{executive_summary.metrics.1.label}}</div>
+          </div>
+          <div class="metric-panel">
+            <div class="metric-panel-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M3 5v4c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                <path d="M3 9v4c0 1.66 4 3 9 3s9-1.34 9-3V9" />
+                <path d="M3 13v4c0 1.66 4 3 9 3s9-1.34 9-3v-4" />
+              </svg></div>
+            <div class="metric-panel-val">{{executive_summary.metrics.2.value}}</div>
+            <div class="metric-panel-label">{{executive_summary.metrics.2.label}}</div>
+          </div>
+          <div class="metric-panel">
+            <div class="metric-panel-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+              </svg></div>
+            <div class="metric-panel-val">{{executive_summary.metrics.3.value}}</div>
+            <div class="metric-panel-label">{{executive_summary.metrics.3.label}}</div>
+          </div>
+        </div>
+
+        <div class="watermark-logo"></div>
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">4 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 05 Â· RESEARCH & DISCOVERY
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">01 Â· Research &amp; Discovery</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">01</span>
+          <h2 class="section-header-title">Research &amp; Discovery</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:16px;">
+          {{workflow_research.intro}}
+        </p>
+
+        <div class="research-grid">
+          <div class="glass-panel" style="text-align: center; margin-bottom: 0;">
+            <div style="font-size: 20pt; font-weight: 800; color: var(--blue-600); margin-bottom: 4px;">
+              {{workflow_research.research_duration_days}} Days</div>
+            <div style="font-size: 7.5pt; font-weight: 700; text-transform: uppercase; color: var(--ink-700);">
+              {{workflow_research.audit_duration_label}}</div>
+            <div style="font-size: 7pt; color: var(--ink-300); margin-top: 4px;">
+              {{workflow_research.audit_duration_desc}}</div>
+          </div>
+          <div class="glass-panel" style="text-align: center; margin-bottom: 0;">
+            <div style="font-size: 20pt; font-weight: 800; color: var(--blue-600); margin-bottom: 4px;">
+              {{workflow_research.research_sessions}} Sessions</div>
+            <div style="font-size: 7.5pt; font-weight: 700; text-transform: uppercase; color: var(--ink-700);">
+              {{workflow_research.interviews_label}}</div>
+            <div style="font-size: 7pt; color: var(--ink-300); margin-top: 4px;">{{workflow_research.interviews_desc}}
+            </div>
+          </div>
+          <div class="glass-panel" style="text-align: center; margin-bottom: 0;">
+            <div style="font-size: 20pt; font-weight: 800; color: var(--blue-600); margin-bottom: 4px;">
+              {{workflow_research.systems_analyzed}} Systems</div>
+            <div style="font-size: 7.5pt; font-weight: 700; text-transform: uppercase; color: var(--ink-700);">
+              {{workflow_research.systems_label}}</div>
+            <div style="font-size: 7pt; color: var(--ink-300); margin-top: 4px;">{{workflow_research.systems_desc}}
+            </div>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Key Workflow Findings</h3>
+        <div class="findings-grid">
+          <div class="glass-panel finding-card" style="margin-bottom: 0;">
+            <div class="finding-title">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="var(--teal-500)"
+                style="width:0.55em;height:0.55em;vertical-align:0.1em;margin-right:6px;">
+                <circle cx="12" cy="12" r="10" />
+              </svg> {{workflow_research.findings.0.title}}
+            </div>
+            <p class="finding-text">
+              {{workflow_research.findings.0.description}}
+            </p>
+          </div>
+          <div class="glass-panel finding-card" style="margin-bottom: 0;">
+            <div class="finding-title">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="var(--teal-500)"
+                style="width:0.55em;height:0.55em;vertical-align:0.1em;margin-right:6px;">
+                <circle cx="12" cy="12" r="10" />
+              </svg> {{workflow_research.findings.1.title}}
+            </div>
+            <p class="finding-text">
+              {{workflow_research.findings.1.description}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Strategic Visual Fill: Workflow Diagnostic Baseline & Research Process Flow -->
+        <div class="glass-panel" style="margin-top: 10px;">
+          <h3 class="subsection-title" style="margin-top:0; margin-bottom:4px; color:var(--blue-600);">Problem-First
+            Research Lifecycle</h3>
+          <p class="body-text" style="font-size: 9.5pt; line-height: 1.5; margin-bottom: 8px;">
+            {{project_overview.feasibility_study}}
+          </p>
+
+          <svg width="100%" height="75" viewBox="0 0 680 75" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="margin-top: 5px;">
+            <!-- Connective dashed line -->
+            <line x1="75" y1="28" x2="605" y2="28" stroke="url(#flow-line-grad)" stroke-width="1.5"
+              stroke-dasharray="4 4" />
+
+            <defs>
+              <linearGradient id="flow-line-grad" x1="0" y1="0" x2="680" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2563EB" />
+                <stop offset="100%" stop-color="#0D9488" />
+              </linearGradient>
+              <linearGradient id="step-grad" x1="0" y1="0" x2="0" y2="40">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.95" />
+              </linearGradient>
+            </defs>
+
+            <!-- Step 1 -->
+            <g transform="translate(10, 8)">
+              <rect width="130" height="40" rx="6" fill="url(#step-grad)" stroke="#2563EB" stroke-width="1.2" />
+              <foreignObject x="0" y="0" width="130" height="40">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 8pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{workflow_research.stages.0.title}}
+                  </div>
+                  <div style="font-size: 6pt; font-weight: 600; color: #2563EB; line-height: 1.2; margin-top: 2px;">
+                    {{workflow_research.stages.0.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+            <!-- Arrow 1 -->
+            <path d="M 152 28 L 160 28 L 157 25 M 160 28 L 157 31" stroke="#2563EB" stroke-width="1.5"
+              stroke-linecap="round" />
+
+            <!-- Step 2 -->
+            <g transform="translate(175, 8)">
+              <rect width="130" height="40" rx="6" fill="url(#step-grad)" stroke="#2563EB" stroke-width="1.2" />
+              <foreignObject x="0" y="0" width="130" height="40">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 8pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{workflow_research.stages.1.title}}
+                  </div>
+                  <div style="font-size: 6pt; font-weight: 600; color: #2563EB; line-height: 1.2; margin-top: 2px;">
+                    {{workflow_research.stages.1.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+            <!-- Arrow 2 -->
+            <path d="M 317 28 L 325 28 L 322 25 M 325 28 L 322 31" stroke="#2563EB" stroke-width="1.5"
+              stroke-linecap="round" />
+
+            <!-- Step 3 -->
+            <g transform="translate(340, 8)">
+              <rect width="130" height="40" rx="6" fill="url(#step-grad)" stroke="#0D9488" stroke-width="1.2" />
+              <foreignObject x="0" y="0" width="130" height="40">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 8pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{workflow_research.stages.2.title}}
+                  </div>
+                  <div style="font-size: 6pt; font-weight: 600; color: #0D9488; line-height: 1.2; margin-top: 2px;">
+                    {{workflow_research.stages.2.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+            <!-- Arrow 3 -->
+            <path d="M 482 28 L 490 28 L 487 25 M 490 28 L 487 31" stroke="#0D9488" stroke-width="1.5"
+              stroke-linecap="round" />
+
+            <!-- Step 4 -->
+            <g transform="translate(505, 8)">
+              <rect width="130" height="40" rx="6" fill="url(#step-grad)" stroke="#0D9488" stroke-width="1.2" />
+              <foreignObject x="0" y="0" width="130" height="40">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 8pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{workflow_research.stages.3.title}}
+                  </div>
+                  <div style="font-size: 6pt; font-weight: 600; color: #0D9488; line-height: 1.2; margin-top: 2px;">
+                    {{workflow_research.stages.3.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+          </svg>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">5 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 05 Â· PROJECT OVERVIEW
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">02 Â· Project Overview</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">02</span>
+          <h2 class="section-header-title">Project Overview</h2>
+        </div>
+
+        <p class="body-text">
+          {{project_overview.research_methodology}}
+        </p>
+
+        <div class="glass-panel">
+          <h3 class="subsection-title" style="margin-top:0; margin-bottom:8px;">Strategic Focus</h3>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.5; margin-bottom: 0;">
+            {{project_overview.strategic_focus}}
+          </p>
+        </div>
+
+        <div class="glass-panel" style="margin-top: 12px;">
+          <h3 class="subsection-title" style="margin-top:0; margin-bottom:8px;">Core Platform Objectives</h3>
+          <ul class="bullet-list" style="margin-top: 6px; margin-bottom: 0;">
+            <li>{{project_overview.objectives.0}}</li>
+            <li>{{project_overview.objectives.1}}</li>
+            <li>{{project_overview.objectives.2}}</li>
+            <li>{{project_overview.objectives.3}}</li>
+          </ul>
+        </div>
+
+        <!-- Strategic Visual Fill: Algorithmic Feasibility Insights & Graph Complexity Chart -->
+        <div class="glass-panel" style="margin-top: 10px;">
+          <h3 class="subsection-title" style="margin-top:0; margin-bottom:4px; color:var(--teal-500);">Algorithmic
+            Feasibility &amp; Scalability</h3>
+          <p class="body-text" style="font-size: 9.5pt; line-height: 1.5; margin-bottom: 6px;">
+            {{project_overview.feasibility_study}}
+          </p>
+
+          <svg width="100%" height="90" viewBox="0 0 680 90" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="margin-top: 5px;">
+            <!-- Grid lines -->
+            <line x1="45" y1="10" x2="640" y2="10" stroke="var(--ink-100)" stroke-width="0.5" />
+            <line x1="45" y1="40" x2="640" y2="40" stroke="var(--ink-100)" stroke-width="0.5" stroke-dasharray="2 2" />
+            <line x1="45" y1="70" x2="640" y2="70" stroke="var(--ink-100)" stroke-width="0.5" />
+
+            <!-- Axis Labels -->
+            <text x="38" y="14" font-family="'IBM Plex Sans', sans-serif" font-size="6.5pt" fill="var(--ink-300)"
+              text-anchor="end">5000ms</text>
+            <text x="38" y="44" font-family="'IBM Plex Sans', sans-serif" font-size="6.5pt" fill="var(--ink-300)"
+              text-anchor="end">1000ms</text>
+            <text x="38" y="74" font-family="'IBM Plex Sans', sans-serif" font-size="6.5pt" fill="var(--ink-300)"
+              text-anchor="end">100ms</text>
+
+            <!-- Y-axis line -->
+            <line x1="45" y1="5" x2="45" y2="75" stroke="var(--ink-300)" stroke-width="1" />
+            <!-- X-axis line -->
+            <line x1="45" y1="75" x2="650" y2="75" stroke="var(--ink-300)" stroke-width="1" />
+
+            <!-- X-axis Label -->
+            <text x="640" y="85" font-family="'IBM Plex Sans', sans-serif" font-size="7pt" font-weight="700"
+              fill="var(--ink-500)" text-anchor="end">Task Nodes (V) &amp; Dependencies (E) <svg class="icon-svg"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-0.15em;">
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <polyline points="14 6 20 12 14 18" />
+              </svg></text>
+
+            <!-- Relational Curve: O(V^2 * E) -->
+            <path d="M 45 73 Q 220 72 320 45 T 420 8" fill="none" stroke="#DC2626" stroke-width="1.8" />
+            <text x="425" y="12" font-family="'IBM Plex Sans', sans-serif" font-size="7.5pt" font-weight="700"
+              fill="#DC2626">Relational O(VÂ²Â·E) - Timeout Threshold</text>
+
+            <!-- Graph Curve: O(V log V + E) -->
+            <path d="M 45 74 Q 300 72 600 68" fill="none" stroke="#0D9488" stroke-width="1.8" />
+            <text x="605" y="65" font-family="'IBM Plex Sans', sans-serif" font-size="7.5pt" font-weight="700"
+              fill="#0D9488">IntoAI Graph O(V log V + E)</text>
+
+            <!-- Threshold indicator lines -->
+            <line x1="45" y1="10" x2="420" y2="10" stroke="#DC2626" stroke-width="0.8" stroke-dasharray="3 3"
+              opacity="0.4" />
+            <line x1="45" y1="70" x2="600" y2="70" stroke="#0D9488" stroke-width="0.8" stroke-dasharray="3 3"
+              opacity="0.4" />
+          </svg>
+        </div>
+
+        <div class="watermark-logo"></div>
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">6 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 07 Â· SCOPE OF WORK
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">02 Â· Scope of Work</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">02</span>
+          <h2 class="section-header-title">Scope of Work</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:16px;">
+          {{scope_of_work.description}}
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="glass-panel" style="margin-bottom: 0;">
+            <h3 class="subsection-title" style="margin-top:0; color:var(--blue-600);">In-Scope Parameters</h3>
+            <ul class="check-list">
+              <li>{{scope_of_work.in_scope.0}}</li>
+              <li>{{scope_of_work.in_scope.1}}</li>
+              <li>{{scope_of_work.in_scope.2}}</li>
+              <li>{{scope_of_work.in_scope.3}}</li>
+              <li>{{scope_of_work.in_scope.4}}</li>
+            </ul>
+          </div>
+
+          <div class="glass-panel" style="margin-bottom: 0;">
+            <h3 class="subsection-title" style="margin-top:0; color:var(--amber-500);">Explicit Exclusions</h3>
+            <ul class="cross-list">
+              <li>{{scope_of_work.out_of_scope.0}}</li>
+              <li>{{scope_of_work.out_of_scope.1}}</li>
+              <li>{{scope_of_work.out_of_scope.2}}</li>
+              <li>{{scope_of_work.out_of_scope.3}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="insight-block insight-research" style="margin-top: 16px;">
+          <div class="insight-type">Scope Guardrail</div>
+          <p class="insight-text">
+            {{scope_of_work.guardrail}}
+          </p>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">7 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 08 Â· SOLUTION ARCHITECTURE
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">02 Â· Technical Blueprint</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">02</span>
+          <h2 class="section-header-title">Solution Architecture</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:8px;">
+          {{architecture.description}}
+        </p>
+
+        <svg width="100%" height="220" viewBox="0 0 680 220" fill="none" xmlns="http://www.w3.org/2000/svg"
+          style="margin-top: 10px; margin-bottom: 8px;">
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="blue-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2563EB" stop-opacity="0.10" />
+              <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.01" />
+            </linearGradient>
+            <linearGradient id="teal-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0D9488" stop-opacity="0.10" />
+              <stop offset="100%" stop-color="#14B8A6" stop-opacity="0.01" />
+            </linearGradient>
+            <linearGradient id="card-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.95" />
+            </linearGradient>
+            <filter id="svg-shadow" x="-5%" y="-5%" width="110%" height="110%">
+              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.06" />
+            </filter>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5"
+              orient="auto-start-reverse">
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563EB" />
+            </marker>
+            <marker id="arrow-teal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5"
+              orient="auto-start-reverse">
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0D9488" />
+            </marker>
+          </defs>
+
+          <!-- Column Backgrounds -->
+          <rect x="5" y="5" width="155" height="210" rx="8" fill="url(#blue-glow)" stroke="rgba(37,99,235,0.08)"
+            stroke-width="1.2" />
+          <rect x="175" y="5" width="155" height="210" rx="8" fill="url(#blue-glow)" stroke="rgba(37,99,235,0.08)"
+            stroke-width="1.2" />
+          <rect x="345" y="5" width="155" height="210" rx="8" fill="url(#teal-glow)" stroke="rgba(13,148,136,0.08)"
+            stroke-width="1.2" />
+          <rect x="515" y="5" width="160" height="210" rx="8" fill="url(#teal-glow)" stroke="rgba(13,148,136,0.08)"
+            stroke-width="1.2" />
+
+          <!-- Column Titles -->
+          <foreignObject x="5" y="8" width="155" height="20">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+              style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font); font-size: 7pt; font-weight: 800; color: #2563EB;">
+              {{architecture.columns.ingestion}}
+            </div>
+          </foreignObject>
+          <foreignObject x="175" y="8" width="155" height="20">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+              style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font); font-size: 7pt; font-weight: 800; color: #2563EB;">
+              {{architecture.columns.compute}}
+            </div>
+          </foreignObject>
+          <foreignObject x="345" y="8" width="155" height="20">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+              style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font); font-size: 7pt; font-weight: 800; color: #0D9488;">
+              {{architecture.columns.data_tier}}
+            </div>
+          </foreignObject>
+          <foreignObject x="515" y="8" width="160" height="20">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+              style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font); font-size: 7pt; font-weight: 800; color: #0D9488;">
+              {{architecture.columns.console}}
+            </div>
+          </foreignObject>
+
+          <!-- Connector Lines -->
+          <path d="M 160 110 L 170 110" stroke="#2563EB" stroke-width="1.2" marker-end="url(#arrow)" />
+          <path d="M 330 80 L 340 80" stroke="#2563EB" stroke-width="1.2" marker-end="url(#arrow)" />
+          <path d="M 340 140 L 332 140" stroke="#0D9488" stroke-width="1.2" marker-end="url(#arrow-teal)" />
+          <path d="M 500 110 L 510 110" stroke="#0D9488" stroke-width="1.2" marker-end="url(#arrow-teal)" />
+
+          <!-- Ingestion Cards -->
+          <g transform="translate(15, 34)" filter="url(#svg-shadow)">
+            <rect width="135" height="34" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font); font-size: 7.5pt; font-weight: 700; color: #1D1D24;">
+                {{architecture.nodes.jira_events}}
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(15, 88)" filter="url(#svg-shadow)">
+            <rect width="135" height="34" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font); font-size: 7.5pt; font-weight: 700; color: #1D1D24;">
+                {{architecture.nodes.git_integrations}}
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(15, 162)" filter="url(#svg-shadow)">
+            <rect width="135" height="34" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font); font-size: 7.5pt; font-weight: 700; color: #1D1D24;">
+                {{architecture.nodes.worker_gateway}}
+              </div>
+            </foreignObject>
+          </g>
+
+          <!-- Compute Core Cards -->
+          <g transform="translate(185, 34)" filter="url(#svg-shadow)">
+            <rect width="135" height="44" rx="5" fill="url(#card-grad)" stroke="#2563EB" stroke-width="1.2" />
+            <foreignObject x="0" y="0" width="135" height="44">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{architecture.nodes.agent_core_title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 500; color: #2563EB; line-height: 1.2; margin-top: 1px;">
+                  {{architecture.nodes.agent_core_desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(185, 98)" filter="url(#svg-shadow)">
+            <rect width="135" height="44" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="44">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #1D1D24; line-height: 1.2;">
+                  {{architecture.nodes.rag_compiler_title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 500; color: #88889C; line-height: 1.2; margin-top: 1px;">
+                  {{architecture.nodes.rag_compiler_desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(185, 162)" filter="url(#svg-shadow)">
+            <rect width="135" height="34" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font); font-size: 7.5pt; font-weight: 700; color: #1D1D24;">
+                {{architecture.nodes.notification_dispatch}}
+              </div>
+            </foreignObject>
+          </g>
+
+          <!-- Data Tier Cards -->
+          <g transform="translate(355, 34)" filter="url(#svg-shadow)">
+            <rect width="135" height="44" rx="5" fill="url(#card-grad)" stroke="#0D9488" stroke-width="1.2" />
+            <foreignObject x="0" y="0" width="135" height="44">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{architecture.nodes.neo4j_title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 500; color: #0D9488; line-height: 1.2; margin-top: 1px;">
+                  {{architecture.nodes.neo4j_desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(355, 98)" filter="url(#svg-shadow)">
+            <rect width="135" height="44" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="44">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #1D1D24; line-height: 1.2;">
+                  {{architecture.nodes.pgvector_title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 500; color: #88889C; line-height: 1.2; margin-top: 1px;">
+                  {{architecture.nodes.pgvector_desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(355, 162)" filter="url(#svg-shadow)">
+            <rect width="135" height="34" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font); font-size: 7.5pt; font-weight: 700; color: #1D1D24;">
+                {{architecture.nodes.jira_queue}}
+              </div>
+            </foreignObject>
+          </g>
+
+          <!-- Presenter Cards -->
+          <g transform="translate(528, 34)" filter="url(#svg-shadow)">
+            <rect width="135" height="44" rx="5" fill="url(#card-grad)" stroke="#0D9488" stroke-width="1.2" />
+            <foreignObject x="0" y="0" width="135" height="44">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{architecture.nodes.operator_dashboard_title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 500; color: #0D9488; line-height: 1.2; margin-top: 1px;">
+                  {{architecture.nodes.operator_dashboard_desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(528, 98)" filter="url(#svg-shadow)">
+            <rect width="135" height="44" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="44">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #1D1D24; line-height: 1.2;">
+                  {{architecture.nodes.iam_gates_title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 500; color: #88889C; line-height: 1.2; margin-top: 1px;">
+                  {{architecture.nodes.iam_gates_desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <g transform="translate(528, 162)" filter="url(#svg-shadow)">
+            <rect width="135" height="34" rx="5" fill="url(#card-grad)" stroke="#E2E2EA" stroke-width="0.8" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font); font-size: 7.5pt; font-weight: 700; color: #1D1D24;">
+                {{architecture.nodes.cloudwatch_logs}}
+              </div>
+            </foreignObject>
+          </g>
+        </svg>
+
+        <div class="insight-block insight-architecture" style="margin-top:10px;">
+          <div class="insight-type">Architectural Note</div>
+          <p class="insight-text">
+            {{architecture.insight}}
+          </p>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">8 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 09 Â· METHODOLOGY & DELIVERY FRAMEWORK
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">02 Â· Delivery Framework</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">02</span>
+          <h2 class="section-header-title">Delivery Methodology</h2>
+        </div>
+
+        <p class="body-text">
+          {{project_overview.delivery_description}}
+        </p>
+
+        <div class="methodology-flow">
+
+          <div class="methodology-step">
+            <div class="methodology-num">1</div>
+            <div class="methodology-title">{{methodology_steps.0.step}}</div>
+            <div class="methodology-desc">
+              {{methodology_steps.0.description}}
+            </div>
+          </div>
+
+          <div class="methodology-step">
+            <div class="methodology-num">2</div>
+            <div class="methodology-title">{{methodology_steps.1.step}}</div>
+            <div class="methodology-desc">
+              {{methodology_steps.1.description}}
+            </div>
+          </div>
+
+          <div class="methodology-step">
+            <div class="methodology-num">3</div>
+            <div class="methodology-title">{{methodology_steps.2.step}}</div>
+            <div class="methodology-desc">
+              {{methodology_steps.2.description}}
+            </div>
+          </div>
+
+          <div class="methodology-step">
+            <div class="methodology-num">4</div>
+            <div class="methodology-title">{{methodology_steps.3.step}}</div>
+            <div class="methodology-desc">
+              {{methodology_steps.3.description}}
+            </div>
+          </div>
+
+          <div class="methodology-step">
+            <div class="methodology-num">5</div>
+            <div class="methodology-title">{{methodology_steps.4.step}}</div>
+            <div class="methodology-desc">
+              {{methodology_steps.4.description}}
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Strategic Research Alignment -->
+        <div class="glass-panel" style="margin-top: 20px;">
+          <h3 class="subsection-title" style="margin-top:0; margin-bottom:8px; color:var(--teal-500);">Strategic
+            Research Alignment</h3>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.5; margin-bottom: 0;">
+            {{project_overview.strategic_alignment}}
+          </p>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">9 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 10 Â· FEATURE SPECIFICATIONS (MODULES 1 & 2)
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">03 Â· Feature Specifications</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">03</span>
+          <h2 class="section-header-title">Feature Specifications</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:12px;">
+          {{features_intro}}
+        </p>
+
+        <div class="features-grid-density">
+
+          <div class="feature-block-card">
+            <span class="feature-block-tag">Module 01</span>
+            <h3 class="feature-block-title">{{features.0.module}}</h3>
+            <p class="feature-block-desc">{{features.0.description}}</p>
+            <ul class="feature-block-list">
+              <li><strong>{{features.0.items.0.title}}:</strong> {{features.0.items.0.details}}</li>
+              <li><strong>{{features.0.items.1.title}}:</strong> {{features.0.items.1.details}}</li>
+              <li><strong>{{features.0.items.2.title}}:</strong> {{features.0.items.2.details}}</li>
+              <li><strong>{{features.0.items.3.title}}:</strong> {{features.0.items.3.details}}</li>
+            </ul>
+          </div>
+
+          <div class="feature-block-card">
+            <span class="feature-block-tag">Module 02</span>
+            <h3 class="feature-block-title">{{features.1.module}}</h3>
+            <p class="feature-block-desc">{{features.1.description}}</p>
+            <ul class="feature-block-list">
+              <li><strong>{{features.1.items.0.title}}:</strong> {{features.1.items.0.details}}</li>
+              <li><strong>{{features.1.items.1.title}}:</strong> {{features.1.items.1.details}}</li>
+              <li><strong>{{features.1.items.2.title}}:</strong> {{features.1.items.2.details}}</li>
+              <li><strong>{{features.1.items.3.title}}:</strong> {{features.1.items.3.details}}</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="watermark-logo"></div>
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+        </div>
+        <span class="footer-page">10 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 11 Â· FEATURE SPECIFICATIONS (MODULE 3)
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">03 Â· Feature Specifications</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">03</span>
+          <h2 class="section-header-title">Feature Specifications</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:12px;">
+          {{features.2.intro}}
+        </p>
+
+        <div class="features-grid-density">
+
+          <div class="feature-block-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <span class="feature-block-tag">Module 03</span>
+                <h3 class="feature-block-title">{{features.2.module}}</h3>
+              </div>
+              <span
+                style="font-size:6.5pt; font-weight:700; text-transform:uppercase; background:var(--blue-100); color:var(--blue-600); border:1px solid var(--blue-border); padding:3px 8px; border-radius:3px;">React
+                Â· WebGL</span>
+            </div>
+            <p class="feature-block-desc">{{features.2.description}}</p>
+            <ul class="feature-block-list">
+              <li><strong>{{features.2.items.0.title}}:</strong> {{features.2.items.0.details}}</li>
+              <li><strong>{{features.2.items.1.title}}:</strong> {{features.2.items.1.details}}</li>
+              <li><strong>{{features.2.items.2.title}}:</strong> {{features.2.items.2.details}}</li>
+              <li><strong>{{features.2.items.3.title}}:</strong> {{features.2.items.3.details}}</li>
+              <li><strong>{{features.2.items.4.title}}:</strong> {{features.2.items.4.details}}</li>
+              <li><strong>{{features.2.items.5.title}}:</strong> {{features.2.items.5.details}}</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="insight-block insight-architecture" style="margin-top: 14px;">
+          <div class="insight-type">Compliance Note</div>
+          <p class="insight-text">
+            {{features_compliance_note}}
+          </p>
+        </div>
+
+        <!-- Strategic Visual Fill: SSO & Audit Compliance -->
+        <div class="glass-panel" style="margin-top: 14px;">
+          <h3 class="subsection-title" style="margin-top:0; margin-bottom:8px; color:var(--blue-600);">Audit Trail &amp;
+            Compliance Logging</h3>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.5; margin-bottom: 0;">
+            {{features_audit_trail}}
+          </p>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">11 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 12 Â· KEY DELIVERABLES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">04 Â· Key Deliverables</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">04</span>
+          <h2 class="section-header-title">Key Deliverables</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:12px;">
+          {{deliverables_intro}}
+        </p>
+
+        <div class="deliv-container">
+          {{deliverables_list}}
+        </div>
+
+        <div class="watermark-logo"></div>
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">12 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 13 Â· TIMELINE & MILESTONES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">04 Â· Timeline &amp; Milestones</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">04</span>
+          <h2 class="section-header-title">Timeline &amp; Milestones</h2>
+        </div>
+
+        <p class="body-text">
+          {{timeline_intro}}
+        </p>
+
+        <div class="timeline-gantt">
+          {{timeline_phases}}
+        </div>
+
+
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">13 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 14 Â· BUSINESS IMPACT
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">04 Â· Business Impact</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">04</span>
+          <h2 class="section-header-title">Business Impact</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom: 14px;">
+          {{business_impact_intro}}
+        </p>
+
+        <div class="kpi-panels">
+
+          <div class="glass-panel kpi-panel-card" style="margin-bottom: 0;">
+            <div class="kpi-val">{{business_impact.kpis.0.value}}</div>
+            <div class="kpi-label">{{business_impact.kpis.0.label}}</div>
+            <p class="kpi-desc">
+              {{business_impact.kpis.0.note}}
+            </p>
+          </div>
+
+          <div class="glass-panel kpi-panel-card kpi-teal" style="margin-bottom: 0;">
+            <div class="kpi-val">{{business_impact.kpis.1.value}}</div>
+            <div class="kpi-label">{{business_impact.kpis.1.label}}</div>
+            <p class="kpi-desc">
+              {{business_impact.kpis.1.note}}
+            </p>
+          </div>
+
+          <div class="glass-panel kpi-panel-card kpi-amber" style="margin-bottom: 0;">
+            <div class="kpi-val">{{business_impact.kpis.2.value}}</div>
+            <div class="kpi-label">{{business_impact.kpis.2.label}}</div>
+            <p class="kpi-desc">
+              {{business_impact.kpis.2.note}}
+            </p>
+          </div>
+
+          <div class="glass-panel kpi-panel-card kpi-green" style="margin-bottom: 0;">
+            <div class="kpi-val">{{business_impact.kpis.3.value}}</div>
+            <div class="kpi-label">{{business_impact.kpis.3.label}}</div>
+            <p class="kpi-desc">
+              {{business_impact.kpis.3.note}}
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Simulation Workflow SVG -->
+        <svg width="100%" height="60" viewBox="0 0 680 60" fill="none" xmlns="http://www.w3.org/2000/svg"
+          style="margin-top: 14px; margin-bottom: 8px;">
+          <defs>
+            <linearGradient id="sim-arrow-grad" x1="0" y1="0" x2="680" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563EB" />
+              <stop offset="100%" stop-color="#0D9488" />
+            </linearGradient>
+            <linearGradient id="sim-box-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.9" />
+            </linearGradient>
+          </defs>
+
+          <!-- Connective line -->
+          <line x1="85" y1="28" x2="595" y2="28" stroke="url(#sim-arrow-grad)" stroke-width="1"
+            stroke-dasharray="3 3" />
+
+          <!-- Step 1: Inputs -->
+          <g transform="translate(10, 8)">
+            <rect width="145" height="34" rx="4" fill="url(#sim-box-grad)" stroke="#2563EB" stroke-width="1" />
+            <foreignObject x="0" y="0" width="145" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{business_impact.stages.0.title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 600; color: #2563EB; line-height: 1.2; margin-top: 1px;">
+                  {{business_impact.stages.0.desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <!-- Arrow 1 -->
+          <path d="M 162 28 L 170 28 L 167 25 M 170 28 L 167 31" stroke="#2563EB" stroke-width="1.2"
+            stroke-linecap="round" />
+
+          <!-- Step 2: Modeling -->
+          <g transform="translate(180, 8)">
+            <rect width="155" height="34" rx="4" fill="url(#sim-box-grad)" stroke="#2563EB" stroke-width="1" />
+            <foreignObject x="0" y="0" width="155" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{business_impact.stages.1.title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 600; color: #2563EB; line-height: 1.2; margin-top: 1px;">
+                  {{business_impact.stages.1.desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <!-- Arrow 2 -->
+          <path d="M 342 28 L 350 28 L 347 25 M 350 28 L 347 31" stroke="#0D9488" stroke-width="1.2"
+            stroke-linecap="round" />
+
+          <!-- Step 3: Benchmarking -->
+          <g transform="translate(360, 8)">
+            <rect width="150" height="34" rx="4" fill="url(#sim-box-grad)" stroke="#0D9488" stroke-width="1" />
+            <foreignObject x="0" y="0" width="150" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{business_impact.stages.2.title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 600; color: #0D9488; line-height: 1.2; margin-top: 1px;">
+                  {{business_impact.stages.2.desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+          <!-- Arrow 3 -->
+          <path d="M 517 28 L 525 28 L 522 25 M 525 28 L 522 31" stroke="#0D9488" stroke-width="1.2"
+            stroke-linecap="round" />
+
+          <!-- Step 4: Projections -->
+          <g transform="translate(535, 8)">
+            <rect width="135" height="34" rx="4" fill="url(#sim-box-grad)" stroke="#0D9488" stroke-width="1" />
+            <foreignObject x="0" y="0" width="135" height="34">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                  {{business_impact.stages.3.title}}
+                </div>
+                <div style="font-size: 6pt; font-weight: 600; color: #0D9488; line-height: 1.2; margin-top: 1px;">
+                  {{business_impact.stages.3.desc}}
+                </div>
+              </div>
+            </foreignObject>
+          </g>
+        </svg>
+
+        <!-- Sourcing Footnote -->
+        <p class="body-text"
+          style="font-size: 7.5pt !important; line-height: 1.4 !important; color: var(--ink-300) !important; margin-top: 12px; margin-bottom: 0; font-style: italic;">
+          {{business_impact.footnote}}
+        </p>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">14 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 15 Â· DELIVERY GATES & MILESTONES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">04 Â· Delivery Gates &amp; Milestones</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">04</span>
+          <h2 class="section-header-title">Delivery Gates &amp; Milestones</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom: 16px;">
+          {{gates_intro}}
+        </p>
+
+        <div class="milestone-cards-container">
+          {{delivery_gates}}
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">15 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 16 Â· ABOUT INTOAI TECHNOLOGIES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">05 Â· Company Credentials</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">05</span>
+          <h2 class="section-header-title">About IntoAI</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom: 12px;">
+          {{about_intoai.intro}}
+        </p>
+
+        <!-- Company Details Panel -->
+        <div class="glass-panel" style="margin-bottom: 12px; padding: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div>
+              <span
+                style="font-size: 7.5pt; font-weight: 700; color: var(--blue-500); text-transform: uppercase; letter-spacing: 0.05em;">Our
+                Motto</span>
+              <h3
+                style="margin: 2px 0 0 0; font-size: 14pt; font-style: italic; font-weight: 800; color: var(--ink-900);">
+                {{about_intoai.tagline}}</h3>
+            </div>
+            <div style="text-align: right;">
+              <span
+                style="font-size: 7pt; font-weight: 700; color: var(--teal-500); text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 4px;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 1L5 3H7L5.5 4.5L6 6.5L4 5.2L2 6.5L2.5 4.5L1 3H3L4 1Z" fill="var(--teal-500)" />
+                </svg>
+                DPIIT RECOGNIZED STARTUP
+              </span>
+              <p style="margin: 2px 0 0 0; font-size: 7pt; line-height: 1.3; color: var(--ink-500); font-weight: 600;">
+                Startup India Initiative
+              </p>
+            </div>
+          </div>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.45; margin-bottom: 0;">
+            {{about_intoai.approach}}
+          </p>
+        </div>
+
+        <div class="why-us-grid">
+
+          <div class="glass-panel why-us-card" style="margin-bottom: 0;">
+            <span class="why-us-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16" />
+                <path d="M14 15.5V18" />
+                <path d="M10 8H8" />
+                <path d="M15 2l-4 9H7l4-9z" />
+                <path d="M7 11l-3 7" />
+              </svg></span>
+            <div class="why-us-card-title">{{about_intoai.differentiators.0.title}}</div>
+            <p class="why-us-card-desc">
+              {{about_intoai.differentiators.0.description}}
+            </p>
+          </div>
+
+          <div class="glass-panel why-us-card" style="margin-bottom: 0;">
+            <span class="why-us-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg></span>
+            <div class="why-us-card-title">{{about_intoai.differentiators.1.title}}</div>
+            <p class="why-us-card-desc">
+              {{about_intoai.differentiators.1.description}}
+            </p>
+          </div>
+
+          <div class="glass-panel why-us-card" style="margin-bottom: 0;">
+            <span class="why-us-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg></span>
+            <div class="why-us-card-title">{{about_intoai.differentiators.2.title}}</div>
+            <p class="why-us-card-desc">
+              {{about_intoai.differentiators.2.description}}
+            </p>
+          </div>
+
+          <div class="glass-panel why-us-card" style="margin-bottom: 0;">
+            <span class="why-us-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <path d="M4.5 16.5c-1.5 1-1.5 1.7-.5 2.5 1 1 3.5 1 5.5-1L12 15" />
+                <path d="M12 15c0 0-3-6-1-10 2-4 7-2 8.5-.5 1.5 1.5 3.5 6.5-.5 8.5-4 2-7 2-7 2z" />
+                <circle cx="14.5" cy="9.5" r="1.5" />
+                <path d="M9 9L4 14" />
+              </svg></span>
+            <div class="why-us-card-title">{{about_intoai.differentiators.3.title}}</div>
+            <p class="why-us-card-desc">
+              {{about_intoai.differentiators.3.description}}
+            </p>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 14px; text-align: center; border-top: 1px dashed var(--ink-100); padding-top: 8px;">
+          <p style="font-size: 7.2pt; color: var(--ink-300); margin: 0;">
+            Corporate Address: Balaji Arcade, Avs Compound, Ejipura, Koramangala, Bangalore, Karnataka, India, 560095
+          </p>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">16 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 17 Â· SECURITY & RELIABILITY COMMITMENT
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">05 Â· Security &amp; Reliability Commitment</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">05</span>
+          <h2 class="section-header-title">Security &amp; Reliability</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom: 10px;">
+          {{security.philosophy}}
+        </p>
+
+        <!-- 5-Card Grid for Security & Reliability -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+
+          <div class="glass-panel" style="margin-bottom: 0; padding: 12px !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <h3 class="subsection-title" style="margin: 0; color: var(--blue-600);"><span
+                  style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                    style="width:1em;height:1em;vertical-align:-0.15em;">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg></span>{{security.sdlc_stages.0.stage}}</h3>
+              <span
+                style="font-size: 6.5pt; font-weight: 700; background: rgba(37,99,235,0.08); color: #2563EB; border: 1px solid rgba(37,99,235,0.16); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">{{security.sdlc_stages.0.tag}}</span>
+            </div>
+            <p class="body-text" style="font-size: 8.5pt; line-height: 1.4; margin-bottom: 0;">
+              {{security.sdlc_stages.0.description}}
+            </p>
+          </div>
+
+          <div class="glass-panel" style="margin-bottom: 0; padding: 12px !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <h3 class="subsection-title" style="margin: 0; color: var(--blue-600);"><span
+                  style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                    style="width:1em;height:1em;vertical-align:-0.15em;">
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16" />
+                    <path d="M14 15.5V18" />
+                    <path d="M10 8H8" />
+                    <path d="M15 2l-4 9H7l4-9z" />
+                    <path d="M7 11l-3 7" />
+                  </svg></span>{{security.sdlc_stages.1.stage}}</h3>
+              <span
+                style="font-size: 6.5pt; font-weight: 700; background: rgba(37,99,235,0.08); color: #2563EB; border: 1px solid rgba(37,99,235,0.16); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">{{security.sdlc_stages.1.tag}}</span>
+            </div>
+            <p class="body-text" style="font-size: 8.5pt; line-height: 1.4; margin-bottom: 0;">
+              {{security.sdlc_stages.1.description}}
+            </p>
+          </div>
+
+          <div class="glass-panel" style="margin-bottom: 0; padding: 12px !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <h3 class="subsection-title" style="margin: 0; color: var(--teal-500);"><span
+                  style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                    style="width:1em;height:1em;vertical-align:-0.15em;">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg></span>{{security.sdlc_stages.2.stage}}</h3>
+              <span
+                style="font-size: 6.5pt; font-weight: 700; background: rgba(13,148,136,0.08); color: #0D9488; border: 1px solid rgba(13,148,136,0.16); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">{{security.sdlc_stages.2.tag}}</span>
+            </div>
+            <p class="body-text" style="font-size: 8.5pt; line-height: 1.4; margin-bottom: 0;">
+              {{security.sdlc_stages.2.description}}
+            </p>
+          </div>
+
+          <div class="glass-panel" style="margin-bottom: 0; padding: 12px !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <h3 class="subsection-title" style="margin: 0; color: var(--teal-500);"><span
+                  style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                    style="width:1em;height:1em;vertical-align:-0.15em;">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg></span>{{security.sdlc_stages.3.stage}}</h3>
+              <span
+                style="font-size: 6.5pt; font-weight: 700; background: rgba(13,148,136,0.08); color: #0D9488; border: 1px solid rgba(13,148,136,0.16); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">{{security.sdlc_stages.3.tag}}</span>
+            </div>
+            <p class="body-text" style="font-size: 8.5pt; line-height: 1.4; margin-bottom: 0;">
+              {{security.sdlc_stages.3.description}}
+            </p>
+          </div>
+
+        </div>
+
+        <div class="glass-panel" style="margin-top: 0; padding: 12px !important; margin-bottom: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <h3 class="subsection-title" style="margin: 0; color: var(--blue-600);"><span
+                style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                  style="width:1em;height:1em;vertical-align:-0.15em;">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg></span>{{security.sdlc_stages.4.stage}}</h3>
+            <span
+              style="font-size: 6.5pt; font-weight: 700; background: rgba(37,99,235,0.08); color: #2563EB; border: 1px solid rgba(37,99,235,0.16); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">{{security.sdlc_stages.4.tag}}</span>
+          </div>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.4; margin-bottom: 0;">
+            {{security.sdlc_stages.4.description}}
+          </p>
+        </div>
+
+        <!-- Vulnerability Lifecycle Pipeline SVG -->
+        <div style="text-align: center; margin-top: 10px;">
+          <span
+            style="font-size: 7.5pt; font-weight: 700; color: var(--ink-500); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">Active
+            Vulnerability Lifecycle Pipeline</span>
+          <svg width="100%" height="45" viewBox="0 0 680 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sec-line-grad" x1="0" y1="0" x2="680" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2563EB" />
+                <stop offset="50%" stop-color="#0D9488" />
+                <stop offset="100%" stop-color="#059669" />
+              </linearGradient>
+              <linearGradient id="sec-box-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.95" />
+              </linearGradient>
+            </defs>
+
+            <line x1="75" y1="18" x2="605" y2="18" stroke="url(#sec-line-grad)" stroke-width="1.2"
+              stroke-dasharray="3 3" />
+
+            <!-- Step 1 -->
+            <g transform="translate(10, 1)">
+              <rect width="130" height="30" rx="4" fill="url(#sec-box-grad)" stroke="#2563EB" stroke-width="1" />
+              <foreignObject x="0" y="0" width="130" height="30">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{security.stages.0.title}}
+                  </div>
+                  <div style="font-size: 5.5pt; font-weight: 600; color: #2563EB; line-height: 1.2; margin-top: 1px;">
+                    {{security.stages.0.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+            <path d="M 152 18 L 160 18 L 157 15 M 160 18 L 157 21" stroke="#2563EB" stroke-width="1.2"
+              stroke-linecap="round" />
+
+            <!-- Step 2 -->
+            <g transform="translate(175, 1)">
+              <rect width="130" height="30" rx="4" fill="url(#sec-box-grad)" stroke="#2563EB" stroke-width="1" />
+              <foreignObject x="0" y="0" width="130" height="30">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{security.stages.1.title}}
+                  </div>
+                  <div style="font-size: 5.5pt; font-weight: 600; color: #2563EB; line-height: 1.2; margin-top: 1px;">
+                    {{security.stages.1.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+            <path d="M 317 18 L 325 18 L 322 15 M 325 18 L 322 21" stroke="#0D9488" stroke-width="1.2"
+              stroke-linecap="round" />
+
+            <!-- Step 3 -->
+            <g transform="translate(340, 1)">
+              <rect width="130" height="30" rx="4" fill="url(#sec-box-grad)" stroke="#0D9488" stroke-width="1" />
+              <foreignObject x="0" y="0" width="130" height="30">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{security.stages.2.title}}
+                  </div>
+                  <div style="font-size: 5.5pt; font-weight: 600; color: #0D9488; line-height: 1.2; margin-top: 1px;">
+                    {{security.stages.2.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+            <path d="M 482 18 L 490 18 L 487 15 M 490 18 L 487 21" stroke="#0D9488" stroke-width="1.2"
+              stroke-linecap="round" />
+
+            <!-- Step 4 -->
+            <g transform="translate(505, 1)">
+              <rect width="130" height="30" rx="4" fill="url(#sec-box-grad)" stroke="#059669" stroke-width="1" />
+              <foreignObject x="0" y="0" width="130" height="30">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="svg-editable-container"
+                  style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px; box-sizing: border-box; font-family: var(--font);">
+                  <div style="font-size: 7.5pt; font-weight: 700; color: #0A0A0F; line-height: 1.2;">
+                    {{security.stages.3.title}}
+                  </div>
+                  <div style="font-size: 5.5pt; font-weight: 600; color: #059669; line-height: 1.2; margin-top: 1px;">
+                    {{security.stages.3.desc}}
+                  </div>
+                </div>
+              </foreignObject>
+            </g>
+          </svg>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">17 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 18 Â· ASSUMPTIONS & DEPENDENCIES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 18 Â· RISKS, MITIGATIONS & DEPENDENCIES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">05 Â· Risks &amp; Mitigations</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">05</span>
+          <h2 class="section-header-title">Risks &amp; Mitigations</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:12px;">
+          {{risks_intro}}
+        </p>
+
+        <div class="glass-panel" style="margin-bottom: 10px;">
+          <h3 class="subsection-title" style="margin-top: 0; color: var(--amber-500); margin-bottom: 6px;"><span
+              style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg></span>{{risks.0.id}}: {{risks.0.title}}</h3>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.45; margin-bottom: 4px;">
+            <strong>Impact:</strong> {{risks.0.impact}}
+          </p>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.45; margin-bottom: 0; color: var(--teal-500);">
+            <strong>Mitigation:</strong> {{risks.0.mitigation}}
+          </p>
+        </div>
+
+        <div class="glass-panel" style="margin-bottom: 10px;">
+          <h3 class="subsection-title" style="margin-top: 0; color: var(--amber-500); margin-bottom: 6px;"><span
+              style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                style="width:1em;height:1em;vertical-align:-0.15em;">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg></span>{{risks.1.id}}: {{risks.1.title}}</h3>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.45; margin-bottom: 4px;">
+            <strong>Impact:</strong> {{risks.1.impact}}
+          </p>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.45; margin-bottom: 0; color: var(--teal-500);">
+            <strong>Mitigation:</strong> {{risks.1.mitigation}}
+          </p>
+        </div>
+
+        <div class="glass-panel" style="margin-bottom: 0; padding: 12px !important;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <h3 class="subsection-title" style="margin: 0; color: var(--blue-600);"><span
+                style="margin-right: 6px;"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                  style="width:1em;height:1em;vertical-align:-0.15em;">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg></span>Steering Governance</h3>
+          </div>
+          <p class="body-text" style="font-size: 8.5pt; line-height: 1.45; margin-bottom: 0;">
+            {{steering_governance}}
+          </p>
+        </div>
+
+        <div class="watermark-logo"></div>
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">18 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 19 Â· ASSUMPTIONS & DEPENDENCIES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">05 Â· Assumptions</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">05</span>
+          <h2 class="section-header-title">Assumptions</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom:16px;">
+          {{assumptions.intro}}
+        </p>
+
+        <div class="glass-panel">
+          <h3 class="subsection-title" style="margin-top: 0; margin-bottom: 8px;">Technical Dependencies</h3>
+          <ul class="check-list">
+            <li>{{assumptions.technical.0}}</li>
+            <li>{{assumptions.technical.1}}</li>
+            <li>{{assumptions.technical.2}}</li>
+          </ul>
+        </div>
+
+        <div class="glass-panel" style="margin-top: 14px;">
+          <h3 class="subsection-title" style="margin-top: 0; margin-bottom: 8px;">Organizational Alignment</h3>
+          <ul class="check-list">
+            <li>{{assumptions.organizational.0}}</li>
+            <li>{{assumptions.organizational.1}}</li>
+          </ul>
+        </div>
+
+        <div class="watermark-logo"></div>
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">19 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 20 Â· SUPPORT SLA & MAINTENANCE
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">05 Â· Support SLA</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">05</span>
+          <h2 class="section-header-title">Support &amp; SLA</h2>
+        </div>
+
+        <p class="body-text" style="margin-bottom: 12px;">
+          {{support_intro}}
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="glass-panel" style="margin-bottom: 0; padding: 12px;">
+            <h3 class="subsection-title" style="margin-top: 0; color: var(--blue-600); margin-bottom: 4px;">90-Day
+              Warranty Period</h3>
+            <p class="body-text" style="font-size: 8pt; line-height: 1.4; margin-bottom: 0;">
+              {{support.warranty_period}}
+            </p>
+          </div>
+
+          <div class="glass-panel" style="margin-bottom: 0; padding: 12px;">
+            <h3 class="subsection-title" style="margin-top: 0; color: var(--teal-500); margin-bottom: 4px;">Extended
+              Maintenance Support</h3>
+            <p class="body-text" style="font-size: 8pt; line-height: 1.4; margin-bottom: 0;">
+              {{support.extended_maintenance_desc}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Priority Response Targets Table -->
+        <h3 class="subsection-title" style="margin-top: 12px; margin-bottom: 6px;">Priority Response Targets</h3>
+        <table class="version-table" style="margin-top: 0; margin-bottom: 12px;">
+          <thead>
+            <tr>
+              <th style="width: 15%;">Severity</th>
+              <th style="width: 55%;">Impact Description</th>
+              <th style="width: 30%;">Response Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ver-num" style="font-weight: 700; color: var(--blue-600);">{{support.sla_tiers.0.severity}}
+              </td>
+              <td>{{support.sla_tiers.0.description}}</td>
+              <td>{{support.sla_tiers.0.response_time}}</td>
+            </tr>
+            <tr>
+              <td class="ver-num" style="font-weight: 700; color: var(--blue-500);">{{support.sla_tiers.1.severity}}
+              </td>
+              <td>{{support.sla_tiers.1.description}}</td>
+              <td>{{support.sla_tiers.1.response_time}}</td>
+            </tr>
+            <tr>
+              <td class="ver-num" style="font-weight: 700; color: var(--ink-900);">{{support.sla_tiers.2.severity}}</td>
+              <td>{{support.sla_tiers.2.description}}</td>
+              <td>{{support.sla_tiers.2.response_time}}</td>
+            </tr>
+            <tr>
+              <td class="ver-num" style="font-weight: 700; color: var(--ink-700);">{{support.sla_tiers.3.severity}}</td>
+              <td>{{support.sla_tiers.3.description}}</td>
+              <td>{{support.sla_tiers.3.response_time}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Strategic Visual Fill: Support SLA Feedbacks -->
+        <div class="glass-panel" style="margin-top: 0;">
+          <h3 class="subsection-title" style="margin-top: 0; color: var(--blue-600); margin-bottom: 4px;">Continuous
+            Improvement SLA Cycles</h3>
+          <p class="body-text" style="font-size: 8pt; line-height: 1.4; margin-bottom: 0;">
+            {{support.improvement_cycle_desc}}
+          </p>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">Strictly Confidential</span>
+        </div>
+        <span class="footer-page">20 of 21</span>
+      </div>
+    </div>
+
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PAGE 21 Â· TERMS, ACCEPTANCE & SIGNATURES
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-brand">
+          <div class="header-logo-mark"></div>
+          <span class="header-brand-name">IntoAI Technologies</span>
+        </div>
+        <span class="header-section-label">05 Â· Terms &amp; Sign-off</span>
+      </div>
+
+      <div class="page-content">
+
+        <div class="section-header-container">
+          <span class="section-header-badge">05</span>
+          <h2 class="section-header-title">Terms &amp; Acceptance</h2>
+        </div>
+
+        <div class="terms-panel-grid">
+          <div class="glass-panel terms-section-card" style="margin-bottom: 0;">
+            <div class="terms-section-title">Intellectual Property Ownership</div>
+            <p class="terms-section-text">
+              {{terms.ip_ownership}}
+            </p>
+          </div>
+          <div class="glass-panel terms-section-card" style="margin-bottom: 0;">
+            <div class="terms-section-title">Confidentiality &amp; NDAs</div>
+            <p class="terms-section-text">
+              {{terms.confidentiality}}
+            </p>
+          </div>
+        </div>
+
+        <div class="acceptance-block">
+          <div class="acceptance-block-title">Acceptance Criteria (Definition of Done)</div>
+          <ul class="acceptance-items">
+            <li>{{acceptance.criteria.0}}</li>
+            <li>{{acceptance.criteria.1}}</li>
+            <li>{{acceptance.criteria.2}}</li>
+            <li>{{acceptance.criteria.3}}</li>
+          </ul>
+        </div>
+
+        <!-- Signature Page Logo -->
+        <div style="text-align: center; margin: 30px 0 20px 0;">
+          <img src="CompanyLogo.png" alt="IntoAI Logo" style="height: 36px; width: auto; object-fit: contain;">
+        </div>
+
+        <div class="signatures-grid">
+          <div class="glass-panel sig-block-card" style="margin-bottom: 0;">
+            <div class="sig-title-label">Approved for the Client</div>
+            <div class="sig-space">
+              <span class="sig-placeholder-text">Authorised Signature</span>
+            </div>
+            <div class="sig-signer-name">{{document_info.distribution_list.0.name}}</div>
+            <div class="sig-signer-title">{{document_info.distribution_list.0.role}}</div>
+            <div class="sig-signer-company">{{cover.prepared_for.company_name}}</div>
+            <div class="sig-date-field">{{acceptance.client_date_placeholder}}</div>
+          </div>
+
+          <div class="glass-panel sig-block-card" style="margin-bottom: 0;">
+            <div class="sig-title-label">Approved for <span class="locked-company-field" contenteditable="false" data-company-field="company.name">IntoAI Technologies</span></div>
+            <div class="sig-space">
+              <span class="sig-placeholder-text">Authorised Signature</span>
+            </div>
+            <div class="sig-signer-name">{{cover.presented_by.lead}}</div>
+            <div class="sig-signer-title">{{cover.presented_by.lead_title}}</div>
+            <div class="sig-signer-company" data-company-field="company.name"><span class="locked-company-field" contenteditable="false" data-company-field="company.name">IntoAI Technologies Pvt Ltd</span></div>
+            <div class="sig-date-field">{{acceptance.intoai_date_placeholder}}</div>
+          </div>
+        </div>
+
+        <div class="page-wave-decoration"></div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">
+          <div class="footer-logo-mark"></div>
+          <span class="footer-item">{{metadata.proposal_id}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-item">Version {{metadata.version}}</span>
+          <span class="footer-divider"></span>
+          <span class="footer-confidential">{{metadata.confidentiality}}</span>
+        </div>
+        <span class="footer-page">21 of 21</span>
+      </div>
+    </div>
+
+  </div><!-- /page-container -->
+
+  <script>
+    (function () {
+      // Designer State
+      const state = {
+        // V-Cut
+        topX: 521,
+        tipX: 289,
+        tipY: 404,
+        botX: 591,
+        botY: 934,
+        brX: 1200,
+        brY: 913,
+        cornerR: 24,
+        showHandles: true,
+
+        // Glows & Image
+        glowOuterColor: '#ffffff',
+        glowOuterWidth: 32,
+        glowOuterOp: 0.10,
+        glowInnerColor: '#ffffff',
+        glowInnerWidth: 12,
+        glowInnerOp: 0.22,
+        boundWidth: 7,
+        boundStop0: '#ffffff',
+        boundStop38: '#ffffff',
+        boundStop100: '#ffffff',
+        imageX: -101,
+        glassBlur: 20,
+
+        // Glass Panels (completely decoupled asymmetric corners)
+        panels: {
+          p1: {
+            x: 440,
+            y: 149,
+            angle: 23,
+            wTL: 95,
+            wTR: 105,
+            wBL: 113,
+            wBR: 37,
+            hTL: 81,
+            hTR: 123,
+            hBL: 111,
+            hBR: 90,
+            r: 20,
+            stop1Color: '#0a0094',
+            stop1Op: 1.0,
+            stop2Color: '#0084ff',
+            stop2Op: 0.34,
+            strokeColor: '#ffffff',
+            strokeOp: 1.00,
+            strokeWidth: 2.5
+          },
+          p2: {
+            x: 563,
+            y: 40,
+            angle: 28,
+            wTL: 47,
+            wTR: 60,
+            wBL: 54,
+            wBR: 29,
+            hTL: 109,
+            hTR: 102,
+            hBL: 70,
+            hBR: 55,
+            r: 18,
+            stop1Color: '#0b47e0',
+            stop1Op: 0.65,
+            stop2Color: '#0b47e0',
+            stop2Op: 0.82,
+            strokeColor: '#295dff',
+            strokeOp: 0.80,
+            strokeWidth: 1.5
+          },
+          p3: {
+            x: 433,
+            y: 592,
+            angle: -24,
+            wTL: 52,
+            wTR: 5,
+            wBL: 5,
+            wBR: 78,
+            hTL: 225,
+            hTR: 272,
+            hBL: 227,
+            hBR: 381,
+            r: 18,
+            stop1Color: '#E8EFFF',
+            stop1Op: 0.55,
+            stop2Color: '#6195f5',
+            stop2Op: 0.73,
+            strokeColor: '#ffffff',
+            strokeOp: 0.80,
+            strokeWidth: 2.5
+          }
+        }
+      };
+
+      // Math Functions for Shapes
+      function getVCutPath(topX, tipX, tipY, botX, botY, r, brX, brY) {
+        // Vector 1 (tip to top)
+        const dx1 = topX - tipX;
+        const dy1 = 0 - tipY;
+        const len1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+        const ux1 = dx1 / len1;
+        const uy1 = dy1 / len1;
+
+        // Vector 2 (tip to bottom)
+        const dx2 = botX - tipX;
+        const dy2 = botY - tipY;
+        const len2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+        const ux2 = dx2 / len2;
+        const uy2 = dy2 / len2;
+
+        // Backoff points
+        const bx1 = tipX + r * ux1;
+        const by1 = tipY + r * uy1;
+
+        const bx2 = tipX + r * ux2;
+        const by2 = tipY + r * uy2;
+
+        const pathLine = `M ${topX},0 L ${bx1.toFixed(1)},${by1.toFixed(1)} Q ${tipX},${tipY} ${bx2.toFixed(1)},${by2.toFixed(1)} L ${botX},${botY}`;
+        const pathClip = `M ${topX},0 L ${bx1.toFixed(1)},${by1.toFixed(1)} Q ${tipX},${tipY} ${bx2.toFixed(1)},${by2.toFixed(1)} L ${botX},${botY} L ${brX},${brY} L 795,-1 Z`;
+
+        return { line: pathLine, clip: pathClip };
+      }
+
+      function makeRoundedTrapezoidPath(wTL, wTR, wBL, wBR, hTL, hTR, hBL, hBR, r) {
+        const v0 = { x: -wTL, y: -hTL };
+        const v1 = { x: wTR, y: -hTR };
+        const v2 = { x: wBR, y: hBR };
+        const v3 = { x: -wBL, y: hBL };
+
+        function getUnitVec(from, to) {
+          const dx = to.x - from.x;
+          const dy = to.y - from.y;
+          const len = Math.sqrt(dx * dx + dy * dy);
+          return len > 0 ? { x: dx / len, y: dy / len } : { x: 0, y: 0 };
+        }
+
+        const u0 = getUnitVec(v0, v1);
+        const u1 = getUnitVec(v1, v2);
+        const u2 = getUnitVec(v2, v3);
+        const u3 = getUnitVec(v3, v0);
+
+        const pStart0 = { x: v0.x - r * u3.x, y: v0.y - r * u3.y };
+        const pEnd0 = { x: v0.x + r * u0.x, y: v0.y + r * u0.y };
+
+        const pStart1 = { x: v1.x - r * u0.x, y: v1.y - r * u0.y };
+        const pEnd1 = { x: v1.x + r * u1.x, y: v1.y + r * u1.y };
+
+        const pStart2 = { x: v2.x - r * u1.x, y: v2.y - r * u1.y };
+        const pEnd2 = { x: v2.x + r * u2.x, y: v2.y + r * u2.y };
+
+        const pStart3 = { x: v3.x - r * u2.x, y: v3.y - r * u2.y };
+        const pEnd3 = { x: v3.x + r * u3.x, y: v3.y + r * u3.y };
+
+        return `M ${pEnd3.x.toFixed(1)},${pEnd3.y.toFixed(1)} ` +
+          `L ${pStart0.x.toFixed(1)},${pStart0.y.toFixed(1)} ` +
+          `Q ${v0.x.toFixed(1)},${v0.y.toFixed(1)} ${pEnd0.x.toFixed(1)},${pEnd0.y.toFixed(1)} ` +
+          `L ${pStart1.x.toFixed(1)},${pStart1.y.toFixed(1)} ` +
+          `Q ${v1.x.toFixed(1)},${v1.y.toFixed(1)} ${pEnd1.x.toFixed(1)},${pEnd1.y.toFixed(1)} ` +
+          `L ${pStart2.x.toFixed(1)},${pStart2.y.toFixed(1)} ` +
+          `Q ${v2.x.toFixed(1)},${v2.y.toFixed(1)} ${pEnd2.x.toFixed(1)},${pEnd2.y.toFixed(1)} ` +
+          `L ${pStart3.x.toFixed(1)},${pStart3.y.toFixed(1)} ` +
+          `Q ${v3.x.toFixed(1)},${v3.y.toFixed(1)} ${pEnd3.x.toFixed(1)},${pEnd3.y.toFixed(1)} Z`;
+      }
+
+      function makeReflectionPath(wTL, wTR, wBL, wBR, hTL, hTR, hBL, hBR, r) {
+        const v0 = { x: -wTL, y: -hTL };
+        const v1 = { x: wTR, y: -hTR };
+        const v2 = { x: wBR, y: hBR };
+        const v3 = { x: -wBL, y: hBL };
+
+        const v2Ref = {
+          x: v1.x + 0.30 * (v2.x - v1.x),
+          y: v1.y + 0.30 * (v2.y - v1.y)
+        };
+        const v3Ref = {
+          x: v0.x + 0.30 * (v3.x - v0.x),
+          y: v0.y + 0.30 * (v3.y - v0.y)
+        };
+
+        return makeRoundedTrapezoidPath(wTL, wTR, Math.abs(v3Ref.x), Math.abs(v2Ref.x), hTL, hTR, v3Ref.y, v2Ref.y, r);
+      }
+
+      // Hex to RGBA conversion helper
+      function hexToRgba(hex, alpha) {
+        hex = hex.replace('#', '');
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      }
+
+      // Engine Core: Update SVG
+      function updateSVG() {
+        // 1. Update V-Cut
+        const vPaths = getVCutPath(state.topX, state.tipX, state.tipY, state.botX, state.botY, state.cornerR, state.brX, state.brY);
+        document.getElementById('vcut-clip-path').setAttribute('d', vPaths.clip);
+        document.getElementById('vcut-outer-glow').setAttribute('d', vPaths.line);
+        document.getElementById('vcut-inner-glow').setAttribute('d', vPaths.line);
+        document.getElementById('vcut-boundary-line').setAttribute('d', vPaths.line);
+
+        // Gradient coordinates for crisp boundary line
+        const chevGrad = document.getElementById('chev-grad');
+        chevGrad.setAttribute('x1', state.topX);
+        chevGrad.setAttribute('y1', '0');
+        chevGrad.setAttribute('x2', state.botX);
+        chevGrad.setAttribute('y2', state.botY);
+
+        // Boundary Gradient Stops colors
+        document.getElementById('chev-grad-stop0').setAttribute('stop-color', state.boundStop0);
+        document.getElementById('chev-grad-stop38').setAttribute('stop-color', state.boundStop38);
+        document.getElementById('chev-grad-stop100').setAttribute('stop-color', state.boundStop100);
+
+        // Glow properties
+        const outerGlow = document.getElementById('vcut-outer-glow');
+        outerGlow.setAttribute('stroke', state.glowOuterColor);
+        outerGlow.setAttribute('stroke-width', state.glowOuterWidth);
+        outerGlow.setAttribute('opacity', state.glowOuterOp);
+
+        const innerGlow = document.getElementById('vcut-inner-glow');
+        innerGlow.setAttribute('stroke', state.glowInnerColor);
+        innerGlow.setAttribute('stroke-width', state.glowInnerWidth);
+        innerGlow.setAttribute('opacity', state.glowInnerOp);
+
+        document.getElementById('vcut-boundary-line').setAttribute('stroke-width', state.boundWidth);
+
+        // Building image offset
+        document.getElementById('vcut-building-image').setAttribute('x', state.imageX);
+
+        // Glass root backdrop filter
+        document.getElementById('glass-root').style.backdropFilter = `blur(${state.glassBlur}px)`;
+        document.getElementById('glass-root').style.webkitBackdropFilter = `blur(${state.glassBlur}px)`;
+
+        // 2. Update Glass Panels
+        for (const [id, p] of Object.entries(state.panels)) {
+          const group = document.getElementById(`glass-${id}-group`);
+          const path = document.getElementById(`glass-${id}-path`);
+          const reflection = document.getElementById(`glass-${id}-reflection`);
+
+          // Transform
+          group.setAttribute('transform', `translate(${p.x},${p.y}) rotate(${p.angle})`);
+
+          // Paths
+          const d = makeRoundedTrapezoidPath(p.wTL, p.wTR, p.wBL, p.wBR, p.hTL, p.hTR, p.hBL, p.hBR, p.r);
+          const refD = makeReflectionPath(p.wTL, p.wTR, p.wBL, p.wBR, p.hTL, p.hTR, p.hBL, p.hBR, p.r);
+          path.setAttribute('d', d);
+          if (reflection) reflection.setAttribute('d', refD);
+
+          // Gradient Colors & Opacities
+          if (id === 'p1') {
+            const stopBlue0 = document.getElementById('p1-grad-blue-stop0');
+            const stopBlue100 = document.getElementById('p1-grad-blue-stop100');
+            if (stopBlue0) {
+              stopBlue0.setAttribute('stop-color', p.stop1Color);
+              stopBlue0.setAttribute('stop-opacity', p.stop1Op);
+            }
+            if (stopBlue100) {
+              stopBlue100.setAttribute('stop-color', p.stop2Color);
+              stopBlue100.setAttribute('stop-opacity', p.stop2Op);
+            }
+
+            const stopWhite0 = document.getElementById('p1-grad-stop0');
+            const stopWhite100 = document.getElementById('p1-grad-stop100');
+            if (stopWhite0) {
+              stopWhite0.setAttribute('stop-color', '#ffffff');
+              stopWhite0.setAttribute('stop-opacity', '0.35');
+            }
+            if (stopWhite100) {
+              stopWhite100.setAttribute('stop-color', '#ffffff');
+              stopWhite100.setAttribute('stop-opacity', p.stop2Op);
+            }
+
+            const p1GradBlue = document.getElementById('p1-grad-blue');
+            if (p1GradBlue) {
+              p1GradBlue.setAttribute('gradientTransform', `rotate(${-p.angle})`);
+            }
+            const p1Grad = document.getElementById('p1-grad');
+            if (p1Grad) {
+              p1Grad.setAttribute('gradientTransform', `rotate(${-p.angle})`);
+            }
+          } else {
+            const stop1 = document.getElementById(`${id}-grad-stop0`);
+            const stop2 = document.getElementById(`${id}-grad-stop100`);
+            if (stop1) {
+              stop1.setAttribute('stop-color', p.stop1Color);
+              stop1.setAttribute('stop-opacity', p.stop1Op);
+            }
+            if (stop2) {
+              stop2.setAttribute('stop-color', p.stop2Color);
+              stop2.setAttribute('stop-opacity', p.stop2Op);
+            }
+          }
+
+          // Stroke
+          path.setAttribute('stroke', hexToRgba(p.strokeColor, p.strokeOp));
+          path.setAttribute('stroke-width', p.strokeWidth);
+
+          // If updating p1, copy its transform and path to the mask for p2
+          if (id === 'p1') {
+            const maskGroup = document.getElementById('p2-mask-p1-group');
+            const maskPath = document.getElementById('p2-mask-p1-path');
+            if (maskGroup) maskGroup.setAttribute('transform', `translate(${p.x},${p.y}) rotate(${p.angle})`);
+            if (maskPath) maskPath.setAttribute('d', d);
+
+            // Copy transform and path to the clipped blue overlay group/path
+            const blueGroup = document.getElementById('glass-p1-blue-group');
+            const bluePath = document.getElementById('glass-p1-blue-path');
+            if (blueGroup) blueGroup.setAttribute('transform', `translate(${p.x},${p.y}) rotate(${p.angle})`);
+            if (bluePath) bluePath.setAttribute('d', d);
+
+            // Copy transform and path to the thickness group/path
+            const thicknessGroup = document.getElementById('glass-p1-thickness-group');
+            const thicknessPath = document.getElementById('glass-p1-thickness-path');
+            if (thicknessGroup) thicknessGroup.setAttribute('transform', `translate(${p.x},${p.y}) rotate(${p.angle})`);
+            if (thicknessPath) thicknessPath.setAttribute('d', d);
+          }
+        }
+        // Render complete
+      }
+
+      // Dynamic Enterprise Headers and Footers System
+      function applyEnterpriseHeadersAndFooters() {
+        const proposalIdEl = document.querySelector('[data-key="metadata.proposal_id"]');
+        const versionEl = document.querySelector('[data-key="metadata.version"]');
+        const shortTitleEl = document.querySelector('[data-key="metadata.short_title"]');
+
+        const currentProposalId = proposalIdEl ? proposalIdEl.textContent.trim() : 'PROP-2026-218045';
+        const currentVersion = versionEl ? versionEl.textContent.trim() : '1.2';
+        const currentShortTitle = shortTitleEl ? shortTitleEl.textContent.trim() : 'AI AGENT PM PROPOSAL';
+
+        const pages = document.querySelectorAll('.page:not(.page-cover)');
+        const totalPages = document.querySelectorAll('.page').length;
+        pages.forEach((page, index) => {
+          const pageNum = index + 2; // cover is Page 1
+
+          // Rebuild Header
+          const header = page.querySelector('.page-header');
+          if (header) {
+            let sectionLabel = "";
+            const labelEl = header.querySelector('.header-section-label');
+            if (labelEl) {
+              sectionLabel = labelEl.textContent.trim();
+              // Clean up redundant doc ID from the start of label if present
+              sectionLabel = sectionLabel.replace(/^PROP-2026-(?:(?:INTOAI|VRSS)-)?\d+\s*·\s*/i, '');
+            }
+
+            if (header.contains(document.activeElement)) {
+              // Update content only, to keep cursor focus intact
+              const titleNode = header.querySelector('.header-proposal-title');
+              if (titleNode && titleNode.innerHTML !== currentShortTitle) {
+                titleNode.innerHTML = currentShortTitle;
+              }
+              const verNode = header.querySelector('.header-version');
+              if (verNode && verNode.textContent !== 'v' + currentVersion) {
+                verNode.textContent = 'v' + currentVersion;
+              }
+            } else {
+              header.innerHTML = `
+                <div class="header-left">
+                  <img src="CompanyLogo.png" alt="IntoAI Logo" class="header-logo-img">
+                  <div class="header-divider"></div>
+                  <span class="header-proposal-title" contenteditable="true" data-key="metadata.short_title">${currentShortTitle}</span>
+                  <div class="header-divider"></div>
+                  <span class="header-version">v${currentVersion}</span>
+                </div>
+                <div class="header-right">
+                  <span class="header-section-label">${sectionLabel}</span>
+                </div>
+              `;
+            }
+          }
+
+          // Rebuild Footer
+          const footer = page.querySelector('.page-footer');
+          if (footer) {
+            const isConfidentialPage = (pageNum !== 2 && pageNum !== 3);
+            const confidentialHtml = isConfidentialPage ? `
+                <div class="footer-divider"></div>
+                <span class="footer-confidential">Strictly Confidential</span>
+            ` : '';
+
+            if (footer.contains(document.activeElement)) {
+              const itemNode = footer.querySelector('.footer-item');
+              if (itemNode && itemNode.textContent !== currentProposalId) {
+                itemNode.textContent = currentProposalId;
+              }
+            } else {
+              footer.innerHTML = `
+                <div class="footer-left">
+                  <img src="CompanyLogo.png" alt="IntoAI Logo" class="footer-logo-img">
+                  <div class="footer-divider"></div>
+                  <span class="footer-item">${currentProposalId}</span>
+                  ${confidentialHtml}
+                </div>
+                <span class="footer-page">${pageNum} of ${totalPages}</span>
+              `;
+            }
+          }
+        });
+      }
+
+      // Init Engine
+      applyEnterpriseHeadersAndFooters();
+      updateSVG();
+
+    })();
+  </script>
+  <script>
+    // Handle inline editing field updates in real-time from parent
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'UPDATE_FIELDS') {
+        const data = event.data.data;
+        document.querySelectorAll('.editable-proposal-field').forEach(el => {
+          const key = el.getAttribute('data-key');
+          if (!key) return;
+          const path = key.split('.');
+          let val = data;
+          for (const p of path) {
+            if (val && typeof val === 'object') {
+              const idx = /^\d+$/.test(p) ? parseInt(p, 10) : p;
+              val = val[idx];
+            } else {
+              val = undefined;
+              break;
+            }
+          }
+          const hasValue = val !== undefined && val !== null && String(val).trim() !== '';
+          const displayVal = hasValue ? String(val) : (typeof getPlaceholderText === 'function' ? getPlaceholderText(key) : '');
+          if (document.activeElement === el) return;
+          if (el.innerText !== displayVal) {
+            el.innerText = displayVal;
+          }
+        });
+        if (typeof applyEnterpriseHeadersAndFooters === 'function') {
+          applyEnterpriseHeadersAndFooters();
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

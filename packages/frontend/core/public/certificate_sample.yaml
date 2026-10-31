@@ -1,0 +1,48 @@
+# ============================================================
+# IntoAI Technologies - Official Certificate Data Model
+# Format: YAML Schema for Documents -> Certificates Tab
+# ============================================================
+
+metadata:
+  certificate_no: "INT-2026-370888"
+  issue_date: "22 SEPTEMBER 2026"
+  verification_url: "https://verify.intoai.ai/internship/INT-2026-370888"
+  status: "Issued"
+
+header:
+  qr_domain: "verify.intoai.ai"
+  verification_url: "https://verify.intoai.ai/internship/INT-2026-370888"
+
+certificate:
+  main_title: "INTERNSHIP CERTIFICATE"
+  presented_label: "PRESENTED TO"
+
+recipient:
+  name: "Alex Johnson"
+  identifier: "INT-2026-441"
+  role: "AI Research Intern"
+  start_date: "01 OCTOBER 2026"
+  end_date: "31 DECEMBER 2026"
+  email: "alex.johnson@intoai.ai"
+
+details:
+  statement_p1: "This is to certify that Alex Johnson has successfully completed an internship at IntoAI Technologies Pvt. Ltd. as AI Research Intern from 01 October 2026 to 31 December 2026."
+  research_area: "Autonomous AI Systems and Graph Neural Architectures"
+  project_description: "dataset curation, model fine-tuning, and evaluation"
+  statement_p2: "During the internship, the intern gained practical experience in Autonomous AI Systems and Graph Neural Architectures, including dataset curation, model fine-tuning, and evaluation."
+  statement_p3: "We acknowledge their contribution and successful completion of the internship."
+  organization: "IntoAI Technologies Pvt. Ltd."
+  program: "Enterprise AI Research & Generative Systems"
+
+signatory:
+  name: "Ansan Mathew"
+  designation: "Founder & Director"
+  organization: "IntoAI Technologies Pvt. Ltd."
+  signature_type: "vector"
+
+company:
+  name: "IntoAI Technologies Pvt. Ltd."
+  tagline: "Enterprise AI Research & Solutions"
+  envision: "E N V I S I O N"
+  logo: "CompanyLogo_official.png"
+  website: "www.intoai.ai"
