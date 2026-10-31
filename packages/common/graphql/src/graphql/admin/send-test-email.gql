@@ -1,0 +1,8 @@
+mutation sendTestEmail($accessKeyId: String!, $secretAccessKey: String!, $region: String!, $sender: String!) {
+  sendTestEmail(config: {
+    accessKeyId: $accessKeyId,
+    secretAccessKey: $secretAccessKey,
+    region: $region,
+    sender: $sender,
+  })
+}

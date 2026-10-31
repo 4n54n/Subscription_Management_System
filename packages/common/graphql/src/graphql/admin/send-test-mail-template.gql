@@ -1,0 +1,11 @@
+mutation sendTestMailTemplate($accessKeyId: String!, $secretAccessKey: String!, $region: String!, $sender: String!, $template: String!) {
+  sendTestMailTemplate(
+    config: {
+      accessKeyId: $accessKeyId,
+      secretAccessKey: $secretAccessKey,
+      region: $region,
+      sender: $sender
+    }
+    template: $template
+  )
+}

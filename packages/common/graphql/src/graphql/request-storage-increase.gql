@@ -1,0 +1,3 @@
+mutation requestStorageIncrease($requestedGb: Int!) {
+  requestStorageIncrease(requestedGb: $requestedGb)
+}

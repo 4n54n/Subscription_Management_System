@@ -1,0 +1,725 @@
+# PROJECTS
+query projects($workspaceId: String!, $skip: Float, $take: Float, $query: String, $status: String, $visibility: String) {
+  projects(workspaceId: $workspaceId, skip: $skip, take: $take, query: $query, status: $status, visibility: $visibility) {
+    id
+    workspaceId
+    name
+    description
+    icon
+    banner
+    color
+    category
+    status
+    visibility
+    createdAt
+    updatedAt
+    restrictedMembers {
+      projectId
+      userId
+      user {
+        id
+        name
+        email
+        avatarUrl
+      }
+    }
+  }
+}
+
+query project($workspaceId: String!, $id: String!) {
+  project(workspaceId: $workspaceId, id: $id) {
+    id
+    workspaceId
+    name
+    description
+    icon
+    banner
+    color
+    category
+    status
+    visibility
+    createdAt
+    updatedAt
+    restrictedMembers {
+      projectId
+      userId
+      user {
+        id
+        name
+        email
+        avatarUrl
+      }
+    }
+  }
+}
+
+mutation createProject($workspaceId: String!, $input: CreateProjectInput!) {
+  createProject(workspaceId: $workspaceId, input: $input) {
+    id
+    workspaceId
+    name
+    description
+    icon
+    banner
+    color
+    category
+    status
+    visibility
+    createdAt
+    updatedAt
+  }
+}
+
+mutation updateProject($workspaceId: String!, $id: String!, $input: UpdateProjectInput!) {
+  updateProject(workspaceId: $workspaceId, id: $id, input: $input) {
+    id
+    workspaceId
+    name
+    description
+    icon
+    banner
+    color
+    category
+    status
+    visibility
+  }
+}
+
+mutation deleteProject($workspaceId: String!, $id: String!) {
+  deleteProject(workspaceId: $workspaceId, id: $id)
+}
+
+query projectAnalytics($workspaceId: String!, $projectId: String!) {
+  projectAnalytics(workspaceId: $workspaceId, projectId: $projectId) {
+    totalIssues
+    completedTasks
+    openBugs
+    currentSprintName
+    upcomingReleaseVersion
+  }
+}
+
+# MODULES
+query projectModules($workspaceId: String!, $projectId: String!) {
+  projectModules(workspaceId: $workspaceId, projectId: $projectId) {
+    id
+    workspaceId
+    projectId
+    name
+    description
+    leadId
+    lead {
+      id
+      name
+      email
+      avatarUrl
+    }
+  }
+}
+
+mutation createProjectModule($workspaceId: String!, $projectId: String!, $name: String!, $description: String, $leadId: String) {
+  createProjectModule(workspaceId: $workspaceId, projectId: $projectId, name: $name, description: $description, leadId: $leadId) {
+    id
+    name
+    description
+    leadId
+  }
+}
+
+mutation updateProjectModule($workspaceId: String!, $id: String!, $name: String, $description: String, $leadId: String) {
+  updateProjectModule(workspaceId: $workspaceId, id: $id, name: $name, description: $description, leadId: $leadId) {
+    id
+    name
+    description
+    leadId
+  }
+}
+
+mutation deleteProjectModule($workspaceId: String!, $id: String!) {
+  deleteProjectModule(workspaceId: $workspaceId, id: $id)
+}
+
+# CYCLES
+query projectCycles($workspaceId: String!, $projectId: String!) {
+  projectCycles(workspaceId: $workspaceId, projectId: $projectId) {
+    id
+    workspaceId
+    projectId
+    name
+    goal
+    startDate
+    endDate
+    status
+  }
+}
+
+mutation createProjectCycle($workspaceId: String!, $projectId: String!, $name: String!, $goal: String, $startDate: DateTime, $endDate: DateTime, $status: String!) {
+  createProjectCycle(workspaceId: $workspaceId, projectId: $projectId, name: $name, goal: $goal, startDate: $startDate, endDate: $endDate, status: $status) {
+    id
+    name
+    goal
+    startDate
+    endDate
+    status
+  }
+}
+
+mutation updateProjectCycle($workspaceId: String!, $id: String!, $name: String, $goal: String, $startDate: DateTime, $endDate: DateTime, $status: String) {
+  updateProjectCycle(workspaceId: $workspaceId, id: $id, name: $name, goal: $goal, startDate: $startDate, endDate: $endDate, status: $status) {
+    id
+    name
+    goal
+    startDate
+    endDate
+    status
+  }
+}
+
+mutation deleteProjectCycle($workspaceId: String!, $id: String!) {
+  deleteProjectCycle(workspaceId: $workspaceId, id: $id)
+}
+
+# RELEASES
+query projectReleases($workspaceId: String!, $projectId: String!) {
+  projectReleases(workspaceId: $workspaceId, projectId: $projectId) {
+    id
+    workspaceId
+    projectId
+    name
+    description
+    plannedDate
+    status
+    checklist
+  }
+}
+
+mutation createProjectRelease($workspaceId: String!, $projectId: String!, $name: String!, $description: String, $plannedDate: DateTime, $status: String!, $checklist: JSON) {
+  createProjectRelease(workspaceId: $workspaceId, projectId: $projectId, name: $name, description: $description, plannedDate: $plannedDate, status: $status, checklist: $checklist) {
+    id
+    name
+    description
+    plannedDate
+    status
+    checklist
+  }
+}
+
+mutation updateProjectRelease($workspaceId: String!, $id: String!, $name: String, $description: String, $plannedDate: DateTime, $status: String, $checklist: JSON) {
+  updateProjectRelease(workspaceId: $workspaceId, id: $id, name: $name, description: $description, plannedDate: $plannedDate, status: $status, checklist: $checklist) {
+    id
+    name
+    description
+    plannedDate
+    status
+    checklist
+  }
+}
+
+mutation deleteProjectRelease($workspaceId: String!, $id: String!) {
+  deleteProjectRelease(workspaceId: $workspaceId, id: $id)
+}
+
+# ISSUES
+query projectIssues($workspaceId: String!, $filter: ProjectIssuesFilterInput) {
+  projectIssues(workspaceId: $workspaceId, filter: $filter) {
+    id
+    workspaceId
+    projectId
+    title
+    description
+    type
+    priority
+    status
+    dueDate
+    estimatedTime
+    timeSpent
+    reporterId
+    reporter {
+      id
+      name
+      email
+      avatarUrl
+    }
+    cycleId
+    cycle {
+      id
+      name
+      status
+    }
+    moduleId
+    module {
+      id
+      name
+    }
+    releaseId
+    release {
+      id
+      name
+      status
+    }
+    parentIssueId
+    parentIssue {
+      id
+      title
+    }
+    subtasks {
+      id
+      title
+      status
+    }
+    assignees {
+      issueId
+      userId
+      user {
+        id
+        name
+        email
+        avatarUrl
+      }
+    }
+    labels {
+      label {
+        id
+        name
+        color
+      }
+    }
+    blockedIssues {
+      blockerIssue {
+        id
+        title
+        status
+      }
+    }
+    blockerIssues {
+      blockedIssue {
+        id
+        title
+        status
+      }
+    }
+  }
+}
+
+query projectIssue($workspaceId: String!, $id: String!) {
+  projectIssue(workspaceId: $workspaceId, id: $id) {
+    id
+    workspaceId
+    projectId
+    title
+    description
+    type
+    priority
+    status
+    dueDate
+    estimatedTime
+    timeSpent
+    reporterId
+    reporter {
+      id
+      name
+      email
+      avatarUrl
+    }
+    cycleId
+    cycle {
+      id
+      name
+      status
+    }
+    moduleId
+    module {
+      id
+      name
+    }
+    releaseId
+    release {
+      id
+      name
+      status
+    }
+    parentIssueId
+    parentIssue {
+      id
+      title
+    }
+    subtasks {
+      id
+      title
+      status
+    }
+    assignees {
+      issueId
+      userId
+      user {
+        id
+        name
+        email
+        avatarUrl
+      }
+    }
+    labels {
+      label {
+        id
+        name
+        color
+      }
+    }
+    blockedIssues {
+      blockerIssue {
+        id
+        title
+        status
+      }
+    }
+    blockerIssues {
+      blockedIssue {
+        id
+        title
+        status
+      }
+    }
+  }
+}
+
+query myProjectIssues($workspaceId: String!) {
+  myProjectIssues(workspaceId: $workspaceId) {
+    id
+    workspaceId
+    projectId
+    title
+    description
+    type
+    priority
+    status
+    dueDate
+    estimatedTime
+    timeSpent
+    reporterId
+    cycleId
+    cycle {
+      id
+      name
+    }
+    moduleId
+    module {
+      id
+      name
+    }
+    releaseId
+    release {
+      id
+      name
+    }
+  }
+}
+
+mutation createProjectIssue($workspaceId: String!, $input: CreateProjectIssueInput!) {
+  createProjectIssue(workspaceId: $workspaceId, input: $input) {
+    id
+    workspaceId
+    projectId
+    title
+    type
+    priority
+    status
+  }
+}
+
+mutation updateProjectIssue($workspaceId: String!, $id: String!, $input: UpdateProjectIssueInput!) {
+  updateProjectIssue(workspaceId: $workspaceId, id: $id, input: $input) {
+    id
+    workspaceId
+    projectId
+    title
+    type
+    priority
+    status
+    dueDate
+    estimatedTime
+    timeSpent
+  }
+}
+
+mutation deleteProjectIssue($workspaceId: String!, $id: String!) {
+  deleteProjectIssue(workspaceId: $workspaceId, id: $id)
+}
+
+# LABELS
+query projectLabels($workspaceId: String!, $projectId: String!) {
+  projectLabels(workspaceId: $workspaceId, projectId: $projectId) {
+    id
+    workspaceId
+    projectId
+    name
+    color
+  }
+}
+
+mutation createProjectLabel($workspaceId: String!, $projectId: String!, $name: String!, $color: String) {
+  createProjectLabel(workspaceId: $workspaceId, projectId: $projectId, name: $name, color: $color) {
+    id
+    name
+    color
+  }
+}
+
+mutation deleteProjectLabel($workspaceId: String!, $id: String!) {
+  deleteProjectLabel(workspaceId: $workspaceId, id: $id)
+}
+
+# COMMENTS
+query projectIssueComments($workspaceId: String!, $issueId: String!) {
+  projectIssueComments(workspaceId: $workspaceId, issueId: $issueId) {
+    id
+    workspaceId
+    issueId
+    userId
+    user {
+      id
+      name
+      email
+      avatarUrl
+    }
+    content
+    createdAt
+  }
+}
+
+mutation createProjectIssueComment($workspaceId: String!, $issueId: String!, $content: String!) {
+  createProjectIssueComment(workspaceId: $workspaceId, issueId: $issueId, content: $content) {
+    id
+    issueId
+    userId
+    content
+    createdAt
+  }
+}
+
+mutation deleteProjectIssueComment($workspaceId: String!, $id: String!) {
+  deleteProjectIssueComment(workspaceId: $workspaceId, id: $id)
+}
+
+# GEMINI SETTINGS
+query workspaceGeminiSetting($workspaceId: String!) {
+  workspaceGeminiSetting(workspaceId: $workspaceId) {
+    workspaceId
+    apiKey
+    model
+    meetingModel
+    allowGemini
+    limitOutput
+    sshHost
+    sshUser
+    sshPass
+    allowWithoutPermission
+    lockContentFor
+  }
+}
+
+mutation updateWorkspaceGeminiSetting(
+  $workspaceId: String!
+  $apiKey: String
+  $model: String
+  $meetingModel: String
+  $allowGemini: Boolean
+  $limitOutput: Boolean
+  $sshHost: String
+  $sshUser: String
+  $sshPass: String
+  $allowWithoutPermission: Boolean
+  $lockContentFor: JSON
+) {
+  updateWorkspaceGeminiSetting(
+    workspaceId: $workspaceId
+    apiKey: $apiKey
+    model: $model
+    meetingModel: $meetingModel
+    allowGemini: $allowGemini
+    limitOutput: $limitOutput
+    sshHost: $sshHost
+    sshUser: $sshUser
+    sshPass: $sshPass
+    allowWithoutPermission: $allowWithoutPermission
+    lockContentFor: $lockContentFor
+  ) {
+    workspaceId
+    apiKey
+    model
+    meetingModel
+    allowGemini
+    limitOutput
+    sshHost
+    sshUser
+    sshPass
+    allowWithoutPermission
+    lockContentFor
+  }
+}
+
+# PROJECT SHARE KEY
+query generateProjectShareKey($workspaceId: String!, $projectId: String, $password: String!) {
+  generateProjectShareKey(workspaceId: $workspaceId, projectId: $projectId, password: $password)
+}
+
+query getOrCreateProjectShareKey($workspaceId: String!, $projectId: String) {
+  getOrCreateProjectShareKey(workspaceId: $workspaceId, projectId: $projectId)
+}
+
+# DOCUMENTS
+query projectDocuments($workspaceId: String!, $projectId: String!, $releaseId: String!) {
+  projectDocuments(workspaceId: $workspaceId, projectId: $projectId, releaseId: $releaseId) {
+    id
+    workspaceId
+    projectId
+    releaseId
+    type
+    title
+    content
+    status
+    approvedInternallyBy
+    version
+    lastEditTime
+    approvalIp
+    approvalTimestamp
+    approvalBrowser
+    approvalDevice
+    approvalEmail
+  }
+}
+
+query projectDocsConfig($workspaceId: String!, $projectId: String!) {
+  projectDocsConfig(workspaceId: $workspaceId, projectId: $projectId) {
+    projectId
+    docsPublicUntil
+    docsPublicActive
+    docsSharedVersionId
+    docsSharedDocumentTypes
+    docsSharedUntil
+    docsSharedActive
+  }
+}
+
+mutation upsertProjectDocument(
+  $workspaceId: String!
+  $projectId: String!
+  $releaseId: String!
+  $type: String!
+  $title: String!
+  $content: String!
+) {
+  upsertProjectDocument(
+    workspaceId: $workspaceId
+    projectId: $projectId
+    releaseId: $releaseId
+    type: $type
+    title: $title
+    content: $content
+  ) {
+    id
+    type
+    title
+    content
+    status
+    version
+    lastEditTime
+  }
+}
+
+mutation sendDeleteDocumentOtp($workspaceId: String!) {
+  sendDeleteDocumentOtp(workspaceId: $workspaceId)
+}
+
+mutation deleteProjectDocument($workspaceId: String!, $id: String!, $otp: String!) {
+  deleteProjectDocument(workspaceId: $workspaceId, id: $id, otp: $otp)
+}
+
+mutation copyDocumentFromPreviousVersion(
+  $workspaceId: String!
+  $projectId: String!
+  $releaseId: String!
+  $type: String!
+) {
+  copyDocumentFromPreviousVersion(
+    workspaceId: $workspaceId
+    projectId: $projectId
+    releaseId: $releaseId
+    type: $type
+  ) {
+    id
+    type
+    title
+    content
+    status
+    version
+  }
+}
+
+mutation approveDocumentInternally($workspaceId: String!, $id: String!) {
+  approveDocumentInternally(workspaceId: $workspaceId, id: $id) {
+    id
+    status
+    approvedInternallyBy
+  }
+}
+
+mutation sendDocumentsForApproval(
+  $workspaceId: String!
+  $projectId: String!
+  $releaseId: String!
+  $documentTypes: [String!]!
+  $days: Int!
+) {
+  sendDocumentsForApproval(
+    workspaceId: $workspaceId
+    projectId: $projectId
+    releaseId: $releaseId
+    documentTypes: $documentTypes
+    days: $days
+  )
+}
+
+mutation makeDocsDirectoryPublic($workspaceId: String!, $projectId: String!, $days: Int!) {
+  makeDocsDirectoryPublic(workspaceId: $workspaceId, projectId: $projectId, days: $days)
+}
+
+
+mutation clientApproveDocument($id: String!, $ip: String!, $browser: String!, $device: String!, $email: String!) {
+  clientApproveDocument(id: $id, ip: $ip, browser: $browser, device: $device, email: $email) {
+    id
+    status
+    approvalIp
+    approvalTimestamp
+    approvalBrowser
+    approvalDevice
+    approvalEmail
+  }
+}
+
+mutation sendClientSignatureOtp($id: String!, $email: String!) {
+  sendClientSignatureOtp(id: $id, email: $email)
+}
+
+mutation clientSignDocument(
+  $id: String!
+  $otp: String!
+  $ip: String!
+  $browser: String!
+  $device: String!
+  $email: String!
+) {
+  clientSignDocument(id: $id, otp: $otp, ip: $ip, browser: $browser, device: $device, email: $email) {
+    id
+    status
+    approvalIp
+    approvalTimestamp
+    approvalBrowser
+    approvalDevice
+    approvalEmail
+  }
+}
+
+mutation sendDocumentsToMail($documentIds: [String!]!, $email: String!) {
+  sendDocumentsToMail(documentIds: $documentIds, email: $email)
+}
+

@@ -1,0 +1,3 @@
+mutation verifyProjectShareGuestOtp($email: String!, $otp: String!, $projectId: String, $workspaceId: String!) {
+  verifyProjectShareGuestOtp(email: $email, otp: $otp, projectId: $projectId, workspaceId: $workspaceId)
+}

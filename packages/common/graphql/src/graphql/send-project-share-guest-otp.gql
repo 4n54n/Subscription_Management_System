@@ -1,0 +1,3 @@
+mutation sendProjectShareGuestOtp($email: String!, $workspaceId: String!) {
+  sendProjectShareGuestOtp(email: $email, workspaceId: $workspaceId)
+}
